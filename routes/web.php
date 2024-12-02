@@ -21,4 +21,9 @@ Route::get('test', function () {
     return view('employers.sendmessage');
 });
 
+Route::get('testing', function () {
+    return view('employees.readmessage');
+});
+
+
 require __DIR__.'/auth.php';

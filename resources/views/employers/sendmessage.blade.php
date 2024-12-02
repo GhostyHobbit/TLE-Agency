@@ -12,7 +12,7 @@
     <p style="color: green;">{{ session('success') }}</p>
 @endif
 
-    <form action="{{ route('messages.store') }}" method="POST">
+    <form action="" method="POST">
     @csrf
 
 
