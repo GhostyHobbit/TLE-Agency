@@ -2,64 +2,62 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\employer;
+use App\Models\Employer;
 use Illuminate\Http\Request;
 
 class EmployerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $employers = Employer::with('company')->get();
+        return response()->json($employers);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-
+        // Return a view to show the employer creation form
+        return view('employers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $employer = Employer::create($request->validate([
+            'company_id' => 'required|exists:companies,id',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]));
+
+        return response()->json($employer, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(employer $employer)
+    public function show($id)
     {
-        //
+        $employer = Employer::with('company', 'vacancies')->findOrFail($id);
+        return response()->json($employer);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(employer $employer)
+    public function edit($id)
     {
-        //
+        // Return a view to show the employer edit form
+        $employer = Employer::findOrFail($id);
+        return view('employers.edit', compact('employer'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, employer $employer)
+    public function update(Request $request, $id)
     {
-        //
+        $employer = Employer::findOrFail($id);
+        $employer->update($request->validate([
+            'company_id' => 'required|exists:companies,id',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]));
+
+        return response()->json($employer);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(employer $employer)
+    public function destroy($id)
     {
-        //
+        Employer::findOrFail($id)->delete();
+        return response()->json(['message' => 'Employer deleted']);
     }
 }

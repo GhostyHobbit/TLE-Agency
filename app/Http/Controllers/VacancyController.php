@@ -2,64 +2,94 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\vacancy;
+use App\Models\Vacancy;
 use Illuminate\Http\Request;
 
 class VacancyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('vacancy');
+        // Load vacancies with their associated employer
+        $vacancies = Vacancy::with('employer')->get();
+        return response()->json($vacancies);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('vacancy.create');
+        // Return a view to show the vacancy creation form
+        return view('vacancies.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'employer_id' => 'required|exists:employers,id',
+            'name' => 'required|string|max:255',
+            'hours' => 'required|integer',
+            'salary' => 'required|numeric',
+        ]);
+
+        $vacancy = Vacancy::create($validatedData);
+
+        return response()->json($vacancy, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(vacancy $vacancy)
+    public function show($id)
     {
-        return view('vacancy.show');
+        // Load the vacancy with its associated employer
+        $vacancy = Vacancy::with('employer')->findOrFail($id);
+        return response()->json($vacancy);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(vacancy $vacancy)
+    public function edit($id)
     {
-        return view('vacancy.edit');
+        // Return a view to show the vacancy edit form
+        $vacancy = Vacancy::findOrFail($id);
+        return view('vacancies.edit', compact('vacancy'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, vacancy $vacancy)
+    public function update(Request $request, $id)
     {
-        //
+        $vacancy = Vacancy::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'employer_id' => 'required|exists:employers,id',
+            'name' => 'required|string|max:255',
+            'hours' => 'required|integer',
+            'salary' => 'required|numeric',
+        ]);
+
+        $vacancy->update($validatedData);
+
+        return response()->json($vacancy);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(vacancy $vacancy)
+    public function destroy($id)
     {
-        //
+        Vacancy::findOrFail($id)->delete();
+        return response()->json(['message' => 'Vacancy deleted']);
+    }
+
+    // Additional method to attach an employee to a vacancy
+    public function attachEmployee(Request $request, $vacancyId)
+    {
+        $validatedData = $request->validate([
+            'employee_id' => 'required|exists:employees,id',
+            'status' => 'required|string',
+        ]);
+
+        $vacancy = Vacancy::findOrFail($vacancyId);
+        $vacancy->employees()->attach($validatedData['employee_id'], ['status' => $validatedData['status']]);
+
+        return response()->json(['message' => 'Employee attached successfully']);
+    }
+
+    // Additional method to detach an employee from a vacancy
+    public function detachEmployee($vacancyId, $employeeId)
+    {
+        $vacancy = Vacancy::findOrFail($vacancyId);
+        $vacancy->employees()->detach($employeeId);
+
+        return response()->json(['message' => 'Employee detached successfully']);
     }
 }
