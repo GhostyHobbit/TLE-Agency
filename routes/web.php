@@ -17,4 +17,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+use App\Http\Controllers\ProfilePreferencesController;
+
+Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])
+    ->name('profile.preferences')
+    ->middleware(['auth']);
+
+
 require __DIR__.'/auth.php';
