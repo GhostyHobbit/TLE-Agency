@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->integer('hours');
             $table->integer('salary');
+            $table->string('location');
+            $table->string('Description');
+            $table->string('path');
             $table->timestamps();
         });
     }

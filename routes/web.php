@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('test', function () {
-    return view('employers.sendmessage');
+    return view('');
 });
 
 // Companies Routes
