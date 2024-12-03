@@ -19,6 +19,7 @@
             <th>Functie</th>
             <th>Werkuren</th>
             <th>Salaris</th>
+            <th>Aantal in Wachtrij</th>
             <th>Werkgever</th>
             <th>edit</th>
             <th>uitnodigen</th>
@@ -31,6 +32,7 @@
                 <td>{{ $vacancy->name }}</td>
                 <td>{{ $vacancy->hours }} uur</td>
                 <td>€{{ number_format($vacancy->salary, 2) }}</td>
+                <td>{{ $vacancy->employees_count }} werkzoekenden</td>
                 <td>onbekend</td>
                 <td> nog leeg </td>
                 <td>

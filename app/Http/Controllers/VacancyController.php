@@ -11,6 +11,7 @@ class VacancyController extends Controller
     {
         // Load vacancies with their associated employer
         $vacancies = Vacancy::all();
+        $vacancies = Vacancy::withCount('employees')->get();
         return view('employers.viewvacancies', compact('vacancies'));
     }
 
