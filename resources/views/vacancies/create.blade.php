@@ -1,7 +1,7 @@
-<x-app-layout>
+<x-nav>
 
-    <div class="max-w-2xl mx-auto p-4 bg-white shadow-md rounded-lg">
-        <h1 class="text-2xl font-bold mb-4">Maak een vacature</h1>
+    <div class="max-w-2xl mx-auto p-6 bg-cream shadow-md rounded-lg">
+        <h1 class="text-2xl font-bold mb-4 text-mossFoot">Maak een vacature</h1>
 
         <form action="{{ route('vacancies.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -25,7 +25,7 @@
                 <label for="hours" class="block text-sm font-medium text-gray-700">Werk uren</label>
                 <input type="number" name="hours" id="hours"
                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                       placeholder="Voer de uren per week in"required>
+                       placeholder="Voer de uren per week in" required>
                 @error('hours')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
@@ -53,7 +53,6 @@
                 @enderror
             </div>
 
-
             <!-- Description -->
             <div class="mb-4">
                 <label for="description" class="block text-sm font-medium text-gray-700">Beschrijving</label>
@@ -78,10 +77,11 @@
 
             <div class="flex justify-end">
                 <button type="submit"
-                        class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        class="inline-flex items-center px-4 py-2 bg-mossFoot border border-transparent rounded-md font-semibold text-yellow hover:bg-mossFoot focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     Plaats de vacature
                 </button>
             </div>
         </form>
     </div>
-</x-app-layout>
+
+</x-nav>
