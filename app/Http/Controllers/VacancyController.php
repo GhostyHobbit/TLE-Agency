@@ -10,9 +10,11 @@ class VacancyController extends Controller
     public function index()
     {
         // Load vacancies with their associated employer
-        $vacancies = Vacancy::with('employer')->get();
-        return response()->json($vacancies);
+        $vacancies = Vacancy::all();
+        return view('employers.viewvacancies', compact('vacancies'));
     }
+
+
 
     public function create()
     {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
@@ -22,9 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('test', function () {
-    return view('employers.sendmessage');
-});
+
 
 // Companies Routes
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
@@ -71,9 +70,14 @@ Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->n
 Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
 Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 
-Route::get('testing', function () {
-    return view('employees.readmessage');
-});
+
+Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+Route::post('/message/store/{vacancyId}', [MessageController::class, 'store'])->name('messages.store');
+
+Route::get('/viewvacancies', [VacancyController::class, 'index'])->name('employers.viewvacancies');
+// routes/web.php
+Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])->name('messages.create');
+
 
 
 require __DIR__.'/auth.php';
