@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 
 class VacancyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Load vacancies with their associated employer
-        $vacancies = Vacancy::with('employer')->get();
-        return response()->json($vacancies);
+        $perPage = $request->get('per_page', 100);
+        $vacancies = Vacancy::with('employer')->paginate($perPage);
+        return view('vacancies.index', compact('vacancies'));
     }
 
     public function create()

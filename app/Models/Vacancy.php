@@ -11,12 +11,17 @@ class Vacancy extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['name', 'employer_id', 'hours', 'salary'];
 
     public function employees()
     {
         return $this->belongsToMany(Employee::class, 'employee_vacancy')
             ->withPivot('status', 'message_id')
             ->withTimestamps();
+    }
+
+    public function employer()
+    {
+        return $this->belongsTo(Employer::class);
     }
 }
