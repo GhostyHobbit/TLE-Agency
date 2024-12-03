@@ -1,5 +1,7 @@
 <?php
 
+// app/Models/Vacancy.php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,15 +11,12 @@ class Vacancy extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['employer_id', 'name', 'hours', 'salary'];
+    protected $fillable = ['title', 'description'];
 
-    public function employer()
+    public function employees()
     {
-        return $this->belongsTo(Employer::class);
-    }
-
-    public function employeeVacancies()
-    {
-        return $this->hasMany(EmployeeVacancy::class);
+        return $this->belongsToMany(Employee::class, 'employee_vacancy')
+            ->withPivot('status', 'message_id')
+            ->withTimestamps();
     }
 }

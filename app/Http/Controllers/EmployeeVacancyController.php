@@ -9,6 +9,7 @@ class EmployeeVacancyController extends Controller
 {
     public function index()
     {
+        // Load applications with their associated employee and vacancy
         $applications = EmployeeVacancy::with(['employee', 'vacancy'])->get();
         return response()->json($applications);
     }
@@ -21,17 +22,20 @@ class EmployeeVacancyController extends Controller
 
     public function store(Request $request)
     {
-        $application = EmployeeVacancy::create($request->validate([
+        $validatedData = $request->validate([
             'employee_id' => 'required|exists:employees,id',
             'vacancy_id' => 'required|exists:vacancies,id',
             'status' => 'required|boolean',
-        ]));
+        ]);
+
+        $application = EmployeeVacancy::create($validatedData);
 
         return response()->json($application, 201);
     }
 
     public function show($id)
     {
+        // Load the application with its associated employee and vacancy
         $application = EmployeeVacancy::with(['employee', 'vacancy'])->findOrFail($id);
         return response()->json($application);
     }
@@ -46,11 +50,14 @@ class EmployeeVacancyController extends Controller
     public function update(Request $request, $id)
     {
         $application = EmployeeVacancy::findOrFail($id);
-        $application->update($request->validate([
+
+        $validatedData = $request->validate([
             'employee_id' => 'required|exists:employees,id',
             'vacancy_id' => 'required|exists:vacancies,id',
             'status' => 'required|boolean',
-        ]));
+        ]);
+
+        $application->update($validatedData);
 
         return response()->json($application);
     }
@@ -61,4 +68,3 @@ class EmployeeVacancyController extends Controller
         return response()->json(['message' => 'Application deleted']);
     }
 }
-

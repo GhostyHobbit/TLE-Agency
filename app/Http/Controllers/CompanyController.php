@@ -10,7 +10,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::with('employers')->get();
-        return response()->json($companies);
+        return view('companies.index', compact('companies'));
     }
 
     public function create()

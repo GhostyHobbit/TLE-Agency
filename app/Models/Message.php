@@ -1,16 +1,17 @@
 <?php
 
-// app/Models/EmployeeVacancy.php
+// app/Models/Message.php
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class EmployeeVacancy extends Pivot
+class Message extends Model
 {
-    protected $table = 'employee_vacancy'; // Specify the pivot table name if it's not the default
+    use HasFactory;
 
-    protected $fillable = ['employee_id', 'vacancy_id', 'status', 'message_id'];
+    protected $fillable = ['employee_id', 'vacancy_id', 'content'];
 
     // Define the relationship with Employee
     public function employee()

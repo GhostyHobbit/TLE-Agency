@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\EmployeeVacancy; // Import the EmployeeVacancy model
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::with('employeeVacancies.vacancy')->get();
+        // Load employees with their associated vacancies through the pivot table
+        $employees = Employee::with('vacancies')->get();
         return response()->json($employees);
     }
 
@@ -21,18 +23,21 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
-        $employee = Employee::create($request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'avatar' => 'nullable|file',
-        ]));
+        ]);
+
+        $employee = Employee::create($validatedData);
 
         return response()->json($employee, 201);
     }
 
     public function show($id)
     {
-        $employee = Employee::with('employeeVacancies.vacancy')->findOrFail($id);
+        // Load the employee with their associated vacancies
+        $employee = Employee::with('vacancies')->findOrFail($id);
         return response()->json($employee);
     }
 
@@ -46,11 +51,14 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $employee = Employee::findOrFail($id);
-        $employee->update($request->validate([
+
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'avatar' => 'nullable|file',
-        ]));
+        ]);
+
+        $employee->update($validatedData);
 
         return response()->json($employee);
     }
@@ -60,5 +68,27 @@ class EmployeeController extends Controller
         Employee::findOrFail($id)->delete();
         return response()->json(['message' => 'Employee deleted']);
     }
-}
 
+    // Additional method to attach a vacancy to an employee
+    public function attachVacancy(Request $request, $employeeId)
+    {
+        $validatedData = $request->validate([
+            'vacancy_id' => 'required|exists:vacancies,id',
+            'status' => 'required|string',
+        ]);
+
+        $employee = Employee::findOrFail($employeeId);
+        $employee->vacancies()->attach($validatedData['vacancy_id'], ['status' => $validatedData['status']]);
+
+        return response()->json(['message' => 'Vacancy attached successfully']);
+    }
+
+    // Additional method to detach a vacancy from an employee
+    public function detachVacancy($employeeId, $vacancyId)
+    {
+        $employee = Employee::findOrFail($employeeId);
+        $employee->vacancies()->detach($vacancyId);
+
+        return response()->json(['message' => 'Vacancy detached successfully']);
+    }
+}
