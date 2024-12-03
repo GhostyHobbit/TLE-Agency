@@ -1,0 +1,22 @@
+<?php
+
+// app/Models/Vacancy.php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Vacancy extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['title', 'description'];
+
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_vacancy')
+            ->withPivot('status', 'message_id')
+            ->withTimestamps();
+    }
+}
