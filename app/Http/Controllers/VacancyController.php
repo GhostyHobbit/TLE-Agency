@@ -7,15 +7,21 @@ use Illuminate\Http\Request;
 
 class VacancyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
+    {
+        // Load vacancies with their associated employer
+        $perPage = $request->get('per_page', 100);
+        $vacancies = Vacancy::with('employer')->paginate($perPage);
+        return view('vacancies.index', compact('vacancies'));
+    }
+
+    public function get ()
     {
         // Load vacancies with their associated employer
         $vacancies = Vacancy::all();
         $vacancies = Vacancy::withCount('employees')->get();
         return view('employers.viewvacancies', compact('vacancies'));
     }
-
-
 
     public function create()
     {
@@ -41,7 +47,7 @@ class VacancyController extends Controller
     {
         // Load the vacancy with its associated employer
         $vacancy = Vacancy::with('employer')->findOrFail($id);
-        return response()->json($vacancy);
+        return view('vacancies.show', compact('vacancy'));
     }
 
     public function edit($id)

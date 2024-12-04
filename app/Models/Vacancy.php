@@ -11,7 +11,7 @@ class Vacancy extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['employer_id', 'name', 'hours', 'salary'];
+    protected $fillable = ['name', 'employer_id', 'hours', 'salary'];
 
     public function employees()
     {

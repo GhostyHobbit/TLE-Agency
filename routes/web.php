@@ -70,7 +70,7 @@ Route::get('/messages/response/{id}', [MessageController::class, 'response'])->n
 Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])->name('messages.create');
 
 
-Route::get('/employers/viewvacancies', [VacancyController::class, 'index'])->name('employers.viewvacancies');
+Route::get('/employers/viewvacancies', [VacancyController::class, 'get'])->name('employers.viewvacancies');
 
 
 require __DIR__.'/auth.php';
