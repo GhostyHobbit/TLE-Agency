@@ -1,25 +1,25 @@
 <?php
 
-// app/Models/Message.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['employee_id', 'vacancy_id', 'content'];
+    // Zorg dat alle relevante velden massaal toewijsbaar zijn
+    protected $fillable = ['message', 'date', 'time', 'location'];
 
-    // Define the relationship with Employee
+    // Als je relaties nodig hebt, kun je ze hier behouden of toevoegen
     public function employee()
     {
         return $this->belongsTo(Employee::class);
     }
 
-    // Define the relationship with Vacancy
     public function vacancy()
     {
         return $this->belongsTo(Vacancy::class);

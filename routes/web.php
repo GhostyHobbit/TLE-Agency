@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\EmployeeVacancyController;
 use App\Http\Controllers\EmployeeController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,9 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('test', function () {
-    return view('');
-});
+
 
 // Companies Routes
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
@@ -36,20 +36,13 @@ Route::put('/companies/{company}', [CompanyController::class, 'update'])->name('
 Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy');
 
 // Employers Routes
-Route::get('/employers', [EmployerController::class, 'index'])->name('employers.index');
-Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
-Route::post('/employers', [EmployerController::class, 'store'])->name('employers.store');
-Route::get('/employers/{employer}', [EmployerController::class, 'show'])->name('employers.show');
-Route::get('/employers/{employer}/edit', [EmployerController::class, 'edit'])->name('employers.edit');
-Route::put('/employers/{employer}', [EmployerController::class, 'update'])->name('employers.update');
-Route::delete('/employers/{employer}', [EmployerController::class, 'destroy'])->name('employers.destroy');
 
 // Vacancies Routes
 Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
 Route::get('/vacancies/create', [VacancyController::class, 'create'])->name('vacancies.create');
 Route::post('/vacancies', [VacancyController::class, 'store'])->name('vacancies.store');
 Route::get('/vacancies/{vacancy}', [VacancyController::class, 'show'])->name('vacancies.show');
-Route::get('/vacancies/{vacancy}/edit', [VacancyController::class, 'edit'])->name('vacancies.edit');
+Route::get('/vacancies/edit/{vacancyId}', [VacancyController::class, 'edit'])->name('vacancies.edit');
 Route::put('/vacancies/{vacancy}', [VacancyController::class, 'update'])->name('vacancies.update');
 Route::delete('/vacancies/{vacancy}', [VacancyController::class, 'destroy'])->name('vacancies.destroy');
 
@@ -64,13 +57,20 @@ Route::delete('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyControlle
 
 // Employees Routes
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
-Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
-Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
-Route::get('/employees/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
-Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
-Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
-Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+
+Route::get('/employees/viewresponses/{employeeId}', [EmployeeController::class, 'showMyQueue'])->name('employees.viewresponses');
+
+Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
+
+
+Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+Route::post('/message/store/{vacancyId}', [MessageController::class, 'store'])->name('messages.store');
+Route::get('/messages/response/{id}', [MessageController::class, 'response'])->name('messages.response');
+
+Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])->name('messages.create');
+
+
+Route::get('/employers/viewvacancies', [VacancyController::class, 'get'])->name('employers.viewvacancies');
+
 
 require __DIR__.'/auth.php';
-
-
