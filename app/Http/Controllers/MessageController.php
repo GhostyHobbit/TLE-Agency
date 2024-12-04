@@ -39,6 +39,7 @@ class MessageController extends Controller
             'location' => 'nullable|string|max:255',
             'date' => 'required|string',
             'time' => 'required',
+            'number_of_invites' => 'required|integer|min:1', // Validatie voor het aantal uitnodigingen
         ]);
 
         // Maak het bericht aan
@@ -49,25 +50,30 @@ class MessageController extends Controller
             'location' => $validatedData['location'] ?? 'Onbekend', // als locatie is ingevuld
         ]);
 
-        // Zoek de eerste werkzoekende die heeft gereageerd op deze vacature
-        // We nemen aan dat 'status' 1 betekent dat de werkzoekende gereageerd heeft
-        $firstEmployee = $vacancy->employees()->wherePivot('status', 1)->first();
+        // Haal alle werkzoekenden op die gereageerd hebben op deze vacature
+        $allApplicants = $vacancy->employees()->wherePivot('status', 1)->orderBy('employee_vacancy.created_at')->get();
 
-        // Als er een werkzoekende is die gereageerd heeft
-        if ($firstEmployee) {
-            // Koppel het bericht aan de wachtrij (employee_vacancy tabel)
-            $vacancy->employees()->updateExistingPivot($firstEmployee->id, [
-                'status' => 2, // Bijvoorbeeld de status wijzigen naar 'uitgenodigd' (2)
-                'message_id' => $message->id, // Koppel het bericht
-            ]);
+        // Beperk het aantal werkzoekenden tot het opgegeven aantal
+        $invitedEmployees = $allApplicants->take($validatedData['number_of_invites']);
+
+        // Als er werkzoekenden zijn die gereageerd hebben, stuur dan het bericht
+        if ($invitedEmployees->count() > 0) {
+            foreach ($invitedEmployees as $employee) {
+                // Koppel het bericht aan de werkzoekende (update de status naar 'uitgenodigd' en koppel het bericht)
+                $vacancy->employees()->updateExistingPivot($employee->id, [
+                    'status' => 2, // Stel de status in op 'uitgenodigd' (2)
+                    'message_id' => $message->id, // Koppel het bericht
+                ]);
+            }
 
             // Terugkeren naar de vorige pagina met een succesbericht
-            return redirect()->back()->with('success', 'Bericht succesvol verstuurd naar de werkzoekende!');
+            return redirect()->back()->with('success', 'Bericht succesvol verstuurd naar de geselecteerde werkzoekenden!');
         }
 
         // Als er geen werkzoekende is die heeft gereageerd, geef een foutmelding terug
         return redirect()->back()->with('error', 'Er zijn geen werkzoekenden die hebben gereageerd op deze vacature.');
     }
+
 
     public function response($id)
     {
