@@ -1,3 +1,7 @@
+<?php
+   $employee = 1
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,7 +24,10 @@
     <!-- Menu -->
     <ul class="inline-block ml-4 mt-2 md:mt-0">
         <li class="inline">
-            <a href="#" class="text-yellow font-medium text-lg transition-colors">Menu</a>
+            <button id="openModal" class="bg-transparent text-yellow font-medium text-lg">Menu</button>
+{{--            <button type="button" class="bg-transparent text-yellow font-medium text-lg hover:bg-yellow-500 hover:text-white transition-colors duration-300" data-toggle="modal" data-target="#myModal">--}}
+{{--                Menu--}}
+{{--            </button>--}}
         </li>
     </ul>
 </nav>
@@ -81,5 +88,64 @@
         <img src="{{ asset('images/OpenHiring.png') }}" alt="Site Logo" class="h-[20vh] w-auto p-4">
     </div>
 </footer>
+<!-- Modal Background -->
+<div id="myModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center z-50 hidden xl:justify-end">
+    <!-- Modal Content -->
+    <div class="w-[96vw] m-2 bg-mossLight min-h-[50vh] position-relative rounded-lg xl:w-[30vw]">
+        <div class="modal-header  p-4 flex justify-between items-center">
+            <h5 class="modal-title text-mossDark font-bold text-lg">Menu</h5>
+            <button id="closeModal" class="text-black hover:text-gray-700" aria-label="Close">
+                &times;
+            </button>
+        </div>
+        <div class="modal-body bg-mossLight p-4">
+            <ul>
+                <li><a class="text-mossDark font-medium text-lg" href="/">Home</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="#">Vacatures</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="#">Over Open Hiring</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="#">Uw privacy</a></li>
+            </ul>
+            <ul>
+                <li>Demo Links</li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('vacancies.index') }}">Vacature overzicht</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('employers.viewvacancies') }}">Bedrijf vacatures</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('employees.viewresponses', $employee) }}">Werknemer ontvangen bericht</a></li>
+            </ul>
+        </div>
+        <div class="modal-footer p-4 flex justify-end">
+            <button id="closeModalFooter" class="bg-violet text-cream rounded-xl px-8 py-1 xl:px-10 py-2">Sluiten</button>
+        </div>
+    </div>
+</div>
+
+
+{{--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>--}}
+{{--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>--}}
+{{--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>--}}
+<script>
+    // Get modal elements
+    const modal = document.getElementById('myModal');
+    const openModalButton = document.getElementById('openModal');
+    const closeModalButtons = document.querySelectorAll('#closeModal, #closeModalFooter');
+
+    // Open modal
+    openModalButton.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+    });
+
+    // Close modal
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    });
+
+    // Close modal when clicking outside of it
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+</script>
 </body>
 </html>
