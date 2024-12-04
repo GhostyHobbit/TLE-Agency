@@ -11,7 +11,7 @@ class Vacancy extends Model
 {
     use HasFactory;
 
-//    protected $fillable = ['title', 'description'];
+    protected $fillable = ['name', 'employer_id', 'hours', 'salary'];
 
     public function employees()
     {
@@ -20,7 +20,8 @@ class Vacancy extends Model
             ->withTimestamps();
     }
 
-    public function employer(){
+    public function employer()
+    {
         return $this->belongsTo(Employer::class);
     }
 }
