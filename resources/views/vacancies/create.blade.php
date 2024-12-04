@@ -1,6 +1,8 @@
 <x-nav>
+    <!-- Skip to Content Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only">Skip to content</a>
 
-    <div class="max-w-2xl mx-auto p-6 bg-cream shadow-md rounded-lg">
+    <div id="main-content" class="max-w-2xl mx-auto p-6 sm:p-8 bg-cream shadow-md rounded-lg border border-black mt-8 sm:mt-12 mb-8 sm:mb-12">
         <h1 class="text-2xl font-bold mb-4 text-mossFoot">Maak een vacature</h1>
 
         <form action="{{ route('vacancies.store') }}" method="POST" enctype="multipart/form-data">
@@ -11,77 +13,101 @@
 
             <!-- Name -->
             <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Vacature titel</label>
-                <input type="text" name="name" id="name"
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                <label for="name" class="block text-sm font-medium text-gray-700">
+                    Vacature titel <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="name" id="name" aria-required="true"
+                       class="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                        placeholder="Voer hier de vacature titel in" required>
                 @error('name')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <div role="alert">
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                </div>
                 @enderror
             </div>
 
             <!-- Hours -->
             <div class="mb-4">
-                <label for="hours" class="block text-sm font-medium text-gray-700">Werk uren</label>
-                <input type="number" name="hours" id="hours"
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                <label for="hours" class="block text-sm font-medium text-gray-700">
+                    Werk uren <span class="text-red-500">*</span>
+                </label>
+                <input type="number" name="hours" id="hours" aria-required="true"
+                       class="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                        placeholder="Voer de uren per week in" required>
                 @error('hours')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <div role="alert">
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                </div>
                 @enderror
             </div>
 
             <!-- Salary -->
             <div class="mb-4">
-                <label for="salary" class="block text-sm font-medium text-gray-700">uurloon</label>
-                <input type="number" name="salary" id="salary" step="0.01"
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                <label for="salary" class="block text-sm font-medium text-gray-700">
+                    Uurloon <span class="text-red-500">*</span>
+                </label>
+                <input type="number" name="salary" id="salary" step="0.01" aria-required="true"
+                       class="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                        placeholder="Voer een uurloon in" required>
                 @error('salary')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <div role="alert">
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                </div>
                 @enderror
             </div>
 
             <!-- Location -->
             <div class="mb-4">
-                <label for="location" class="block text-sm font-medium text-gray-700">Locatie</label>
-                <input type="text" name="location" id="location"
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                <label for="location" class="block text-sm font-medium text-gray-700">
+                    Locatie <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="location" id="location" aria-required="true"
+                       class="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                        placeholder="Voer een locatie in" required>
                 @error('location')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <div role="alert">
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                </div>
                 @enderror
             </div>
 
             <!-- Description -->
             <div class="mb-4">
-                <label for="description" class="block text-sm font-medium text-gray-700">Beschrijving</label>
-                <textarea name="description" id="description" rows="5"
-                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                <label for="description" class="block text-sm font-medium text-gray-700">
+                    Beschrijving <span class="text-red-500">*</span>
+                </label>
+                <textarea name="description" id="description" rows="5" aria-required="true"
+                          class="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           placeholder="Voer de baan omschrijving in" required></textarea>
                 @error('description')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <div role="alert">
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                </div>
                 @enderror
             </div>
 
             <!-- Picture -->
             <div class="mb-4">
-                <label for="picture" class="block text-sm font-medium text-gray-700">Foto</label>
-                <input type="file" name="picture" id="picture"
-                       class="mt-1 block w-full text-sm text-gray-700 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                <label for="picture" class="block text-sm font-medium text-gray-700">
+                    Foto
+                </label>
+                <input type="file" name="picture" id="picture" aria-describedby="picture-description"
+                       class="mt-1 block w-full text-sm text-gray-700 rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                        accept="image/*">
+                <p id="picture-description" class="text-sm text-gray-500">Upload een JPG, PNG of GIF bestand.</p>
                 @error('picture')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <div role="alert">
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                </div>
                 @enderror
             </div>
 
             <div class="flex justify-end">
                 <button type="submit"
-                        class="inline-flex items-center px-4 py-2 bg-mossFoot border border-transparent rounded-md font-semibold text-yellow hover:bg-mossFoot focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        class="inline-flex items-center px-4 py-2 bg-mossFoot border border-transparent rounded-md font-semibold text-yellow hover:bg-mossFoot focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     Plaats de vacature
                 </button>
             </div>
         </form>
     </div>
-
 </x-nav>
