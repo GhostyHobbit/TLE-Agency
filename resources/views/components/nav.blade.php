@@ -1,3 +1,7 @@
+<?php
+   $employee = 1
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -87,7 +91,7 @@
 <!-- Modal Background -->
 <div id="myModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center z-50 hidden xl:justify-end">
     <!-- Modal Content -->
-    <div class="w-[96vw] m-2 bg-mossLight max-h-[43vh] position-relative rounded-lg xl:w-[30vw]">
+    <div class="w-[96vw] m-2 bg-mossLight min-h-[50vh] position-relative rounded-lg xl:w-[30vw]">
         <div class="modal-header  p-4 flex justify-between items-center">
             <h5 class="modal-title text-mossDark font-bold text-lg">Menu</h5>
             <button id="closeModal" class="text-black hover:text-gray-700" aria-label="Close">
@@ -100,6 +104,12 @@
                 <li><a class="text-mossDark font-medium text-lg" href="#">Vacatures</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="#">Over Open Hiring</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="#">Uw privacy</a></li>
+            </ul>
+            <ul>
+                <li>Demo Links</li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('vacancies.index') }}">Vacature overzicht</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('employers.viewvacancies') }}">Bedrijf vacatures</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('employees.viewresponses', $employee) }}">Werknemer ontvangen bericht</a></li>
             </ul>
         </div>
         <div class="modal-footer p-4 flex justify-end">
