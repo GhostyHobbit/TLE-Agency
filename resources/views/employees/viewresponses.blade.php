@@ -1,75 +1,70 @@
-<!-- resources/views/employee/queue.blade.php -->
+<x-nav>
+    <body class="bg-cream text-black">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mijn Wachtrij</title>
-</head>
-<body>
-<h1>Mijn Wachtrij</h1>
+    <div class="max-w-4xl mx-auto p-8 bg-white shadow-xl rounded-xl mt-10 mb-16">
 
-<!-- Succesbericht -->
-@if (session('success'))
-    <p style="color: green;">{{ session('success') }}</p>
-@endif
+        <h1 class="text-2xl font-semibold text-black mb-6 text-center">Mijn Wachtrij</h1>
 
-<!-- Fouten tonen -->
-@if ($errors->any())
-    <div style="color: red;">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+        <!-- Succesbericht -->
+        @if (session('success'))
+            <p class="text-green-500 mb-4">{{ session('success') }}</p>
+        @endif
+
+        <!-- Fouten tonen -->
+        @if ($errors->any())
+            <div class="text-red-500 mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <h2 class="text-xl font-semibold mb-4">Ingeschreven voor de volgende vacatures:</h2>
+
+        @if($vacancies->isEmpty())
+            <p class="text-black">Je hebt je nog niet ingeschreven voor een vacature.</p>
+        @else
+            <div class="overflow-x-auto"> <!-- Zorgt ervoor dat de tabel scrollbaar wordt als het nodig is -->
+                <table class="min-w-full table-fixed">
+                    <thead>
+                    <tr class="bg-mossLight text-black">
+                        <th class="px-4 py-3 text-left w-4/12">Vacature</th>
+                        <th class="px-4 py-3 text-left w-3/12">Status</th>
+                        <th class="px-4 py-3 text-left w-2/12">Positie in de wachtrij</th>
+                        <th class="px-4 py-3 text-left w-3/12">Bericht</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-black">
+                    @foreach($vacancies as $vacancy)
+                        <tr class="border-t border-strokeThin hover:bg-mossLight">
+                            <td class="px-4 py-3">{{ $vacancy->name }}</td>
+                            <td class="px-4 py-3">
+                                @if($vacancy->pivot->status == 1)
+                                    Ingeschreven en in wachtrij
+                                @elseif($vacancy->pivot->status == 2)
+                                    Er is een bericht gestuurd!
+                                @else
+                                    Onbekend
+                                @endif
+                            </td>
+                            <td class="px-4 py-3">{{ $vacancy->queue_position ?? 'Onbekend' }}</td>
+                            <td class="px-4 py-3">
+                                @if($vacancy->pivot->message_id)
+                                    <a href="{{ route('messages.response', $vacancy->pivot->message_id) }}" class="text-violet hover:text-violetDark font-bold">Bekijk Bericht</a>
+                                @else
+                                    Geen bericht
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
+
     </div>
-@endif
 
-<h2>Ingeschreven voor de volgende vacatures:</h2>
-
-@if($vacancies->isEmpty())
-    <p>Je hebt je nog niet ingeschreven voor een vacature.</p>
-@else
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>Vacature</th>
-            <th>Status</th>
-            <th>Positie in de wachtrij</th>
-            <th>Bericht</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($vacancies as $vacancy)
-            <tr>
-                <td>{{ $vacancy->name }}</td>
-                <td>
-                    @if($vacancy->pivot->status == 1)
-                        Ingeschreven en in wachtrij
-                    @elseif($vacancy->pivot->status == 2)
-                        er is een bericht gestuurd!
-                    @else
-                        Onbekend
-                    @endif
-                </td>
-                <td>{{ $vacancy->queue_position ?? 'Onbekend' }}</td>
-                <td>
-                    @if($vacancy->pivot->message_id)
-                        <a href="{{ route('messages.response', $vacancy->pivot->message_id) }}">Bekijk Bericht</a>
-                    @else
-                        Geen bericht
-                    @endif
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-@endif
-
-
-
-
-
-</body>
-</html>
+    </body>
+</x-nav>
