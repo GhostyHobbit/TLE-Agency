@@ -103,10 +103,20 @@
             </div>
 
             <div class="flex justify-end">
-                <button type="submit"
-                        class="inline-flex items-center px-4 py-2 bg-mossFoot border border-transparent rounded-md font-semibold text-yellow hover:bg-mossFoot focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                    Plaats de vacature
+                <button class="w-72 h-20 relative bg-pink-700 rounded-2xl border-b-2 border-pink-900 flex items-center justify-between hover:bg-pink-800 active:bg-pink-600">
+                    <!-- Custom PNG Icon -->
+                    <img src="{{ asset('images/right-arrow-buttons.png') }}" alt="Right Arrow" class="w-6 h-6 left-[254px] top-[28px] absolute" />
+
+                    <!-- Button Text -->
+                    <span class="Verzenden left-[20px] top-[26px] absolute text-white text-xl font-bold font-['Radikal'] leading-relaxed">
+    Verzenden
+  </span>
                 </button>
+
+
+
+
+
             </div>
         </form>
     </div>
