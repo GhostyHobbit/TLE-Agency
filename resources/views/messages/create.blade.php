@@ -13,6 +13,10 @@
     <p style="color: green;">{{ session('success') }}</p>
 @endif
 
+@if (session('error'))
+    <p style="color: #ff0000;">{{ session('error') }}</p>
+@endif
+
 <!-- Fouten tonen -->
 @if ($errors->any())
     <div style="color: red;">

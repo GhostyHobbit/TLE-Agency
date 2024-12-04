@@ -33,8 +33,10 @@
                 <td>{{ $vacancy->hours }} uur</td>
                 <td>€{{ number_format($vacancy->salary, 2) }}</td>
                 <td>{{ $vacancy->employees_count }} werkzoekenden</td>
-                <td>onbekend</td>
-                <td> nog leeg </td>
+                <td>{{ $vacancy->employer ? $vacancy->employer->name : 'Onbekend' }}</td>
+                <td>
+                    <a href="{{ route('vacancies.edit', ['vacancyId' => $vacancy->id]) }}" class="btn btn-warning btn-sm">vacature aanpassen</a>
+                </td>
                 <td>
                     <a href="{{ route('messages.create', ['vacancyId' => $vacancy->id]) }}" class="btn btn-warning btn-sm">Werkzoekende uitnodigen</a>
                 </td>

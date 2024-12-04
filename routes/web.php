@@ -48,7 +48,7 @@ Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.i
 Route::get('/vacancies/create', [VacancyController::class, 'create'])->name('vacancies.create');
 Route::post('/vacancies', [VacancyController::class, 'store'])->name('vacancies.store');
 Route::get('/vacancies/{vacancy}', [VacancyController::class, 'show'])->name('vacancies.show');
-Route::get('/vacancies/{vacancy}/edit', [VacancyController::class, 'edit'])->name('vacancies.edit');
+Route::get('/vacancies/edit/{vacancyId}', [VacancyController::class, 'edit'])->name('vacancies.edit');
 Route::put('/vacancies/{vacancy}', [VacancyController::class, 'update'])->name('vacancies.update');
 Route::delete('/vacancies/{vacancy}', [VacancyController::class, 'destroy'])->name('vacancies.destroy');
 
@@ -63,20 +63,19 @@ Route::delete('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyControlle
 
 // Employees Routes
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
-Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
-Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
-Route::get('/employees/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
-Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
-Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
-Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+
+Route::get('/employees/viewresponses/{employeeId}', [EmployeeController::class, 'showMyQueue'])->name('employees.viewresponses');
+
+Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
 
 
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 Route::post('/message/store/{vacancyId}', [MessageController::class, 'store'])->name('messages.store');
+Route::get('/messages/response/{id}', [MessageController::class, 'response'])->name('messages.response');
+
+Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])->name('messages.create');
 
 Route::get('/viewvacancies', [VacancyController::class, 'index'])->name('employers.viewvacancies');
-// routes/web.php
-Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])->name('messages.create');
 
 
 

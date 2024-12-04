@@ -44,8 +44,8 @@ class MessageController extends Controller
         // Maak het bericht aan
         $message = Message::create([
             'message' => $validatedData['message'],
-            'date' => now()->toDateString(), // bijvoorbeeld de huidige datum
-            'time' => now()->toTimeString(), // en de huidige tijd
+            'date' => $validatedData['date'],
+            'time' => $validatedData['time'],
             'location' => $validatedData['location'] ?? 'Onbekend', // als locatie is ingevuld
         ]);
 
@@ -69,14 +69,26 @@ class MessageController extends Controller
         return redirect()->back()->with('error', 'Er zijn geen werkzoekenden die hebben gereageerd op deze vacature.');
     }
 
-
-
-
-    public function show($id)
+    public function response($id)
     {
-        $message = Message::with(['sender', 'recipient'])->findOrFail($id);
-        return response()->json($message);
+        // Haal het bericht op via het ID
+        $message = Message::findOrFail($id);
+
+        // Geef de view terug met het bericht
+        return view('messages.response', compact('message'));
     }
+
+
+
+    public function show($messageId)
+    {
+        // Haal het bericht op op basis van het ID
+        $message = Message::findOrFail($messageId);
+
+        // Geef de gegevens door aan de view
+        return view('messages.show', compact('message'));
+    }
+
 
 
 

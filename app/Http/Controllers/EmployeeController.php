@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\EmployeeVacancy; // Import the EmployeeVacancy model
 use Illuminate\Http\Request;
+use App\Models\Message;
+
 
 class EmployeeController extends Controller
 {
@@ -14,6 +16,7 @@ class EmployeeController extends Controller
         $employees = Employee::with('vacancies')->get();
         return response()->json($employees);
     }
+
 
     public function create()
     {
@@ -62,6 +65,26 @@ class EmployeeController extends Controller
 
         return response()->json($employee);
     }
+
+    public function showMyQueue($employeeId)
+    {
+        // Haal de werkzoekende op
+        $employee = Employee::findOrFail($employeeId);
+
+        // Haal de vacatures op waarvoor de werkzoekende zich heeft ingeschreven
+        $vacancies = $employee->vacancies()
+            ->withPivot('status', 'message_id')
+            ->get();
+
+        // Haal de berichten op (zorg dat dit altijd een collectie is)
+        $messages = Message::whereIn('id', $vacancies->pluck('pivot.message_id'))->get();
+
+        return view('employees.viewresponses', compact('vacancies', 'messages'));
+    }
+
+
+
+
 
     public function destroy($id)
     {

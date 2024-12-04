@@ -19,4 +19,9 @@ class Vacancy extends Model
             ->withPivot('status', 'message_id')
             ->withTimestamps();
     }
+
+    public function employer()
+    {
+        return $this->belongsTo(Employer::class);
+    }
 }
