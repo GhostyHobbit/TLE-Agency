@@ -3,9 +3,9 @@
         @foreach($vacancies as $vacancy)
             <div class="bg-[#92AA83] border border-[#2E342A] shadow-md rounded-lg p-4">
                 <h3 class="text-xl font-bold mb-2">{{ $vacancy->name }}</h3>
-                <p class="text-gray-700 mb-2">Employer: {{ $vacancy->employer->name }}</p>
-                <p class="text-gray-700 mb-2">Hours: {{ $vacancy->hours }}</p>
-                <p class="text-gray-700 mb-2">Salary: {{ $vacancy->salary }}</p>
+                <p class="text-[#2E342A] mb-2">Employer: {{ $vacancy->employer->name }}</p>
+                <p class="text-[#2E342A] mb-2">Hours: {{ $vacancy->hours }}</p>
+                <p class="text-[#2E342A] mb-2">Salary: {{ $vacancy->salary }}</p>
             </div>
         @endforeach
     </div>
