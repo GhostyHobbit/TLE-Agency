@@ -3,7 +3,7 @@
         @foreach($vacancies as $vacancy)
             <div class="bg-[#E2ECC8] border border-[#2E342A] shadow-md rounded-lg p-4">
                 <h3 class="text-[#2E342A] text-xl font-bold m-2">{{ $vacancy->name }}</h3>
-                <p class="text-[#2E342A] mb-2">Employer: {{ $vacancy->employer->name }}</p>
+                <p class="text-[#2E342A] mb-2">Location: {{ $vacancy->location }}</p>
                 <p class="text-[#2E342A] mb-2">Hours: {{ $vacancy->hours }}</p>
                 <p class="text-[#2E342A] mb-2">Salary: {{ $vacancy->salary }}</p>
             </div>
