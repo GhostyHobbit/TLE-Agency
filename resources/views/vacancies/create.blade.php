@@ -2,7 +2,7 @@
     <!-- Skip to Content Link -->
     <a href="#main-content" class="sr-only focus:not-sr-only">Skip to content</a>
 
-    <div id="main-content" class="max-w-2xl mx-auto p-6 sm:p-8 bg-cream shadow-md rounded-lg border border-black mt-8 sm:mt-12 mb-8 sm:mb-12">
+    <div id="main-content" class="max-w-2xl mx-auto p-6 sm:p-8 bg-mossLight shadow-md rounded-lg border border-black mt-8 sm:mt-12 mb-8 sm:mb-12">
         <h1 class="text-2xl font-bold mb-4 text-mossFoot">Maak een vacature</h1>
 
         <form action="{{ route('vacancies.store') }}" method="POST" enctype="multipart/form-data">
@@ -17,7 +17,7 @@
                     Vacature titel <span class="text-red-500">*</span>
                 </label>
                 <input type="text" name="name" id="name" aria-required="true"
-                       class="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                       class="mt-1 block w-full rounded-md border border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                        placeholder="Voer hier de vacature titel in" required>
                 @error('name')
                 <div role="alert">
@@ -32,7 +32,7 @@
                     Werk uren <span class="text-red-500">*</span>
                 </label>
                 <input type="number" name="hours" id="hours" aria-required="true"
-                       class="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                       class="mt-1 block w-full rounded-md border border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                        placeholder="Voer de uren per week in" required>
                 @error('hours')
                 <div role="alert">
@@ -47,7 +47,7 @@
                     Uurloon <span class="text-red-500">*</span>
                 </label>
                 <input type="number" name="salary" id="salary" step="0.01" aria-required="true"
-                       class="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                       class="mt-1 block w-full rounded-md border border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                        placeholder="Voer een uurloon in" required>
                 @error('salary')
                 <div role="alert">
@@ -62,7 +62,7 @@
                     Locatie <span class="text-red-500">*</span>
                 </label>
                 <input type="text" name="location" id="location" aria-required="true"
-                       class="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                       class="mt-1 block w-full rounded-md border border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                        placeholder="Voer een locatie in" required>
                 @error('location')
                 <div role="alert">
@@ -77,7 +77,7 @@
                     Beschrijving <span class="text-red-500">*</span>
                 </label>
                 <textarea name="description" id="description" rows="5" aria-required="true"
-                          class="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          class="mt-1 block w-full rounded-md border border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           placeholder="Voer de baan omschrijving in" required></textarea>
                 @error('description')
                 <div role="alert">
@@ -92,7 +92,7 @@
                     Foto
                 </label>
                 <input type="file" name="picture" id="picture" aria-describedby="picture-description"
-                       class="mt-1 block w-full text-sm text-gray-700 rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                       class="mt-1 block w-full text-sm text-gray-700 px-3 py-2 rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                        accept="image/*">
                 <p id="picture-description" class="text-sm text-gray-500">Upload een JPG, PNG of GIF bestand.</p>
                 @error('picture')
@@ -102,20 +102,15 @@
                 @enderror
             </div>
 
+            <!-- Submit Button -->
             <div class="flex justify-end">
-                <button class="w-72 h-20 relative bg-pink-700 rounded-2xl border-b-2 border-pink-900 flex items-center justify-between hover:bg-pink-800 active:bg-pink-600">
-                    <!-- Custom PNG Icon -->
-                    <img src="{{ asset('images/right-arrow-buttons.png') }}" alt="Right Arrow" class="w-6 h-6 left-[254px] top-[28px] absolute" />
-
+                <button class="w-72 h-20 bg-pink-700 rounded-2xl border-b-2 border-pink-900 flex items-center justify-between px-4 hover:bg-pink-800 active:bg-pink-600">
                     <!-- Button Text -->
-                    <span class="Verzenden left-[20px] top-[26px] absolute text-white text-xl font-bold font-['Radikal'] leading-relaxed">
-    Verzenden
-  </span>
+                    <span class="text-white text-xl font-bold">Verzenden</span>
+
+                    <!-- Sprite Icon -->
+                    <img src="{{ asset('images/right-arrow-buttons.png') }}" alt="Sprite Icon" class="w-6 h-6">
                 </button>
-
-
-
-
 
             </div>
         </form>
