@@ -39,7 +39,7 @@ class VacancyController extends Controller
     {
         // Load the vacancy with its associated employer
         $vacancy = Vacancy::with('employer')->findOrFail($id);
-        return response()->json($vacancy);
+        return view('vacancies.show', compact('vacancy'));
     }
 
     public function edit($id)
