@@ -7,11 +7,20 @@ use Illuminate\Http\Request;
 
 class VacancyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Load vacancies with their associated employer
-        $vacancies = Vacancy::with('employer')->get();
-        return response()->json($vacancies);
+        $perPage = $request->get('per_page', 100);
+        $vacancies = Vacancy::with('employer')->paginate($perPage);
+        return view('vacancies.index', compact('vacancies'));
+    }
+
+    public function get ()
+    {
+        // Load vacancies with their associated employer
+        $vacancies = Vacancy::all();
+        $vacancies = Vacancy::withCount('employees')->get();
+        return view('employers.viewvacancies', compact('vacancies'));
     }
 
     public function create()
@@ -22,23 +31,40 @@ class VacancyController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
+
             'employer_id' => 'required|exists:employers,id',
             'name' => 'required|string|max:255',
             'hours' => 'required|integer',
             'salary' => 'required|numeric',
+            'location' => 'required|string|max:255',
+            'description' => 'required|string',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
 
-        $vacancy = Vacancy::create($validatedData);
+        if ($request->hasFile('picture')) {
+            $path = $request->file('picture')->store('vacancies', 'public'); // Store file in 'storage/app/public/vacancies'
+        }
 
-        return response()->json($vacancy, 201);
+        $vacancy = new Vacancy();
+        $vacancy->employer_id = $request->input('employer_id');
+        $vacancy->name = $request->input("name");
+        $vacancy->hours = $request->input("hours");
+        $vacancy->salary = $request->input("salary");
+        $vacancy->location = $request->input("location");
+        $vacancy ->description = $request->input("description");
+        $vacancy->path = $path;
+        $vacancy->save();
+
+        return redirect()->route('vacancies.index');
+
     }
 
     public function show($id)
     {
         // Load the vacancy with its associated employer
         $vacancy = Vacancy::with('employer')->findOrFail($id);
-        return response()->json($vacancy);
+        return view('vacancies.show', compact('vacancy'));
     }
 
     public function edit($id)
@@ -57,6 +83,8 @@ class VacancyController extends Controller
             'name' => 'required|string|max:255',
             'hours' => 'required|integer',
             'salary' => 'required|numeric',
+            'description' => 'required|string',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
 
         $vacancy->update($validatedData);
