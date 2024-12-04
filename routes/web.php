@@ -9,6 +9,7 @@ use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\EmployeeVacancyController;
 use App\Http\Controllers\EmployeeController;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,13 +36,6 @@ Route::put('/companies/{company}', [CompanyController::class, 'update'])->name('
 Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy');
 
 // Employers Routes
-Route::get('/employers', [EmployerController::class, 'index'])->name('employers.index');
-Route::get('/employers/create', [EmployerController::class, 'create'])->name('employers.create');
-Route::post('/employers', [EmployerController::class, 'store'])->name('employers.store');
-Route::get('/employers/{employer}', [EmployerController::class, 'show'])->name('employers.show');
-Route::get('/employers/{employer}/edit', [EmployerController::class, 'edit'])->name('employers.edit');
-Route::put('/employers/{employer}', [EmployerController::class, 'update'])->name('employers.update');
-Route::delete('/employers/{employer}', [EmployerController::class, 'destroy'])->name('employers.destroy');
 
 // Vacancies Routes
 Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
@@ -75,8 +69,8 @@ Route::get('/messages/response/{id}', [MessageController::class, 'response'])->n
 
 Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])->name('messages.create');
 
-Route::get('/viewvacancies', [VacancyController::class, 'index'])->name('employers.viewvacancies');
 
+Route::get('/employers/viewvacancies', [VacancyController::class, 'index'])->name('employers.viewvacancies');
 
 
 require __DIR__.'/auth.php';
