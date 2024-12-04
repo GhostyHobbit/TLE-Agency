@@ -56,6 +56,8 @@ class VacancyController extends Controller
         $vacancy->path = $path;
         $vacancy->save();
 
+        return redirect()->route('vacancies.index');
+
     }
 
     public function show($id)
