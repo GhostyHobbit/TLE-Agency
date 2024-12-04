@@ -6,7 +6,7 @@ use App\Models\Employee;
 use App\Models\EmployeeVacancy; // Import the EmployeeVacancy model
 use Illuminate\Http\Request;
 use App\Models\Message;
-
+use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -66,6 +66,8 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
+
+
     public function showMyQueue($employeeId)
     {
         // Haal de werkzoekende op
@@ -73,14 +75,34 @@ class EmployeeController extends Controller
 
         // Haal de vacatures op waarvoor de werkzoekende zich heeft ingeschreven
         $vacancies = $employee->vacancies()
-            ->withPivot('status', 'message_id')
+            ->withPivot('status', 'message_id') // Zorg ervoor dat we de juiste pivot-velden hebben
             ->get();
 
-        // Haal de berichten op (zorg dat dit altijd een collectie is)
+        // Voeg wachtrijpositie toe aan elke vacature
+        foreach ($vacancies as $vacancy) {
+            // Haal alle inschrijvingen voor deze vacature op
+            $allApplicants = $vacancy->employees()
+                ->orderBy('id') // Sorteer op inschrijf-ID in oplopende volgorde
+                ->get();
+
+            // Zoek de positie van de huidige werkzoekende in de lijst
+            $queuePosition = $allApplicants->search(function ($applicant) use ($employee) {
+                    return $applicant->id === $employee->id; // Zoek de werkzoekende op basis van hun ID
+                }) + 1; // Voeg +1 toe om een positie van 1 te krijgen in plaats van 0 (omdat de zoekfunctie 0-gebaseerd is)
+
+            $vacancy->queue_position = $queuePosition; // Voeg de positie toe aan de vacature
+        }
+
+        // Haal de berichten op
         $messages = Message::whereIn('id', $vacancies->pluck('pivot.message_id'))->get();
 
+        // Retourneer de view
         return view('employees.viewresponses', compact('vacancies', 'messages'));
     }
+
+
+
+
 
 
 

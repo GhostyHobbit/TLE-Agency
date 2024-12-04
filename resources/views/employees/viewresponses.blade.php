@@ -46,14 +46,14 @@
                 <td>{{ $vacancy->name }}</td>
                 <td>
                     @if($vacancy->pivot->status == 1)
-                        Ingeschreven
+                        Ingeschreven en in wachtrij
                     @elseif($vacancy->pivot->status == 2)
-                        In wachtrij
+                        er is een bericht gestuurd!
                     @else
                         Onbekend
                     @endif
                 </td>
-                <td>{{ $loop->iteration }}</td> <!-- Toon de volgorde in de wachtrij -->
+                <td>{{ $vacancy->queue_position ?? 'Onbekend' }}</td>
                 <td>
                     @if($vacancy->pivot->message_id)
                         <a href="{{ route('messages.response', $vacancy->pivot->message_id) }}">Bekijk Bericht</a>
