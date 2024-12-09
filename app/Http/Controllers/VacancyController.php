@@ -19,7 +19,7 @@ class VacancyController extends Controller
             $query->where('hours', $request->hours);
         }
 
-        $vacancies = $query->paginate(10000);
+        $vacancies = $query->paginate(10);
         $locations = Vacancy::select('location')->distinct()->get();
         $hours = Vacancy::select('hours')->distinct()->get();
 

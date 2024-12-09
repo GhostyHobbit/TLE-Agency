@@ -1,5 +1,5 @@
 <x-nav>
-    <form method="GET" action="{{ route('vacancies.index') }}" class="mb-4">
+    <form id="filter-form" class="mb-4">
         <label for="location" class="block text-sm font-medium text-gray-700">Filter by Location:</label>
         <select name="location" id="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
             <option value="">All Locations</option>
@@ -38,4 +38,5 @@
         {{ $vacancies->links() }}
     </div>
     <script src="{{ asset('js/infiniteScroll.js') }}"></script>
+    @vite('resources/js/filter.js')
 </x-nav>
