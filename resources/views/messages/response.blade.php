@@ -17,8 +17,9 @@
             <p class="text-lg"><strong>Tijd:</strong> {{ $message->time }}</p>
         </div>
 
-        <!-- Formulier sectie -->
-        <div class="space-y-6">
+        <form action="{{ route('employee.response', $message->id) }}" method="POST" class="space-y-6">
+            @csrf <!-- Laravel's CSRF-token voor beveiliging -->
+
             <!-- Radio buttons -->
             <div class="flex items-center space-x-6">
                 <label class="flex items-center space-x-2">
@@ -95,7 +96,8 @@
             >
                 Verstuur reactie
             </button>
-        </div>
+        </form>
+
 
         <!-- Terugknop -->
         <div class="mt-8 text-center">

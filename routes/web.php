@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeResponseController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -55,8 +56,12 @@ Route::get('/employee-vacancies/{employeeVacancy}/edit', [EmployeeVacancyControl
 Route::put('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyController::class, 'update'])->name('employee-vacancies.update');
 Route::delete('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyController::class, 'destroy'])->name('employee-vacancies.destroy');
 
+Route::post('/employee/response/{message}', [EmployeeResponseController::class, 'store'])->name('employee.response');
+
+
 // Employees Routes
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+
 
 Route::get('/employees/viewresponses/{employeeId}', [EmployeeController::class, 'showMyQueue'])->name('employees.viewresponses');
 
