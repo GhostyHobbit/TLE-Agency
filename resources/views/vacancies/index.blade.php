@@ -1,7 +1,7 @@
 <x-nav>
     <form id="filter-form" class="m-4">
         <label for="location" class="block text-sm font-medium text-[#2E342A]">Filter by Location:</label>
-        <select name="location" id="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A]">
+        <select name="location" id="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A]">
             <option value="">Alle locaties</option>
             @foreach($locations as $location)
                 <option value="{{ $location->location }}" {{ request('location') == $location->location ? 'selected' : '' }}>{{ $location->location }}</option>
@@ -9,7 +9,7 @@
         </select>
 
         <label for="hours" class="block text-sm font-medium text-[#2E342A] mt-4">Filter by Hours:</label>
-        <select name="hours" id="hours" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A]">
+        <select name="hours" id="hours" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A]">
             <option value="">Alle uren</option>
             @foreach($hoursRanges as $range => $label)
                 <option value="{{ $range }}" {{ request('hours') == $range ? 'selected' : '' }}>{{ $label }}</option>
