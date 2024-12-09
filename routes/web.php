@@ -12,7 +12,7 @@ use App\Http\Controllers\EmployeeController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/privacy', function () {
     return view('privacy');

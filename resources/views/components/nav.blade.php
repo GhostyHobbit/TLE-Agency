@@ -19,8 +19,9 @@
 <body class="bg-cream">
 <nav class="p-4 bg-mossFoot flex justify-between items-center rounded-b-lg">
     <!-- Logo -->
+    <a href="{{ route('welcome') }}">
     <img src="{{ asset('images/OpenHiring.png') }}" alt="Site Logo" class="h-14 w-auto">
-
+    </a>
     <!-- Menu -->
     <ul class="inline-block ml-4 mt-2 md:mt-0">
         <li class="inline">
@@ -40,7 +41,7 @@
             <p class="text-yellow font-bold mb-2">Voor werkzoekenden</p>
             <ul>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Vind een baan</a>
+                    <a href="{{ route('vacancies.index') }}" class="text-[#D1D5DB] font-medium transition-colors">Vind een baan</a>
                 </li>
                 <li>
                     <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Veelgestelde vragen</a>
