@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    use HasFactory;
 
     protected $fillable = ['name', 'city', 'adress'];
 
-    public function employers()
+    public function employers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Employer::class);
     }
