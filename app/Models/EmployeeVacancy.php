@@ -23,4 +23,10 @@ class EmployeeVacancy extends Pivot
     {
         return $this->belongsTo(Vacancy::class);
     }
+
+    public function response()
+    {
+        return $this->belongsTo(Response::class);
+    }
+
 }
