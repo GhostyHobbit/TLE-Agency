@@ -19,7 +19,7 @@
                         <input type="radio" name="preference1" value="0" {{ Auth::user()->preference1 === 0 ? 'checked' : '' }}> Disagree
                     </label>
                     <label class="text-white">
-                        <input type="radio" name="preference1" value="1" {{ Auth::user()->preference1 === 1 ? 'checked' : '' }}> Unsure
+                        <input type="radio" name="preference1" value="1" {{ Auth::user()->preference1 === null || Auth::user()->preference1 === 1 ? 'checked' : '' }}> Unsure
                     </label>
                     <label class="text-white">
                         <input type="radio" name="preference1" value="2" {{ Auth::user()->preference1 === 2 ? 'checked' : '' }}> Agree
@@ -35,7 +35,7 @@
                         <input type="radio" name="preference2" value="0" {{ Auth::user()->preference2 === 0 ? 'checked' : '' }}> Disagree
                     </label>
                     <label class="text-white">
-                        <input type="radio" name="preference2" value="1" {{ Auth::user()->preference2 === 1 ? 'checked' : '' }}> Unsure
+                        <input type="radio" name="preference2" value="1" {{ Auth::user()->preference2 === null || Auth::user()->preference2 === 1 ? 'checked' : '' }}> Unsure
                     </label>
                     <label class="text-white">
                         <input type="radio" name="preference2" value="2" {{ Auth::user()->preference2 === 2 ? 'checked' : '' }}> Agree
@@ -51,7 +51,7 @@
                         <input type="radio" name="preference3" value="0" {{ Auth::user()->preference3 === 0 ? 'checked' : '' }}> Disagree
                     </label>
                     <label class="text-white">
-                        <input type="radio" name="preference3" value="1" {{ Auth::user()->preference3 === 1 ? 'checked' : '' }}> Unsure
+                        <input type="radio" name="preference3" value="1" {{ Auth::user()->preference3 === null || Auth::user()->preference3 === 1 ? 'checked' : '' }}> Unsure
                     </label>
                     <label class="text-white">
                         <input type="radio" name="preference3" value="2" {{ Auth::user()->preference3 === 2 ? 'checked' : '' }}> Agree
@@ -67,7 +67,7 @@
                         <input type="radio" name="preference4" value="0" {{ Auth::user()->preference4 === 0 ? 'checked' : '' }}> Disagree
                     </label>
                     <label class="text-white">
-                        <input type="radio" name="preference4" value="1" {{ Auth::user()->preference4 === 1 ? 'checked' : '' }}> Unsure
+                        <input type="radio" name="preference4" value="1" {{ Auth::user()->preference4 === null || Auth::user()->preference4 === 1 ? 'checked' : '' }}> Unsure
                     </label>
                     <label class="text-white">
                         <input type="radio" name="preference4" value="2" {{ Auth::user()->preference4 === 2 ? 'checked' : '' }}> Agree
