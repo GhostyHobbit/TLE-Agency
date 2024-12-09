@@ -45,6 +45,7 @@ Route::get('/vacancies/{vacancy}', [VacancyController::class, 'show'])->name('va
 Route::get('/vacancies/edit/{vacancyId}', [VacancyController::class, 'edit'])->name('vacancies.edit');
 Route::put('/vacancies/{vacancy}', [VacancyController::class, 'update'])->name('vacancies.update');
 Route::delete('/vacancies/{vacancy}', [VacancyController::class, 'destroy'])->name('vacancies.destroy');
+Route::get('/vacancies/search', [VacancyController::class, 'search'])->name('vacancies.search');
 
 // Employee Vacancies Routes
 Route::get('/employee-vacancies', [EmployeeVacancyController::class, 'index'])->name('employee-vacancies.index');

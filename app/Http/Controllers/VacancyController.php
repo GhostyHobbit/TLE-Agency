@@ -138,4 +138,27 @@ class VacancyController extends Controller
 
         return response()->json(['message' => 'Employee detached successfully']);
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $results = Vacancy::where('name', 'like', "%$search%")
+            ->orWhere('location', 'like', "%$search%")
+            ->orWhereHas('employer.company', function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%");
+            })
+            ->get();
+
+        return view('vacancies.index', [
+            'vacancies' => $results,
+            'locations' => Vacancy::select('location')->distinct()->get(),
+            'hoursRanges' => [
+                '0-8' => '0-8',
+                '9-16' => '9-16',
+                '17-24' => '17-24',
+                '25-32' => '25-32',
+                '33-36' => '33-36',
+                '37-40' => '37-40',
+        ]]);
+    }
 }
