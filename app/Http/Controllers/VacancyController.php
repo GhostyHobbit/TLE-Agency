@@ -16,14 +16,22 @@ class VacancyController extends Controller
         }
 
         if ($request->has('hours') && $request->hours != '') {
-            $query->where('hours', $request->hours);
+            $hoursRange = explode('-', $request->hours);
+            $query->whereBetween('hours', [$hoursRange[0], $hoursRange[1]]);
         }
 
-        $vacancies = $query->paginate(10);
-        $locations = Vacancy::select('location')->distinct()->get();
-        $hours = Vacancy::select('hours')->distinct()->get();
+        $vacancies = $query->get();
+        $locations = Vacancy::select('location')->distinct()->orderBy('location')->get();
+        $hoursRanges = [
+            '0-8' => '0-8',
+            '9-16' => '9-16',
+            '17-24' => '17-24',
+            '25-32' => '25-32',
+            '33-36' => '33-36',
+            '37-40' => '37-40',
+        ];
 
-        return view('vacancies.index', compact('vacancies', 'locations', 'hours'));
+        return view('vacancies.index', compact('vacancies', 'locations', 'hoursRanges'));
     }
 
     public function get ()
