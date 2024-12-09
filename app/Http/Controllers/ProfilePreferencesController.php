@@ -35,6 +35,6 @@ class ProfilePreferencesController extends Controller
         $user->save(); // Save the updated user data to the database
 
         // Redirect back with a success message
-        return redirect()->route('profile.preferences')->with('status', 'Preferences saved successfully!');
+        return redirect()->route('profile.edit')->with('status', 'Preferences updated successfully!');
     }
 }
