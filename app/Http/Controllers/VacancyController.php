@@ -9,10 +9,21 @@ class VacancyController extends Controller
 {
     public function index(Request $request)
     {
-        // Load vacancies with their associated employer
-        $perPage = $request->get('per_page', 100);
-        $vacancies = Vacancy::with('employer')->paginate($perPage);
-        return view('vacancies.index', compact('vacancies'));
+        $query = Vacancy::query();
+
+        if ($request->has('location') && $request->location != '') {
+            $query->where('location', $request->location);
+        }
+
+        if ($request->has('hours') && $request->hours != '') {
+            $query->where('hours', $request->hours);
+        }
+
+        $vacancies = $query->paginate(10000);
+        $locations = Vacancy::select('location')->distinct()->get();
+        $hours = Vacancy::select('hours')->distinct()->get();
+
+        return view('vacancies.index', compact('vacancies', 'locations', 'hours'));
     }
 
     public function get ()
