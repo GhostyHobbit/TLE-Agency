@@ -59,10 +59,10 @@
 
         <!-- Centered Button with Route -->
         <div class="flex justify-center mt-12">
-            <a href="{{ route('privacy') }}"
+            <a href="{{ route('vacancies.index') }}"
                class="w-72 h-20 bg-pink-700 rounded-2xl border-b-2 border-pink-900 flex items-center justify-between px-4 hover:bg-pink-800 active:bg-pink-600">
                 <!-- Button Text -->
-                <span class="text-white text-xl font-bold">Privacybeleid</span>
+                <span class="text-white text-xl font-bold">Vacatures</span>
 
                 <!-- Sprite Icon -->
                 <img src="{{ asset('images/right-arrow-buttons.png') }}" alt="Sprite Icon" class="w-6 h-6">

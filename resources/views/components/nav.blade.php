@@ -65,7 +65,7 @@
                     <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Ontstaan</a>
                 </li>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Privacybeleid</a>
+                    <a href="{{ route('privacy') }}" class="text-[#D1D5DB] font-medium transition-colors">Privacybeleid</a>
                 </li>
             </ul>
         </div>
@@ -103,7 +103,7 @@
                 <li><a class="text-mossDark font-medium text-lg" href="/">Home</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="#">Vacatures</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="#">Over Open Hiring</a></li>
-                <li><a class="text-mossDark font-medium text-lg" href="#">Uw privacy</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('privacy') }}">Uw privacy</a></li>
             </ul>
             <ul>
                 <li>Demo Links</li>
