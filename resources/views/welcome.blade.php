@@ -124,8 +124,7 @@
             <a href="{{ route('vacancies.index') }}"
                class="w-72 h-20 bg-violet rounded-2xl border-b-2 border-violetDark flex items-center justify-between px-4 hover:bg-violetDark active:bg-mossMedium">
                 <!-- Button Text -->
-                <span class="text-white text-xl font-bold">Bekijk Video</span>
-
+                <span class="text-white text-xl font-bold">Bekijk vacatures</span>
                 <!-- Sprite Icon -->
                 <img src="{{ asset('images/right-arrow-buttons.png') }}" alt="Sprite Icon" class="w-6 h-6">
             </a>
