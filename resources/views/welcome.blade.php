@@ -57,6 +57,19 @@
             </div>
         </section>
 
+        <!-- Centered Button with Route -->
+        <div class="flex justify-center mt-12">
+            <a href="{{ route('video') }}"
+               class="w-72 h-20 bg-violet rounded-2xl border-b-2 border-violetDark flex items-center justify-between px-4 hover:bg-violetDark active:bg-mossMedium">
+                <!-- Button Text -->
+                <span class="text-white text-xl font-bold">Bekijk Video</span>
+
+                <!-- Sprite Icon -->
+                <img src="{{ asset('images/right-arrow-buttons.png') }}" alt="Sprite Icon" class="w-6 h-6">
+            </a>
+        </div>
+
+
 
         <!-- How Open Hiring Works -->
         <section class="px-4 sm:px-8 py-12 bg-cream">
@@ -105,12 +118,13 @@
                 </div>
             </div>
         </section>
+
         <!-- Centered Button with Route -->
         <div class="flex justify-center mt-12">
             <a href="{{ route('vacancies.index') }}"
-               class="w-72 h-20 bg-pink-700 rounded-2xl border-b-2 border-pink-900 flex items-center justify-between px-4 hover:bg-pink-800 active:bg-pink-600">
+               class="w-72 h-20 bg-violet rounded-2xl border-b-2 border-violetDark flex items-center justify-between px-4 hover:bg-violetDark active:bg-mossMedium">
                 <!-- Button Text -->
-                <span class="text-white text-xl font-bold">Vacatures</span>
+                <span class="text-white text-xl font-bold">Bekijk Video</span>
 
                 <!-- Sprite Icon -->
                 <img src="{{ asset('images/right-arrow-buttons.png') }}" alt="Sprite Icon" class="w-6 h-6">
