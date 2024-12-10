@@ -29,7 +29,7 @@
             <h2 class="text-3xl font-bold text-mossFoot mb-4 text-center">3 Principes van Open Hiring</h2>
             <div class="grid gap-12 lg:grid-cols-3">
                 <!-- Principle 1 -->
-                <div class="bg-mosslight shadow-md rounded-lg p-6 space-y-4">
+                <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
                     <h3 class="text-2xl font-bold text-mossFoot">1. Het werkt beter zonder (voor)oordelen</h3>
                     <p class="text-gray-700 text-lg leading-relaxed">
                         Met Open Hiring krijgen (voor)oordelen geen kans. En mensen die vaak (onbewust) worden uitgesloten
@@ -38,7 +38,7 @@
                 </div>
 
                 <!-- Principle 2 -->
-                <div class="bg-mosslight shadow-md rounded-lg p-6 space-y-4">
+                <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
                     <h3 class="text-2xl font-bold text-mossFoot">2. We vertrouwen elkaar</h3>
                     <p class="text-gray-700 text-lg leading-relaxed">
                         Werkzoekenden kunnen zelf prima beoordelen of ze een baan aankunnen. Door daarop te vertrouwen,
@@ -47,7 +47,7 @@
                 </div>
 
                 <!-- Principle 3 -->
-                <div class="bg-mosslight shadow-md rounded-lg p-6 space-y-4">
+                <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
                     <h3 class="text-2xl font-bold text-mossFoot">3. Groeien doe je samen</h3>
                     <p class="text-gray-700 text-lg leading-relaxed">
                         Ieder mens heeft mooie en minder mooie kanten én momenten. Door elkaar helemaal te accepteren,
@@ -57,6 +57,54 @@
             </div>
         </section>
 
+
+        <!-- How Open Hiring Works -->
+        <section class="px-4 sm:px-8 py-12 bg-cream">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <!-- Header -->
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold text-mossFoot mb-4">Hoe werkt Open Hiring?</h2>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Bij Open Hiring draait alles om eenvoud en anonimiteit. Geen sollicitatiegesprekken, geen lastige vragen—gewoon jouw bereidheid om te werken staat centraal.
+                    </p>
+                </div>
+
+                <!-- Process Steps -->
+                <div class="grid gap-12 lg:grid-cols-2">
+                    <!-- Step 1 -->
+                    <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
+                        <h3 class="text-2xl font-bold text-mossFoot">1. Kies een baan die bij je past</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Kijk welke banen beschikbaar zijn en beoordeel zelf of je de capaciteiten hebt om deze aan te kunnen. Het gaat om wat jij denkt dat je kunt, niet om je cv.
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
+                        <h3 class="text-2xl font-bold text-mossFoot">2. Meld je aan voor de lijst</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Vul een eenvoudig formulier in om je aan te melden. Je komt op een wachtlijst terecht, waarbij de volgorde van aanmelding bepaalt wie de kans krijgt.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
+                        <h3 class="text-2xl font-bold text-mossFoot">3. Wacht op uitnodiging van de werkgever</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Zodra het jouw beurt is, word je anoniem uitgenodigd door de werkgever. Ze kennen alleen jouw bereidheid om te werken en niet je achtergrond of verleden.
+                        </p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
+                        <h3 class="text-2xl font-bold text-mossFoot">4. Begin met werken</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Je start met werken in een omgeving waar vertrouwen en gelijkwaardigheid centraal staan. Laat zien wat je kunt en groei in je nieuwe rol.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Centered Button with Route -->
         <div class="flex justify-center mt-12">
             <a href="{{ route('vacancies.index') }}"
@@ -68,6 +116,5 @@
                 <img src="{{ asset('images/right-arrow-buttons.png') }}" alt="Sprite Icon" class="w-6 h-6">
             </a>
         </div>
-
     </main>
 </x-nav>

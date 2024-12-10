@@ -101,8 +101,8 @@
         </div>
         <div class="modal-body bg-mossLight p-4">
             <ul>
-                <li><a class="text-mossDark font-medium text-lg" href="/">Home</a></li>
-                <li><a class="text-mossDark font-medium text-lg" href="#">Vacatures</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="href="{{ route('welcome') }}"">Home</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="href="{{ route('vacancies.index') }}"">Vacatures</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="#">Over Open Hiring</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="{{ route('privacy') }}">Uw privacy</a></li>
             </ul>
