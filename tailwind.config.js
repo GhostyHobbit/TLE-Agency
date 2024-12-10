@@ -15,7 +15,15 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Radikal', ...defaultTheme.fontFamily.sans],
+                sans: ['Radikal', 'sans-serif'],
+            },
+            fontSize: {
+                'h1': ['3rem', {fontWeight: 'bold', fontFamily: 'Radikal'}],
+                'h2': ['1.875rem', {fontWeight: 'bold', fontFamily: 'Radikal'}],
+                'h3': ['1.25rem', {fontWeight: 'bold', fontFamily: 'Radikal'}],
+                'navLink': ['1.125rem', {fontWeight: 'semi-bold', fontFamily: 'Radikal'}],
+                'p': ['1rem', {fontWeight: 'normal', fontFamily: 'Radikal'}],
+                'buttonLink': ['0.875rem', {fontWeight: 'bold', fontFamily: 'Radikal'}],
             },
             colors: {
                 'mossLight' : '#E2ECC8',

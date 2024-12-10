@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Open Hiring</title>
 </head>
-<body class="bg-cream">
+<body class="bg-cream text-mossDark">
 <nav class="p-4 bg-mossFoot flex justify-between items-center rounded-b-lg">
     <!-- Logo -->
     <img src="{{ asset('images/OpenHiring.png') }}" alt="Site Logo" class="h-14 w-auto">
@@ -93,35 +93,31 @@
     <!-- Modal Content -->
     <div class="w-[96vw] m-2 bg-mossLight min-h-[50vh] position-relative rounded-lg xl:w-[30vw]">
         <div class="modal-header  p-4 flex justify-between items-center">
-            <h5 class="modal-title text-mossDark font-bold text-lg">Menu</h5>
+            <h3 class="modal-title text-h3">Menu</h3>
             <button id="closeModal" class="text-black hover:text-gray-700" aria-label="Close">
                 &times;
             </button>
         </div>
         <div class="modal-body bg-mossLight p-4">
             <ul>
-                <li><a class="text-mossDark font-medium text-lg" href="/">Home</a></li>
-                <li><a class="text-mossDark font-medium text-lg" href="#">Vacatures</a></li>
-                <li><a class="text-mossDark font-medium text-lg" href="#">Over Open Hiring</a></li>
-                <li><a class="text-mossDark font-medium text-lg" href="#">Uw privacy</a></li>
+                <li><a class="text-navLink" href="/">Home</a></li>
+                <li><a class="text-navLink" href="#">Vacatures</a></li>
+                <li><a class="text-navLink" href="#">Over Open Hiring</a></li>
+                <li><a class="text-navLink" href="#">Uw privacy</a></li>
             </ul>
             <ul>
                 <li>Demo Links</li>
-                <li><a class="text-mossDark font-medium text-lg" href="{{ route('vacancies.index') }}">Vacature overzicht</a></li>
-                <li><a class="text-mossDark font-medium text-lg" href="{{ route('employers.viewvacancies') }}">Bedrijf vacatures</a></li>
-                <li><a class="text-mossDark font-medium text-lg" href="{{ route('employees.viewresponses', $employee) }}">Werknemer ontvangen bericht</a></li>
+                <li><a class="text-navLink" href="{{ route('vacancies.index') }}">Vacature overzicht</a></li>
+                <li><a class="text-navLink" href="{{ route('employers.viewvacancies') }}">Bedrijf vacatures</a></li>
+                <li><a class="text-navLink" href="{{ route('employees.viewresponses', $employee) }}">Werknemer ontvangen bericht</a></li>
             </ul>
         </div>
-        <div class="modal-footer p-4 flex justify-end">
-            <button id="closeModalFooter" class="bg-violet text-cream rounded-xl px-8 py-1 xl:px-10 py-2">Sluiten</button>
+        <div class="modal-footer py-2 flex justify-center bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] mx-4">
+            <button id="closeModalFooter" class="text-cream text-base font-bold font-['Radikal'] leading-snug">Sluiten</button>
         </div>
     </div>
 </div>
 
-
-{{--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>--}}
-{{--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>--}}
-{{--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>--}}
 <script>
     // Get modal elements
     const modal = document.getElementById('myModal');
