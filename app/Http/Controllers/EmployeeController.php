@@ -66,8 +66,6 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
-
-
     public function showMyQueue($employeeId)
     {
         // Haal de werkzoekende op
@@ -101,15 +99,6 @@ class EmployeeController extends Controller
         // Retourneer de view
         return view('employees.viewresponses', compact('vacancies', 'messages'));
     }
-
-
-
-
-
-
-
-
-
 
     public function destroy($id)
     {

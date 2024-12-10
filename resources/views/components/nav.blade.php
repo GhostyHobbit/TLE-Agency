@@ -25,9 +25,6 @@
     <ul class="inline-block ml-4 mt-2 md:mt-0">
         <li class="inline">
             <button id="openModal" class="bg-transparent text-yellow font-medium text-lg">Menu</button>
-{{--            <button type="button" class="bg-transparent text-yellow font-medium text-lg hover:bg-yellow-500 hover:text-white transition-colors duration-300" data-toggle="modal" data-target="#myModal">--}}
-{{--                Menu--}}
-{{--            </button>--}}
         </li>
     </ul>
 </nav>

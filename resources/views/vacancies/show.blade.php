@@ -3,7 +3,7 @@
     <h1 class="text-h1 mx-4 my-2">{{ $vacancy->name }}</h1>
     <div class="flex items-center mx-4 my-2">
         @if($vacancy->path)
-            <img src="{{ asset('storage/' . $vacancy->path) }}" alt="{{ $vacancy->employee->company->name }} Logo" class="h-[5vh] w-auto">
+            <img src="{{ asset('storage/' . $vacancy->path) }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
         @endif
         <img src="{{ asset('images/OpenHiring.png') }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
         <p class="text-p mx-4">{{ $vacancy->employer->company->name }}</p>
@@ -18,7 +18,7 @@
         </div>
         <div class="bg-mossLight pl-3 pr-3 py-4 rounded-lg my-2">
             <p class="text-p font-bold mb-2">Interesse?</p>
-            <div class="w-[40vw] h-[6vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
+            <div id="openEnrollTwo" class="w-[40vw] h-[6vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
                 <a class="text-cream text-base font-bold font-['Radikal'] leading-snug">Schrijf in</a>
             </div>
         </div>
@@ -80,8 +80,37 @@
 
     <div class="my-4 mx-4">
         <p class="text-p font-bold mb-2">Interesse?</p>
-        <div class="w-[92vw] h-[8vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
+        <div id="openEnroll" class="w-[92vw] h-[8vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
             <a class="text-cream text-base font-bold font-['Radikal'] leading-snug">Schrijf in</a>
+        </div>
+    </div>
+
+{{--Enrolling popup--}}
+    <div id="myEnroll" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden xl:justify-end">
+        <!-- Modal Content -->
+        <div class="w-[96vw] min-h-[45vh] m-2 bg-violet rounded-lg xl:w-[30vw]">
+            <div class="modal-header p-4 flex justify-between items-center">
+                <p class="text-navLink text-cream font-bold">Bevestigen?</p>
+                <button id="closeEnroll" class="text-black hover:text-gray-700" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body bg-violet p-4">
+                <p class="text-p text-cream">
+                    U gaat zich inschrijven voor <span class="font-bold">{{ $vacancy->name }} bij {{ $vacancy->employer->company->name }}</span>
+                    Weet u dit zeker?
+                </p>
+            </div>
+            <form action="{{ url(route('employee-vacancies.store')) }}" method="POST">
+                @csrf
+                <input type="hidden" name="vacancy_id" value="{{ $vacancy->id }}">
+                <div class="modal-footer py-2 flex justify-center bg-cream rounded-2xl border-b-4 border-mossDark mx-4 my-2 hover:bg-mossLight active:bg-cream">
+                    <button class="text-mossDark text-base font-bold font-['Radikal'] leading-snug">Bevestigen</button>
+                </div>
+            </form>
+            <div id="closeEnrollFooter" class="modal-footer py-2 flex justify-center bg-violet rounded-2xl border-b-4 border-violetDark border-2 mx-4 my-2 hover:bg-[#7c1a51] active:bg-[#aa0160]">
+                <button class="text-cream text-base font-bold font-['Radikal'] leading-snug">Ga Terug</button>
+            </div>
         </div>
     </div>
 
@@ -102,6 +131,34 @@
         // Toggle function for "Wat bieden wij"
         offerHeader.addEventListener('click', () => {
             offerDescription.classList.toggle('hidden');
+        });
+
+        const enroll = document.getElementById('myEnroll');
+        const openEnrollButton = document.getElementById('openEnroll');
+        const openEnrollButtonTwo = document.getElementById('openEnrollTwo');
+        const closeEnrollButtons = document.querySelectorAll('#closeEnroll, #closeEnrollFooter');
+
+        // Open modal
+        openEnrollButton.addEventListener('click', () => {
+            enroll.classList.remove('hidden');
+        });
+
+        openEnrollButtonTwo.addEventListener('click', () => {
+            enroll.classList.remove('hidden');
+        });
+
+        // Close modal
+        closeEnrollButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                enroll.classList.add('hidden');
+            });
+        });
+
+        // Close modal when clicking outside of it
+        enroll.addEventListener('click', (event) => {
+            if (event.target === enroll) {
+                enroll.classList.add('hidden');
+            }
         });
     </script>
 </x-nav>

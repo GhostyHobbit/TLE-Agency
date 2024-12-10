@@ -50,7 +50,8 @@ Route::delete('/vacancies/{vacancy}', [VacancyController::class, 'destroy'])->na
 // Employee Vacancies Routes
 Route::get('/employee-vacancies', [EmployeeVacancyController::class, 'index'])->name('employee-vacancies.index');
 Route::get('/employee-vacancies/create', [EmployeeVacancyController::class, 'create'])->name('employee-vacancies.create');
-Route::post('/employee-vacancies', [EmployeeVacancyController::class, 'store'])->name('employee-vacancies.store');
+Route::post('/employee-vacancies', [EmployeeVacancyController::class, 'store'])->name('employee-vacancies.store')->middleware('auth');
+Route::get('/employee-vacancies/enrolled', [EmployeeVacancyController::class, 'enrolled'])->name('employee-vacancies.enrolled');
 Route::get('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyController::class, 'show'])->name('employee-vacancies.show');
 Route::get('/employee-vacancies/{employeeVacancy}/edit', [EmployeeVacancyController::class, 'edit'])->name('employee-vacancies.edit');
 Route::put('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyController::class, 'update'])->name('employee-vacancies.update');

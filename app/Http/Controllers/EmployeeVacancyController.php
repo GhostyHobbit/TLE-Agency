@@ -23,14 +23,20 @@ class EmployeeVacancyController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'employee_id' => 'required|exists:employees,id',
             'vacancy_id' => 'required|exists:vacancies,id',
-            'status' => 'required|boolean',
         ]);
 
-        $application = EmployeeVacancy::create($validatedData);
+        $employeeVacancy = new EmployeeVacancy();
+        $employeeVacancy->employee_id = request()->user()->id;
+        $employeeVacancy->vacancy_id = $request->input('vacancy_id');
+        $employeeVacancy->status = 0;
+        $employeeVacancy->save();
 
-        return response()->json($application, 201);
+        return redirect(route('employee-vacancies.enrolled'));
+    }
+
+    public function enrolled() {
+        return view('employee_vacancies.enrolled');
     }
 
     public function show($id)
