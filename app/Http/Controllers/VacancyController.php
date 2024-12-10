@@ -11,6 +11,17 @@ class VacancyController extends Controller
     {
         $query = Vacancy::query();
 
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('location', 'like', '%' . $search . '%')
+                    ->orWhereHas('employer', function($q) use ($search) {
+                        $q->where('company', 'like', '%' . $search . '%');
+                    });
+            });
+        }
+
         if ($request->has('location') && $request->location != '') {
             $query->where('location', $request->location);
         }
@@ -137,28 +148,5 @@ class VacancyController extends Controller
         $vacancy->employees()->detach($employeeId);
 
         return response()->json(['message' => 'Employee detached successfully']);
-    }
-
-    public function search(Request $request)
-    {
-        $search = $request->input('search');
-        $results = Vacancy::where('name', 'like', "%$search%")
-            ->orWhere('location', 'like', "%$search%")
-            ->orWhereHas('employer.company', function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%");
-            })
-            ->get();
-
-        return view('vacancies.index', [
-            'vacancies' => $results,
-            'locations' => Vacancy::select('location')->distinct()->get(),
-            'hoursRanges' => [
-                '0-8' => '0-8',
-                '9-16' => '9-16',
-                '17-24' => '17-24',
-                '25-32' => '25-32',
-                '33-36' => '33-36',
-                '37-40' => '37-40',
-        ]]);
     }
 }

@@ -1,31 +1,37 @@
 <x-nav>
-    <form id="search-form" class="m-4" method="GET" action="{{ route('vacancies.search') }}">
-        <label for="search" class="block text-sm font-medium text-[#2E342A]">Search:</label>
-        <input type="text" name="search" id="search" value="{{ request('search') }}" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A]">
-        <button type="submit" class="px-8 py-2 mt-5 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
-            <div class="text-[#fbfcf6] text-base font-bold font-['Radikal'] leading-snug">Search</div>
-        </button>
-    </form>
 
-    <form id="filter-form" class="m-4">
-        <label for="location" class="block text-sm font-medium text-[#2E342A]">Filter by Location:</label>
-        <select name="location" id="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A]">
+    <form id="search-form" class="m-4">
+        <label for="search" class="block text-sm font-medium text-[#2E342A]">Search:</label>
+        <input type="text" name="search" id="search" value="{{ request('search') }}" placeholder="Zoek naar vacatures" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A] placeholder-[#2E342A]">
+
+        <label for="location" class="block text-sm font-medium text-[#2E342A] mt-4">Filter by Location:</label>
+        <div class="relative">
+        <select name="location" id="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A] appearance-none">
             <option value="">Alle locaties</option>
             @foreach($locations as $location)
                 <option value="{{ $location->location }}" {{ request('location') == $location->location ? 'selected' : '' }}>{{ $location->location }}</option>
             @endforeach
         </select>
+        <svg class="w-5 h-5 transform rotate-180 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#AA0160" fill="#AA0160">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7H5z" />
+        </svg>
+        </div>
 
         <label for="hours" class="block text-sm font-medium text-[#2E342A] mt-4">Filter by Hours:</label>
-        <select name="hours" id="hours" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A]">
+        <div class="relative">
+        <select name="hours" id="hours" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A] appearance-none">
             <option value="">Alle uren</option>
             @foreach($hoursRanges as $range => $label)
                 <option value="{{ $range }}" {{ request('hours') == $range ? 'selected' : '' }}>{{ $label }}</option>
             @endforeach
         </select>
+        <svg class="w-5 h-5 transform rotate-180 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#AA0160" fill="#AA0160">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7H5z" />
+        </svg>
+        </div>
 
         <button type="submit" class="px-8 py-2 mt-5 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
-            <div class="text-[#fbfcf6] text-base font-bold font-['Radikal'] leading-snug">Filter</div>
+            <div class="text-[#fbfcf6] text-base font-bold font-['Radikal'] leading-snug">Zoek</div>
         </button>
     </form>
 
