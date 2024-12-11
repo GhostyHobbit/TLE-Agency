@@ -9,10 +9,40 @@ class VacancyController extends Controller
 {
     public function index(Request $request)
     {
-        // Load vacancies with their associated employer
-        $perPage = $request->get('per_page', 100);
-        $vacancies = Vacancy::with('employer')->paginate($perPage);
-        return view('vacancies.index', compact('vacancies'));
+        $query = Vacancy::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('location', 'like', '%' . $search . '%')
+                    ->orWhereHas('employer', function($q) use ($search) {
+                        $q->where('company', 'like', '%' . $search . '%');
+                    });
+            });
+        }
+
+        if ($request->has('location') && $request->location != '') {
+            $query->where('location', $request->location);
+        }
+
+        if ($request->has('hours') && $request->hours != '') {
+            $hoursRange = explode('-', $request->hours);
+            $query->whereBetween('hours', [$hoursRange[0], $hoursRange[1]]);
+        }
+
+        $vacancies = $query->get();
+        $locations = Vacancy::select('location')->distinct()->orderBy('location')->get();
+        $hoursRanges = [
+            '0-8' => '0-8',
+            '9-16' => '9-16',
+            '17-24' => '17-24',
+            '25-32' => '25-32',
+            '33-36' => '33-36',
+            '37-40' => '37-40',
+        ];
+
+        return view('vacancies.index', compact('vacancies', 'locations', 'hoursRanges'));
     }
 
     public function get ()

@@ -19,8 +19,9 @@
 <body class="bg-cream text-mossDark">
 <nav class="p-4 bg-mossFoot flex justify-between items-center rounded-b-lg">
     <!-- Logo -->
+    <a href="{{ route('welcome') }}">
     <img src="{{ asset('images/OpenHiring.png') }}" alt="Site Logo" class="h-14 w-auto">
-
+    </a>
     <!-- Menu -->
     <ul class="inline-block ml-4 mt-2 md:mt-0">
         <li class="inline">
@@ -37,7 +38,7 @@
             <p class="text-yellow font-bold mb-2">Voor werkzoekenden</p>
             <ul>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Vind een baan</a>
+                    <a href="{{ route('vacancies.index') }}" class="text-[#D1D5DB] font-medium transition-colors">Vind een baan</a>
                 </li>
                 <li>
                     <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Veelgestelde vragen</a>
@@ -62,7 +63,7 @@
                     <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Ontstaan</a>
                 </li>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Privacybeleid</a>
+                    <a href="{{ route('privacy') }}" class="text-[#D1D5DB] font-medium transition-colors">Privacybeleid</a>
                 </li>
             </ul>
         </div>
@@ -97,10 +98,10 @@
         </div>
         <div class="modal-body bg-mossLight p-4">
             <ul>
-                <li><a class="text-navLink" href="/">Home</a></li>
-                <li><a class="text-navLink" href="#">Vacatures</a></li>
-                <li><a class="text-navLink" href="#">Over Open Hiring</a></li>
-                <li><a class="text-navLink" href="#">Uw privacy</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('welcome') }}">Home</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('vacancies.index') }}">Vacatures</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="#">Over Open Hiring</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('privacy') }}">Uw privacy</a></li>
             </ul>
             <ul>
                 <li>Demo Links</li>
