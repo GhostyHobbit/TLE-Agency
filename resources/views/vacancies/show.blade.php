@@ -3,7 +3,7 @@
     <h1 class="text-h1 mx-4 my-2">{{ $vacancy->name }}</h1>
     <div class="flex items-center mx-4 my-2">
         @if($vacancy->path)
-            <img src="{{ asset('storage/' . $vacancy->path) }}" alt="{{ $vacancy->employee->company->name }} Logo" class="h-[5vh] w-auto">
+            <img src="{{ asset('storage/' . $vacancy->path) }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
         @endif
         <p class="text-p mx-4">{{ $vacancy->employer->company->name }}</p>
     </div>
