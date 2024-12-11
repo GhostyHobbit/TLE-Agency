@@ -85,12 +85,12 @@
 
         <!-- Save button -->
         <div class="flex items-center gap-4">
-            <div class="mb-4">
+{{--            <div class="mb-4">--}}
                 <x-primary-button class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 !bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug">
-                    {{ __('Save') }}
+                    {{ __('Opslaan') }}
                 </x-primary-button>
 
-            </div>
+{{--            </div>--}}
 
             @if (session('status') === 'profile-updated')
                 <p
