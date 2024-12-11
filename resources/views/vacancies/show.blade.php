@@ -5,7 +5,6 @@
         @if($vacancy->path)
             <img src="{{ asset('storage/' . $vacancy->path) }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
         @endif
-        <img src="{{ asset('images/OpenHiring.png') }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
         <p class="text-p mx-4">{{ $vacancy->employer->company->name }}</p>
     </div>
     <div class="flex justify-between items-center mx-4">
@@ -37,7 +36,6 @@
     @if($vacancy->path)
         <img src="{{ asset('storage/' . $vacancy->path) }}" alt="Banner-foto-baan" class="h-[5vh] w-auto">
     @endif
-    <img src="{{ asset('images/placeholderbanner.jpg') }}" class="h-[25vh] w-[92vw] object-cover mx-4 rounded-lg object-top">
 
 {{--Description--}}
     <div>

@@ -8,7 +8,6 @@ use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\EmployeeVacancyController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\ProfilePreferencesController;
 
 
 Route::get('/', function () {
@@ -73,22 +72,6 @@ Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])
 
 
 Route::get('/employers/viewvacancies', [VacancyController::class, 'get'])->name('employers.viewvacancies');
-
-
-Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])->name('profile.preferences');
-Route::post('/profile/preferences/update', [ProfilePreferencesController::class, 'update'])->name('profile.preferences.update');
-Route::get('/preferences', [ProfilePreferencesController::class, 'index'])->name('profile.preferences');
-Route::post('/preferences', [ProfilePreferencesController::class, 'update'])->name('profile.preferences.update');
-Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index']);
-Route::get('/profile/preferences', function () {
-    return view('preferences'); // Replace with the correct logic for showing the preferences page
-})->name('profile.preferences');
-
-Route::post('/profile/preferences/update', [ProfilePreferencesController::class, 'update'])
-    ->name('profile.preferences.update');
-Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])
-    ->name('profile.preferences');
-
 
 
 require __DIR__.'/auth.php';
