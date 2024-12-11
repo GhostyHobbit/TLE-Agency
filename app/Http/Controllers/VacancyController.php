@@ -19,7 +19,7 @@ class VacancyController extends Controller
     {
         // Load vacancies with their associated employer
         $vacancies = Vacancy::all();
-        $vacancies = Vacancy::withCount('employees')->get();
+
         return view('employers.viewvacancies', compact('vacancies'));
     }
 
@@ -45,6 +45,7 @@ class VacancyController extends Controller
         if ($request->hasFile('picture')) {
             $path = $request->file('picture')->store('vacancies', 'public'); // Store file in 'storage/app/public/vacancies'
         }
+
 
         $vacancy = new Vacancy();
         $vacancy->employer_id = $request->input('employer_id');

@@ -63,10 +63,14 @@ Route::post('/employee/response/{message}', [EmployeeResponseController::class, 
 // Employees Routes
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
 
+// routes/web.php
+//Route::get('/employees/viewresponses', [EmployeeVacancyController::class, 'showMyQueue']);
+Route::get('employee/message/{message}', [MessageController::class, 'show'])->name('employee.message.view');
 
-Route::get('/employees/viewresponses/{employeeId}', [EmployeeController::class, 'showMyQueue'])->name('employees.viewresponses');
+Route::get('/employees/viewresponses', [EmployeeVacancyController::class, 'index'])->name('employees.viewresponses') ->middleware('auth');
 
-Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
+
+Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show')->middleware('auth');
 
 
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');

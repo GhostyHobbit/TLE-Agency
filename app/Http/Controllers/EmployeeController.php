@@ -66,51 +66,6 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
-
-
-    public function showMyQueue($employeeId)
-    {
-        // Haal de werkzoekende op
-        $employee = Employee::findOrFail($employeeId);
-
-        // Haal de vacatures op waarvoor de werkzoekende zich heeft ingeschreven
-        $vacancies = $employee->vacancies()
-            ->withPivot('status', 'message_id', 'created_at') // Zorg ervoor dat we de juiste pivot-velden hebben
-            ->get();
-
-        // Voeg wachtrijpositie toe aan elke vacature
-        foreach ($vacancies as $vacancy) {
-            // Haal alle inschrijvingen voor deze vacature op waar de status '1' is
-            $allApplicants = $vacancy->employees()
-                ->wherePivot('status', '1') // Filter werkzoekenden met status '1' (in de wachtrij)
-                ->orderBy('employee_vacancy.created_at') // Sorteer op basis van de inschrijftijd in de wachtrij
-                ->get();
-
-            // Zoek de positie van de huidige werkzoekende in de lijst
-            $queuePosition = $allApplicants->search(function ($applicant) use ($employee) {
-                    return $applicant->id === $employee->id; // Zoek de werkzoekende op basis van hun ID
-                }) + 1; // Voeg +1 toe omdat de zoekfunctie 0-gebaseerd is
-
-            // Voeg de wachtrijpositie toe aan de vacature
-            $vacancy->queue_position = $queuePosition;
-        }
-
-        // Haal de berichten op
-        $messages = Message::whereIn('id', $vacancies->pluck('pivot.message_id'))->get();
-
-        // Retourneer de view
-        return view('employees.viewresponses', compact('vacancies', 'messages'));
-    }
-
-
-
-
-
-
-
-
-
-
     public function destroy($id)
     {
         Employee::findOrFail($id)->delete();
@@ -132,11 +87,5 @@ class EmployeeController extends Controller
     }
 
     // Additional method to detach a vacancy from an employee
-    public function detachVacancy($employeeId, $vacancyId)
-    {
-        $employee = Employee::findOrFail($employeeId);
-        $employee->vacancies()->detach($vacancyId);
 
-        return response()->json(['message' => 'Vacancy detached successfully']);
-    }
 }
