@@ -94,6 +94,7 @@
                 <input type="file" name="picture" id="picture" aria-describedby="picture-description"
                        class="mt-1 block w-full text-sm text-gray-700 bg-white px-3 py-2 rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                        accept="image/*">
+{{--                 image toevoegen--}}
                 <p id="picture-description" class="text-sm text-gray-500">Upload een JPG, PNG of GIF bestand.</p>
                 @error('picture')
                 <div role="alert">
