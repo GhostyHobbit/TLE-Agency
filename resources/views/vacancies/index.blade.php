@@ -1,10 +1,10 @@
 <x-nav>
 
     <form id="search-form" class="m-4">
-        <label for="search" class="block text-sm font-medium text-[#2E342A]">Search:</label>
+        <label for="search" class="block text-sm font-medium text-[#2E342A]">Zoek:</label>
         <input type="text" name="search" id="search" value="{{ request('search') }}" placeholder="Zoek naar vacatures" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A] placeholder-[#2E342A]">
 
-        <label for="location" class="block text-sm font-medium text-[#2E342A] mt-4">Filter by Location:</label>
+        <label for="location" class="block text-sm font-medium text-[#2E342A] mt-4">Filter op Locatie:</label>
         <div class="relative">
         <select name="location" id="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A] appearance-none">
             <option value="">Alle locaties</option>
@@ -17,7 +17,7 @@
         </svg>
         </div>
 
-        <label for="hours" class="block text-sm font-medium text-[#2E342A] mt-4">Filter by Hours:</label>
+        <label for="hours" class="block text-sm font-medium text-[#2E342A] mt-4">Filter op Uren:</label>
         <div class="relative">
         <select name="hours" id="hours" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A] appearance-none">
             <option value="">Alle uren</option>
@@ -40,9 +40,9 @@
             <a href="{{ route('vacancies.show', $vacancy->id) }}" class="block bg-[#E2ECC8] border border-[#2E342A] shadow-md rounded-lg p-4 flex justify-between items-center">
                 <div class="flex-1">
                     <h3 class="text-[#2E342A] text-xl font-bold mb-2">{{ $vacancy->name }}</h3>
-                    <p class="text-[#2E342A] mb-2">Location: {{ $vacancy->location }}</p>
-                    <p class="text-[#2E342A] mb-2">Hours: {{ $vacancy->hours }}</p>
-                    <p class="text-[#2E342A] mb-2">Salary: {{ $vacancy->salary }}</p>
+                    <p class="text-[#2E342A] mb-2">Locatie: {{ $vacancy->location }}</p>
+                    <p class="text-[#2E342A] mb-2">Uren: {{ $vacancy->hours }} uur</p>
+                    <p class="text-[#2E342A] mb-2">Uurloon: €{{ $vacancy->salary }} per uur</p>
                 </div>
                 @if($vacancy->path)
                     <img src="{{ asset('storage/' . $vacancy->path) }}" alt="{{ $vacancy->employer->company->name }} logo" class="w-24 h-24 mr-8 rounded-md">
