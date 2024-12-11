@@ -7,16 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employer extends Model
 {
-    use HasFactory;
-
     protected $fillable = ['company_id', 'name', 'email'];
 
-    public function company()
+    public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Company::class);
     }
 
-    public function vacancies()
+    public function vacancies(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Vacancy::class);
     }
