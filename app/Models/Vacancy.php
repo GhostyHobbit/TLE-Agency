@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vacancy extends Model
 {
-    use HasFactory;
-
     protected $fillable = ['name', 'employer_id', 'hours', 'salary'];
 
     public function employees()
@@ -20,7 +18,7 @@ class Vacancy extends Model
             ->withTimestamps();
     }
 
-    public function employer()
+    public function employer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Employer::class);
     }

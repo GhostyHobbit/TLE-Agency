@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: 'Radikal'; /* Choose a name for your font */
+    src: url('/public/fonts/Nootype - Radikal.otf') format('truetype'); /* Correct format for OTF */
+    font-weight: normal; /* Adjust as necessary */
+    font-style: normal; /* Adjust as necessary */
+}
