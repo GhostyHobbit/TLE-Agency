@@ -99,9 +99,6 @@
                 </div>
             </form>
         @endauth
-        <div id="openEnroll" class="w-[92vw] h-[8vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
-            <a class="text-cream text-base font-bold font-['Radikal'] leading-snug">Schrijf in</a>
-        </div>
     </div>
 
 {{--Enrolling popup--}}
