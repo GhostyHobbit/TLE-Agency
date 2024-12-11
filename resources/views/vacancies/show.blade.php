@@ -18,9 +18,18 @@
         </div>
         <div class="bg-mossLight pl-3 pr-3 py-4 rounded-lg my-2">
             <p class="text-p font-bold mb-2">Interesse?</p>
-            <div id="openEnrollTwo" class="w-[40vw] h-[6vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
-                <a class="text-cream text-base font-bold font-['Radikal'] leading-snug">Schrijf in</a>
-            </div>
+            @auth
+                <div id="openEnrollTwo" class="w-[40vw] h-[6vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
+                    <a class="text-cream text-base font-bold font-['Radikal'] leading-snug">Schrijf in</a>
+                </div>
+            @else
+                <form action="{{ url(route('employee-vacancies.store')) }}" method="POST">
+                    @csrf
+                    <div class="modal-footer w-[40vw] h-[6vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
+                        <button class="text-cream text-base font-bold font-['Radikal'] leading-snug">Log in</button>
+                    </div>
+                </form>
+            @endauth
         </div>
     </div>
 
@@ -80,6 +89,18 @@
 
     <div class="my-4 mx-4">
         <p class="text-p font-bold mb-2">Interesse?</p>
+        @auth
+            <div id="openEnroll" class="w-[92vw] h-[8vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
+                <a class="text-cream text-base font-bold font-['Radikal'] leading-snug">Schrijf in</a>
+            </div>
+        @else
+            <form action="{{ url(route('employee-vacancies.store')) }}" method="POST">
+                @csrf
+                <div class="modal-footer w-[92vw] h-[8vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
+                    <button class="text-cream text-base font-bold font-['Radikal'] leading-snug">Log in</button>
+                </div>
+            </form>
+        @endauth
         <div id="openEnroll" class="w-[92vw] h-[8vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160]">
             <a class="text-cream text-base font-bold font-['Radikal'] leading-snug">Schrijf in</a>
         </div>
