@@ -1,4 +1,4 @@
-<section class="p-6 rounded-lg shadow-lg">
+<section class="p-6 rounded-lg shadow-lg bg-[#E2ECC8] mx-auto w-full max-w-[90vw] mt-8 mb-8">
     <header>
         <!-- You can add content here, if needed -->
     </header>
@@ -25,13 +25,10 @@
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2 !text-black" />
         </div>
 
-
-        <div class="mb-4">
-            <x-primary-button class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 !bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug">
+        <div class="flex justify-end items-center gap-4">
+            <x-primary-button class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 !bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug !normal-case">
                 {{ __('Opslaan') }}
             </x-primary-button>
-
-
         </div>
 
         @if (session('status') === 'password-updated')
@@ -42,7 +39,6 @@
                 x-init="setTimeout(() => show = false, 2000)"
                 class="!text-sm !text-black"
             >{{ __('Saved.') }}</p>
-            @endif
-            </div>
+        @endif
     </form>
 </section>

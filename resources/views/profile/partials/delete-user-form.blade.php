@@ -1,11 +1,12 @@
-<section class="space-y-6">
+<section class="space-y-6 flex justify-center">
     <header>
-
+        <!-- You can add content here if necessary -->
     </header>
 
     <x-danger-button
         x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+        class="flex justify-center items-center"
     >{{ __('Delete Account') }}</x-danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>

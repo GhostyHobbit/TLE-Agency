@@ -1,4 +1,4 @@
-<section class="p-6 rounded-lg shadow-lg">
+<section class="p-6 rounded-lg shadow-lg bg-[#E2ECC8] mx-auto w-full max-w-[90vw] mt-8 mb-8">
     <header>
         <h2 class="text-lg font-medium !text-black">
             {{ __('Profile Information') }}
@@ -46,8 +46,6 @@
         @csrf
     </form>
 
-
-
     <!-- Main form for updating profile -->
     <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
         @csrf
@@ -84,13 +82,10 @@
         </div>
 
         <!-- Save button -->
-        <div class="flex items-center gap-4">
-{{--            <div class="mb-4">--}}
-                <x-primary-button class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 !bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug">
-                    {{ __('Opslaan') }}
-                </x-primary-button>
-
-{{--            </div>--}}
+        <div class="flex justify-end items-center gap-4">
+            <x-primary-button class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 !bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug !normal-case">
+                {{ __('Opslaan') }}
+            </x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p

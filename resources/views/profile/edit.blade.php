@@ -18,9 +18,9 @@
                     @include('profile.partials.update-password-form')
                 </div>
             </div>
-            <div class="mb-4">
+            <div class="mb-4 flex justify-center items-center">
                 <a href="{{ route('profile.preferences') }}" class="w-[296px] h-[53px] px-[44.50px] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex text-[#fbfcf6] text-base font-bold font-['Radikal'] leading-snug">
-                    {{ __('Profile Preferences') }}
+                    {{ __('Voorkeuren') }}
 
 
                 </a>
