@@ -121,11 +121,5 @@ class EmployeeController extends Controller
     }
 
     // Additional method to detach a vacancy from an employee
-    public function detachVacancy($employeeId, $vacancyId)
-    {
-        $employee = Employee::findOrFail($employeeId);
-        $employee->vacancies()->detach($vacancyId);
 
-        return response()->json(['message' => 'Vacancy detached successfully']);
-    }
 }

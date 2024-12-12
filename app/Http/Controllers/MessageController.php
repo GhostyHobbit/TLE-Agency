@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Models\Vacancy;
+use App\Models\EmployeeVacancy;
+
 
 class MessageController extends Controller
 {
@@ -25,55 +27,51 @@ class MessageController extends Controller
         return view('messages.create', compact('vacancy'));
     }
 
-
-
-
     public function store(Request $request, $vacancyId)
     {
-        // Haal de vacature op
-        $vacancy = Vacancy::findOrFail($vacancyId);
-
-        // Valideer de binnenkomende gegevens (bijvoorbeeld het bericht)
+        // Valideer de invoer
         $validatedData = $request->validate([
+            'number_of_invites' => 'required|integer|min:1',
             'message' => 'required|string|max:255',
-            'location' => 'nullable|string|max:255',
-            'date' => 'required|string',
-            'time' => 'required',
-            'number_of_invites' => 'required|integer|min:1', // Validatie voor het aantal uitnodigingen
+            'location' => 'required|string|max:255',
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i',
         ]);
 
-        // Maak het bericht aan
-        $message = Message::create([
-            'message' => $validatedData['message'],
-            'date' => $validatedData['date'],
-            'time' => $validatedData['time'],
-            'location' => $validatedData['location'] ?? 'Onbekend', // als locatie is ingevuld
-        ]);
+        // Haal de wachtrij op voor deze vacature (status = 1 betekent in wachtrij)
+        $queue = EmployeeVacancy::where('vacancy_id', $vacancyId)
+            ->where('status', 1)
+            ->orderBy('id') // Sorteer op basis van wachtrijvolgorde
+            ->limit($validatedData['number_of_invites']) // Limiteer tot het aantal te versturen uitnodigingen
+            ->get();
 
-        // Haal alle werkzoekenden op die gereageerd hebben op deze vacature
-        $allApplicants = $vacancy->employees()->wherePivot('status', 1)->orderBy('employee_vacancy.created_at')->get();
-
-        // Beperk het aantal werkzoekenden tot het opgegeven aantal
-        $invitedEmployees = $allApplicants->take($validatedData['number_of_invites']);
-
-        // Als er werkzoekenden zijn die gereageerd hebben, stuur dan het bericht
-        if ($invitedEmployees->count() > 0) {
-            foreach ($invitedEmployees as $employee) {
-                // Koppel het bericht aan de werkzoekende (update de status naar 'uitgenodigd' en koppel het bericht)
-                $vacancy->employees()->updateExistingPivot($employee->id, [
-                    'status' => 2, // Stel de status in op 'uitgenodigd' (2)
-                    'message_id' => $message->id, // Koppel het bericht
-                ]);
-            }
-
-            // Terugkeren naar de vorige pagina met een succesbericht
-            return redirect()->back()->with('success', 'Bericht succesvol verstuurd naar de geselecteerde werkzoekenden!');
+        // Controleer of er genoeg mensen in de wachtrij staan
+        if ($queue->isEmpty()) {
+            return redirect()->back()->with('error', 'Er zijn geen kandidaten in de wachtrij.');
         }
 
-        // Als er geen werkzoekende is die heeft gereageerd, geef een foutmelding terug
-        return redirect()->back()->with('error', 'Er zijn geen werkzoekenden die hebben gereageerd op deze vacature.');
-    }
+        // Loop door de wachtrij en maak berichten aan
+        foreach ($queue as $candidate) {
+            // Stap 1: Maak een bericht aan
+            $newMessage = Message::create([
+                'user_id' => $candidate->user_id, // Gebruiker uit de wachtrij
+                'vacancy_id' => $candidate->vacancy_id, // Vacature uit de wachtrij
+                'message' => $validatedData['message'], // Berichtinhoud uit formulier
+                'location' => $validatedData['location'],
+                'date' => $validatedData['date'],
+                'time' => $validatedData['time'],
+            ]);
 
+            // Stap 2: Update de wachtrij (status = 2, message_id = ID van het nieuwe bericht)
+            $candidate->update([
+                'status' => 2,
+                'message_id' => $newMessage->id,
+            ]);
+        }
+
+        // Stap 3: Redirect met een succesbericht
+        return redirect()->back()->with('success', 'Berichten succesvol verzonden naar ' . $queue->count() . ' kandidaten!');
+    }
 
     public function response($id)
     {

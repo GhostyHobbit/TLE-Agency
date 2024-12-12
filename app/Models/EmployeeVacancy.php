@@ -1,26 +1,50 @@
 <?php
 
-// app/Models/EmployeeVacancy.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class EmployeeVacancy extends Model
 {
-    protected $table = 'employee_vacancy'; // Specify the pivot table name if it's not the default
+    protected $table = 'employee_vacancy';
 
-    protected $fillable = ['employee_id', 'vacancy_id', 'status', 'message_id'];
+    protected $fillable = [
+        'user_id', // Correcte kolomnaam
+        'vacancy_id',
+        'status',
+        'message_id',
+        'response_id', // Deze ontbreekt in je huidige model
+    ];
 
-    // Define the relationship with Employee
-    public function employee()
+    /**
+     * Relatie met User
+     */
+    public function user()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Define the relationship with Vacancy
+    /**
+     * Relatie met Vacancy
+     */
     public function vacancy()
     {
-        return $this->belongsTo(Vacancy::class);
+        return $this->belongsTo(Vacancy::class, 'vacancy_id');
     }
+
+    /**
+     * Relatie met Response
+     */
+    public function response()
+    {
+        return $this->belongsTo(Response::class, 'response_id');
+    }
+
+    public function message()
+    {
+        return $this->belongsTo(Message::class, 'message_id');
+    }
+
 }

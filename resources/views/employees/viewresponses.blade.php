@@ -39,20 +39,22 @@
                     <tbody class="text-black">
                     @foreach($vacancies as $vacancy)
                         <tr class="border-t border-strokeThin hover:bg-mossLight">
-                            <td class="px-4 py-3">{{ $vacancy->name }}</td>
+                            <td class="px-4 py-3">{{ $vacancy->vacancy->name }}</td>
                             <td class="px-4 py-3">
-                                @if($vacancy->pivot->status == 1)
+                                @if($vacancy->status === 1)
                                     Ingeschreven en in wachtrij
-                                @elseif($vacancy->pivot->status == 2)
+                                @elseif($vacancy->status === 2)
                                     Er is een bericht gestuurd!
                                 @else
                                     Onbekend
                                 @endif
                             </td>
-                            <td class="px-4 py-3">{{ $vacancy->queue_position ?? 'Onbekend' }}</td>
                             <td class="px-4 py-3">
-                                @if($vacancy->pivot->message_id)
-                                    <a href="{{ route('messages.response', $vacancy->pivot->message_id) }}" class="text-violet hover:text-violetDark font-bold">Bekijk Bericht</a>
+                                {{ $vacancy->queuePosition ?? 'Onbekend' }} <!-- Hier wordt de berekende wachtrijpositie getoond -->
+                            </td>
+                            <td class="px-4 py-3">
+                                @if($vacancy->message_id)
+                                    <a href="{{ route('employee.message.view', $vacancy->message_id) }}" class="text-blue-500 hover:underline">Bekijk Bericht</a>
                                 @else
                                     Geen bericht
                                 @endif
