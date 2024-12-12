@@ -4,9 +4,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class EmployeeVacancy extends Pivot
+class EmployeeVacancy extends Model
 {
     protected $table = 'employee_vacancy'; // Specify the pivot table name if it's not the default
 

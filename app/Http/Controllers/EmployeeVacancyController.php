@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\EmployeeVacancy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeVacancyController extends Controller
 {
@@ -26,6 +28,13 @@ class EmployeeVacancyController extends Controller
             'vacancy_id' => 'required|exists:vacancies,id',
         ]);
 
+//        $userCheck = EmployeeVacancy::where('');
+        $userCheck = EmployeeVacancy::where('user_id', Auth::user()->id);
+        dd($userCheck);
+
+        if (request()->user()->id) {
+
+        }
         $employeeVacancy = new EmployeeVacancy();
         $employeeVacancy->employee_id = request()->user()->id;
         $employeeVacancy->vacancy_id = $request->input('vacancy_id');
