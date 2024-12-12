@@ -26,15 +26,16 @@ class ProfilePreferencesController extends Controller
         ]);
 
         // Save the preference in the database
-        $user = Auth::user(); // Get the authenticated user
+        $user = Auth::user();
         $user->preference1 = $request->preference1;
         $user->preference2 = $request->preference2;
         $user->preference3 = $request->preference3;
         $user->preference4 = $request->preference4;
 
-        $user->save(); // Save the updated user data to the database
+        $user->save();
 
-        // Redirect back with a success message
-        return redirect()->route('profile.preferences')->with('status', 'Preferences saved successfully!');
+        // Redirect to the profile page after saving preferences
+        return redirect()->route('profile.edit');
     }
+
 }

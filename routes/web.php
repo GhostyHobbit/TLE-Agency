@@ -12,19 +12,43 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfilePreferencesController;
 
 
+
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
+
+Route::get('/video', function () {
+    return view('video');
+})->name('video');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Profile-related routes
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');  // Profile editing route
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Profile preferences-related routes
+    Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])->name('profile.preferences');
+    Route::post('/profile/preferences', [ProfilePreferencesController::class, 'update'])->name('profile.preferences.update');
 });
+Route::middleware('auth')->group(function () {
+    // Profile preferences-related routes
+    Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])->name('profile.preferences');
+    Route::post('/profile/preferences/update', [ProfilePreferencesController::class, 'update'])->name('profile.preferences.update');
+});
+
+
 
 
 
