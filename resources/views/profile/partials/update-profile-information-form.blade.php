@@ -1,11 +1,9 @@
 <section class="p-6 rounded-lg shadow-lg bg-[#E2ECC8] mx-auto w-full max-w-[90vw] mt-8 mb-8">
     <header>
-        <h2 class="text-lg font-medium !text-black">
-            {{ __('Profile Information') }}
-        </h2>
+
         <div class="flex items-center">
             <label for="profile_picture" class="cursor-pointer">
-                <img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('images/default-profile.png') }}"
+                <img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('images/picture1.jpg') }}"
                      alt="Profile Picture"
                      class="w-32 h-32 rounded-full cursor-pointer" id="profile-picture-dropdown-button">
             </label>
@@ -17,7 +15,7 @@
     <div class="relative mt-4">
         <button type="button" class="block w-full !bg-white !text-black text-center px-4 py-2 rounded-md border border-gray-300"
                 id="profile-picture-dropdown-button">
-            Select Profile Picture
+            Verander profielfoto
         </button>
 
         <!-- Dropdown menu -->
@@ -34,7 +32,7 @@
 
     @if ($user->profile_picture)
         <div class="mt-4">
-            <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="Profile Picture" class="w-32 h-32 rounded-full shadow-md">
+            <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="Profiel foto" class="w-32 h-32 rounded-full shadow-md">
         </div>
     @else
         {{-- <p class="mt-2 !text-sm !text-black">{{ __('No profile picture uploaded.') }}</p> --}}
