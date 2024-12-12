@@ -52,7 +52,7 @@ class EmployeeVacancyController extends Controller
         $employeeVacancy = new EmployeeVacancy();
         $employeeVacancy->user_id = request()->user()->id;
         $employeeVacancy->vacancy_id = $request->input('vacancy_id');
-        $employeeVacancy->status = 0;
+        $employeeVacancy->status = 1;
         $employeeVacancy->save();
 
         return redirect(route('employee-vacancies.enrolled'));
