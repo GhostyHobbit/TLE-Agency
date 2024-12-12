@@ -8,6 +8,8 @@ use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\EmployeeVacancyController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProfilePreferencesController;
+
 
 
 Route::get('/', function () {
