@@ -31,6 +31,29 @@ class VacancyController extends Controller
             $query->whereBetween('hours', [$hoursRange[0], $hoursRange[1]]);
         }
 
+        if ($request->filled('sort')) {
+            switch ($request->sort) {
+                case 'name_asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'name_desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+                case 'salary_asc':
+                    $query->orderBy('salary', 'asc');
+                    break;
+                case 'salary_desc':
+                    $query->orderBy('salary', 'desc');
+                    break;
+                case 'hours_asc':
+                    $query->orderBy('hours', 'asc');
+                    break;
+                case 'hours_desc':
+                    $query->orderBy('hours', 'desc');
+                    break;
+            }
+        }
+
         $vacancies = $query->get();
         $locations = Vacancy::select('location')->distinct()->orderBy('location')->get();
         $hoursRanges = [

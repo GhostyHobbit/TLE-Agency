@@ -4,6 +4,22 @@
         <label for="search" class="block text-sm font-medium text-[#2E342A]">Zoek:</label>
         <input type="text" name="search" id="search" value="{{ request('search') }}" placeholder="Zoek naar vacatures" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A] placeholder-[#2E342A]">
 
+        <label for="sort" class="block text-sm font-medium text-[#2E342A] mt-4">Sorteer op:</label>
+        <div class="relative">
+            <select name="sort" id="sort" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A] appearance-none">
+                <option value="" disabled selected>Selecteer optie</option>
+                <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Naam (A-Z)</option>
+                <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Naam (Z-A)</option>
+                <option value="salary_desc" {{ request('sort') == 'salary_desc' ? 'selected' : '' }}>Salaris (Hoog-Laag)</option>
+                <option value="salary_asc" {{ request('sort') == 'salary_asc' ? 'selected' : '' }}>Salaris (Laag-Hoog)</option>
+                <option value="hours_desc" {{ request('sort') == 'hours_desc' ? 'selected' : '' }}>Uren (Hoog-Laag)</option>
+                <option value="hours_asc" {{ request('sort') == 'hours_asc' ? 'selected' : '' }}>Uren (Laag-Hoog)</option>
+            </select>
+            <svg class="w-5 h-5 transform rotate-180 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#AA0160" fill="#AA0160">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7H5z" />
+            </svg>
+        </div>
+
         <label for="location" class="block text-sm font-medium text-[#2E342A] mt-4">Filter op Locatie:</label>
         <div class="relative">
         <select name="location" id="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A] appearance-none">
