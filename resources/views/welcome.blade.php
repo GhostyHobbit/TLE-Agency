@@ -1,8 +1,4 @@
 <x-nav>
-    <header class="bg-mosslight py-6 px-4 sm:px-8 shadow-md">
-        <h1 class="text-3xl font-bold text-center text-mossFoot">Welkom bij Open Hiring</h1>
-    </header>
-
     <main class="px-4 sm:px-8 py-8 space-y-12 bg-cream">
         <!-- Main Section -->
         <section class="relative">
