@@ -33,7 +33,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 @foreach($vacanciesWithMessage as $vacancy)
                     <div class="bg-mossLight shadow-md rounded-lg p-6">
-                        <h3 class="text-xl font-bold mb-2">{{ $vacancy->vacancy->name }}</h3>
+                        <a href="{{ route('vacancies.show', $vacancy->vacancy->id) }}" class="text-xl font-bold mb-2">{{ $vacancy->vacancy->name }}</a>
                         <p class="text-black mb-4">
                             Er is een bericht gestuurd!
                         </p>
@@ -56,7 +56,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($vacanciesInQueue as $vacancy)
                     <div class="bg-mossLight shadow-md rounded-lg p-6">
-                        <h3 class="text-xl font-bold mb-2">{{ $vacancy->vacancy->name }}</h3>
+                        <a href="{{ route('vacancies.show', $vacancy->vacancy->id) }}" class="text-xl font-bold mb-2">{{ $vacancy->vacancy->name }}</a>
+
                         <p class="text-black mb-4">
                             Ingeschreven en in wachtrij
                         </p>
