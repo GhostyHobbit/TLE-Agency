@@ -41,6 +41,9 @@
                     <a href="{{ route('vacancies.index') }}" class="text-[#D1D5DB] font-medium transition-colors">Vind een baan</a>
                 </li>
                 <li>
+                    <a href="{{ route('privacy') }}" class="text-[#D1D5DB] font-medium transition-colors">Gebruik van uw gegevens</a>
+                </li>
+                <li>
                     <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Veelgestelde vragen</a>
                 </li>
             </ul>
@@ -71,13 +74,13 @@
             <p class="text-yellow font-bold mb-2">Volg ons op</p>
             <ul>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">LinkedIn</a>
+                    <a href="https://www.linkedin.com/company/open-hiring-nl/" class="text-[#D1D5DB] font-medium transition-colors">LinkedIn</a>
                 </li>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Instagram</a>
+                    <a href="https://www.instagram.com/openhiring_nl/" class="text-[#D1D5DB] font-medium transition-colors">Instagram</a>
                 </li>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Facebook</a>
+                    <a href="https://www.facebook.com/Openhiringnl" class="text-[#D1D5DB] font-medium transition-colors">Facebook</a>
                 </li>
             </ul>
         </div>
