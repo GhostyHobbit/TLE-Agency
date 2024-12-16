@@ -1,9 +1,9 @@
 <x-nav>
     <body class="bg-cream text-black">
 
-    <div class="max-w-4xl mx-auto p-8 bg-white shadow-xl rounded-xl mt-10 mb-16">
+    <div class="max-w-6xl mx-auto p-8 bg-white shadow-xl rounded-xl mt-10 mb-16">
 
-        <h1 class="text-2xl font-semibold text-black mb-6 text-center">Mijn Wachtrij</h1>
+        <h1 class="text-3xl font-bold text-black mb-6 text-center">Mijn Wachtrij</h1>
 
         <!-- Succesbericht -->
         @if (session('success'))
@@ -21,48 +21,50 @@
             </div>
         @endif
 
-        <h2 class="text-xl font-semibold mb-4">Ingeschreven voor de volgende vacatures:</h2>
+        <!-- Vacatures met berichten -->
+        <h2 class="text-2xl font-semibold mb-4">Vacatures met een bericht</h2>
+        @php
+            $vacanciesWithMessage = $vacancies->filter(fn($v) => $v->status === 2);
+        @endphp
 
-        @if($vacancies->isEmpty())
-            <p class="text-black">Je hebt je nog niet ingeschreven voor een vacature.</p>
+        @if($vacanciesWithMessage->isEmpty())
+            <p class="text-black mb-6">Geen vacatures met berichten.</p>
         @else
-            <div class="overflow-x-auto"> <!-- Zorgt ervoor dat de tabel scrollbaar wordt als het nodig is -->
-                <table class="min-w-full table-fixed">
-                    <thead>
-                    <tr class="bg-mossLight text-black">
-                        <th class="px-4 py-3 text-left w-4/12">Vacature</th>
-                        <th class="px-4 py-3 text-left w-3/12">Status</th>
-                        <th class="px-4 py-3 text-left w-2/12">Positie in de wachtrij</th>
-                        <th class="px-4 py-3 text-left w-3/12">Bericht</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-black">
-                    @foreach($vacancies as $vacancy)
-                        <tr class="border-t border-strokeThin hover:bg-mossLight">
-                            <td class="px-4 py-3">{{ $vacancy->vacancy->name }}</td>
-                            <td class="px-4 py-3">
-                                @if($vacancy->status === 1)
-                                    Ingeschreven en in wachtrij
-                                @elseif($vacancy->status === 2)
-                                    Er is een bericht gestuurd!
-                                @else
-                                    Onbekend
-                                @endif
-                            </td>
-                            <td class="px-4 py-3">
-                                {{ $vacancy->queuePosition ?? 'Onbekend' }} <!-- Hier wordt de berekende wachtrijpositie getoond -->
-                            </td>
-                            <td class="px-4 py-3">
-                                @if($vacancy->message_id)
-                                    <a href="{{ route('employee.message.view', $vacancy->message_id) }}" class="text-blue-500 hover:underline">Bekijk Bericht</a>
-                                @else
-                                    Geen bericht
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                @foreach($vacanciesWithMessage as $vacancy)
+                    <div class="bg-mossLight shadow-md rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">{{ $vacancy->vacancy->name }}</h3>
+                        <p class="text-black mb-4">
+                            Er is een bericht gestuurd!
+                        </p>
+                        <a href="{{ route('employee.message.view', $vacancy->message_id) }}"
+                           class="text-blue-700 hover:underline font-semibold">Bekijk Bericht</a>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+        <!-- Vacatures waarin is ingeschreven -->
+        <h2 class="text-2xl font-semibold mb-4">Ingeschreven vacatures</h2>
+        @php
+            $vacanciesInQueue = $vacancies->filter(fn($v) => $v->status === 1);
+        @endphp
+
+        @if($vacanciesInQueue->isEmpty())
+            <p class="text-black mb-6">Geen vacatures waarin je bent ingeschreven.</p>
+        @else
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach($vacanciesInQueue as $vacancy)
+                    <div class="bg-mossLight shadow-md rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">{{ $vacancy->vacancy->name }}</h3>
+                        <p class="text-black mb-4">
+                            Ingeschreven en in wachtrij
+                        </p>
+                        <p class="text-black mb-4">
+                            Wachtrijpositie: <span class="font-semibold">{{ $vacancy->queuePosition ?? 'Onbekend' }}</span>
+                        </p>
+                    </div>
+                @endforeach
             </div>
         @endif
 

@@ -1,6 +1,4 @@
-<?php
-   $employee = 1
-?>
+
 
 <!doctype html>
 <html lang="en">
@@ -107,7 +105,7 @@
                 <li>Demo Links</li>
                 <li><a class="text-navLink" href="{{ route('vacancies.index') }}">Vacature overzicht</a></li>
                 <li><a class="text-navLink" href="{{ route('employers.viewvacancies') }}">Bedrijf vacatures</a></li>
-                <li><a class="text-navLink" href="{{ route('employees.viewresponses', $employee) }}">Werknemer ontvangen bericht</a></li>
+                <li><a class="text-navLink" href="{{ route('employees.viewresponses') }}">Werknemer ontvangen bericht</a></li>
             </ul>
         </div>
         <div class="modal-footer py-2 flex justify-center bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] mx-4">
