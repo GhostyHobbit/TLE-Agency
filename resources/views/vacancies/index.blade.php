@@ -45,7 +45,7 @@
                     <p class="text-[#2E342A] mb-2">Uurloon: €{{ $vacancy->salary }} per uur</p>
                 </div>
                 @if($vacancy->path)
-                    <img src="{{ asset('storage/' . $vacancy->path) }}" alt="{{ $vacancy->employer->company->name }} logo" class="w-24 h-24 mr-8 rounded-md">
+                    <img src="{{ asset('storage/' . $vacancy->employer->company->logo_path) }}" alt="{{ $vacancy->employer->company->name }} logo" class="w-24 h-24 mr-8 rounded-md">
                 @endif
             </a>
         @endforeach

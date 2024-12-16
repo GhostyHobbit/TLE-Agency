@@ -2,8 +2,7 @@
     <!-- Skip to Content Link -->
     <a href="#main-content" class="sr-only focus:not-sr-only">Skip to content</a>
 
-    <div id="main-content"
-         class="max-w-2xl mx-auto p-6 sm:p-8 bg-mossLight shadow-md rounded-lg border border-black mt-8 sm:mt-12 mb-8 sm:mb-12">
+    <div id="main-content" class="max-w-2xl mx-auto p-6 sm:p-8 bg-mossLight shadow-md rounded-lg border border-black mt-8 sm:mt-12 mb-8 sm:mb-12">
         <h1 class="text-2xl font-bold mb-4 text-mossFoot">Maak een vacature</h1>
 
         <form action="{{ route('vacancies.store') }}" method="POST" enctype="multipart/form-data">
@@ -130,7 +129,7 @@
                 <input type="file" name="picture" id="picture" aria-describedby="picture-description"
                        class="mt-1 block w-full text-sm text-gray-700 bg-white px-3 py-2 rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                        accept="image/*">
-                {{--                 image toevoegen--}}
+{{--                 image toevoegen--}}
                 <p id="picture-description" class="text-sm text-gray-500">Upload een JPG, PNG of GIF bestand.</p>
                 @error('picture')
                 <div role="alert">
@@ -139,11 +138,35 @@
                 @enderror
             </div>
 
+            <!-- Status Selection -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">
+                    Status <span class="text-red-500">*</span>
+                </label>
+                <div class="flex items-center space-x-4 mt-2">
+                    <!-- Active Radio Button -->
+                    <label for="active" class="flex items-center cursor-pointer">
+                        <input type="radio" id="active" name="status" value="active" class="hidden peer" checked>
+                        <span class="peer-checked:bg-green-500 peer-checked:text-white peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-green-500 peer-checked:ring-opacity-50 peer-checked:ring-offset-2 w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center transition duration-200">
+            </span>
+                        <span class="ml-2 text-sm text-gray-700">Actief</span>
+                    </label>
+
+                    <!-- Not Active Radio Button -->
+                    <label for="not_active" class="flex items-center cursor-pointer">
+                        <input type="radio" id="not_active" name="status" value="not_active" class="hidden peer">
+                        <span class="peer-checked:bg-red-500 peer-checked:text-white peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-red-500 peer-checked:ring-opacity-50 peer-checked:ring-offset-2 w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center transition duration-200">
+            </span>
+                        <span class="ml-2 text-sm text-gray-700">Niet Actief</span>
+                    </label>
+                </div>
+            </div>
+
+
 
             <!-- Submit Button -->
             <div class="flex justify-end">
-                <button
-                    class="w-72 h-20 bg-pink-700 rounded-2xl border-b-2 border-pink-900 flex items-center justify-between px-4 hover:bg-pink-800 active:bg-pink-600">
+                <button class="w-72 h-20 bg-pink-700 rounded-2xl border-b-2 border-pink-900 flex items-center justify-between px-4 hover:bg-pink-800 active:bg-pink-600">
                     <!-- Button Text -->
                     <span class="text-white text-xl font-bold">Verzenden</span>
 

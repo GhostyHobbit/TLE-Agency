@@ -3,7 +3,7 @@
     <h1 class="text-h1 mx-4 my-2 lg:mx-[4vw]">{{ $vacancy->name }}</h1>
     <div class="flex items-center mx-4 my-2 lg:mx-[4vw]">
         @if($vacancy->path)
-            <img src="{{ asset('storage/' . $vacancy->path) }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
+            <img src="{{ asset('storage/' . $vacancy->employer->company->logo_path) }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
         @else
             <img src="{{ asset('images/OpenHiring.png') }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
         @endif
@@ -34,50 +34,62 @@
         </div>
     </div>
 
-    <div class="lg:flex mx-[4vw]">
-    {{--Image Banner--}}
+    <div class="flex flex-col lg:flex-row mx-[4vw] gap-4 lg:gap-8">
+        {{-- Mobile Image Banner --}}
         @if($vacancy->path)
-            <img src="{{ asset('storage/' . $vacancy->path) }}" alt="Banner-foto-baan" class="h-[20vh] w-[92vw] my-4 mx-4 rounded-lg object-cover object-top lg:hidden">
+            <img src="{{ asset('storage/' . $vacancy->path) }}" alt="Banner-foto-baan"
+                 class="h-[20vh] w-full my-4 rounded-lg object-cover object-top lg:hidden">
         @else
-            <img src="{{ asset('images/placeholderbanner.jpg') }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[20vh] w-[92vw] my-4 rounded-lg object-cover object-top lg:hidden">
+            <img src="{{ asset('images/placeholderbanner.jpg') }}" alt="Placeholder banner"
+                 class="h-[20vh] w-full my-4 rounded-lg object-cover object-top lg:hidden">
         @endif
 
-    {{--Description--}}
-        <div class="lg:flex-col">
+        {{-- Description --}}
+        <div class="flex flex-col lg:w-[60%]">
+            {{-- Function Section --}}
             <div>
                 <div id="functionHeader" class="w-[92vw] mt-4 bg-mossLight border-2 border-mossDark rounded-lg px-3 py-1 flex justify-between items-center cursor-pointer md:w-[45vw]">
                     <h2 class="text-p font-bold text-lg">Over de functie</h2>
                     <svg class="w-5 h-5 transform rotate-180 lg:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#AA0160" fill="#AA0160">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7H5z" />
-                  </svg>
+                    </svg>
                 </div>
                 <div id="functionDescription" class="w-[92vw] border-2 border-mossDark rounded-lg px-3 py-1 hidden md:w-[45vw] lg:block">
                     <p class="text-p my-2 font-bold">Wat moet u doen?</p>
                     <p class="text-p my-2">{{ $vacancy->description }}</p>
+
+                    {{-- Uw taken --}}
                     <p class="text-p my-2 font-bold">Uw taken</p>
                     <ul class="list-disc list-inside pl-5">
-                        <li>Vloeren dweilen</li>
-                        <li>Prullenbakken legen</li>
-                        <li>Kamers stofzuigen</li>
-                        <li>Vergelijkbaar werk</li>
+                        @foreach(explode("\n", $vacancy->tasks) as $task)
+                            @if(!empty(trim($task)))
+                                <li>{{ $task }}</li>
+                            @endif
+                        @endforeach
                     </ul>
+
+                    {{-- Kwaliteiten --}}
                     <p class="text-p my-2 font-bold">Kwaliteiten</p>
                     <ul class="list-disc list-inside pl-5">
-                        <li>Fysiek</li>
-                        <li>Detail gericht</li>
-                        <li>Gemotiveerd</li>
+                        @foreach(explode("\n", $vacancy->qualities) as $quality)
+                            @if(!empty(trim($quality)))
+                                <li>{{ $quality }}</li>
+                            @endif
+                        @endforeach
                     </ul>
                 </div>
             </div>
 
+
+            {{-- Offer Section --}}
             <div>
-                <div id="offerHeader" class="w-[92vw] mt-4 bg-mossLight border-2 border-mossDark rounded-lg px-3 py-1 flex justify-between items-center cursor-pointer md:w-[45vw] lg:w-full">
+                <div id="offerHeader" class="w-full mt-4 bg-mossLight border-2 border-mossDark rounded-lg px-3 py-1 flex justify-between items-center cursor-pointer">
                     <h2 class="text-p font-bold text-lg">Wat bieden wij</h2>
                     <svg class="w-5 h-5 transform rotate-180 lg:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#AA0160" fill="#AA0160">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7H5z" />
                     </svg>
                 </div>
-                <div id="offerDescription" class="w-[92vw] border-2 border-mossDark rounded-lg px-3 py-1 hidden md:w-[45vw] lg:block">
+                <div id="offerDescription" class="w-full border-2 border-mossDark rounded-lg px-3 py-1 hidden lg:block">
                     <p class="text-p mt-2 font-bold">Loon</p>
                     <ul class="list-disc list-inside pl-5 mb-2">
                         <li class="text-p">€{{ $vacancy->salary }} per uur</li>
@@ -94,11 +106,13 @@
             </div>
         </div>
 
-    {{--Desktop image banner--}}
+        {{-- Desktop Image Banner --}}
         @if($vacancy->path)
-            <img src="{{ asset('storage/' . $vacancy->path) }}" alt="Banner-foto-baan" class="hidden lg:block rounded-lg object-cover object-top">
+            <img src="{{ asset('storage/' . $vacancy->path) }}" alt="Banner-foto-baan"
+                 class="hidden lg:block lg:w-[40%] rounded-lg object-cover object-top">
         @else
-            <img src="{{ asset('images/placeholderbanner.jpg') }}" alt="{{ $vacancy->employer->company->name }} Logo" class="hidden lg:block w-[35vw] h-[35vw] rounded-lg object-cover object-top my-4 mx-16">
+            <img src="{{ asset('images/placeholderbanner.jpg') }}" alt="Placeholder banner"
+                 class="hidden lg:block lg:w-[40%] rounded-lg object-cover object-top">
         @endif
     </div>
 

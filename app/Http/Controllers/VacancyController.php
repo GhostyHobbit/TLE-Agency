@@ -69,7 +69,10 @@ class VacancyController extends Controller
             'salary' => 'required|numeric',
             'location' => 'required|string|max:255',
             'description' => 'required|string',
+            'tasks' => 'required|string',
+            'qualifications' => 'required|string',
             'picture' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'status' => 'required|string|in:active,not_active',
         ]);
 
         if ($request->hasFile('picture')) {
@@ -85,6 +88,9 @@ class VacancyController extends Controller
         $vacancy->location = $request->input("location");
         $vacancy ->description = $request->input("description");
         $vacancy->path = $path;
+        $vacancy->tasks = $request->input("tasks");
+        $vacancy->qualifications = $request->input("qualifications");
+        $vacancy->status = $request->input("status");
         $vacancy->save();
 
         return redirect()->route('vacancies.index');
