@@ -2,7 +2,8 @@
     <!-- Skip to Content Link -->
     <a href="#main-content" class="sr-only focus:not-sr-only">Skip to content</a>
 
-    <div id="main-content" class="max-w-2xl mx-auto p-6 sm:p-8 bg-mossLight shadow-md rounded-lg border border-black mt-8 sm:mt-12 mb-8 sm:mb-12">
+    <div id="main-content"
+         class="max-w-2xl mx-auto p-6 sm:p-8 bg-mossLight shadow-md rounded-lg border border-black mt-8 sm:mt-12 mb-8 sm:mb-12">
         <h1 class="text-2xl font-bold mb-4 text-mossFoot">Maak een vacature</h1>
 
         <form action="{{ route('vacancies.store') }}" method="POST" enctype="multipart/form-data">
@@ -85,6 +86,41 @@
                 </div>
                 @enderror
             </div>
+            <!-- Tasks Table -->
+            <div class="mb-6">
+                <label for="tasks" class="block text-sm font-medium text-gray-700">
+                    Taken <span class="text-red-500">*</span>
+                </label>
+                <textarea name="tasks" id="tasks" rows="5" aria-required="true"
+                          class="mt-1 block w-full rounded-md border border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Voer een lijst van taken in, gescheiden door nieuwe regels" required></textarea>
+                <p class="text-sm text-gray-500 mt-1">
+                    Gebruik elke regel om een taak te vermelden.
+                </p>
+                @error('tasks')
+                <div role="alert">
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                </div>
+                @enderror
+            </div>
+
+            <!-- Qualifications List -->
+            <div class="mb-6">
+                <label for="qualifications" class="block text-sm font-medium text-gray-700">
+                    Kwalificaties <span class="text-red-500">*</span>
+                </label>
+                <textarea name="qualifications" id="qualifications" rows="5" aria-required="true"
+                          class="mt-1 block w-full rounded-md border border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Voer de kwalificaties in, gescheiden door nieuwe regels" required></textarea>
+                <p class="text-sm text-gray-500 mt-1">
+                    Bijvoorbeeld: Rijbewijs, minimaal 18 jaar, enzovoort.
+                </p>
+                @error('qualifications')
+                <div role="alert">
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                </div>
+                @enderror
+            </div>
 
             <!-- Picture -->
             <div class="mb-4">
@@ -94,7 +130,7 @@
                 <input type="file" name="picture" id="picture" aria-describedby="picture-description"
                        class="mt-1 block w-full text-sm text-gray-700 bg-white px-3 py-2 rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                        accept="image/*">
-{{--                 image toevoegen--}}
+                {{--                 image toevoegen--}}
                 <p id="picture-description" class="text-sm text-gray-500">Upload een JPG, PNG of GIF bestand.</p>
                 @error('picture')
                 <div role="alert">
@@ -106,7 +142,8 @@
 
             <!-- Submit Button -->
             <div class="flex justify-end">
-                <button class="w-72 h-20 bg-pink-700 rounded-2xl border-b-2 border-pink-900 flex items-center justify-between px-4 hover:bg-pink-800 active:bg-pink-600">
+                <button
+                    class="w-72 h-20 bg-pink-700 rounded-2xl border-b-2 border-pink-900 flex items-center justify-between px-4 hover:bg-pink-800 active:bg-pink-600">
                     <!-- Button Text -->
                     <span class="text-white text-xl font-bold">Verzenden</span>
 

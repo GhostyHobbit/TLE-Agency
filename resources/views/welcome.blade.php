@@ -15,7 +15,8 @@
                     </p>
                 </div>
                 <div class="lg:w-1/2 mt-8 lg:mt-0 lg:order-last">
-                    <img src="{{ asset('images/openhiring website main pic.webp') }}" alt="Iedereen kan meedoen" class="rounded-lg shadow-lg w-full h-auto">
+                    <img src="{{ asset('images/openhiring website main pic.webp') }}" alt="Iedereen kan meedoen"
+                         class="rounded-lg shadow-lg w-full h-auto">
                 </div>
             </div>
         </section>
@@ -28,7 +29,8 @@
                 <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
                     <h3 class="text-2xl font-bold text-mossFoot">1. Het werkt beter zonder (voor)oordelen</h3>
                     <p class="text-gray-700 text-lg leading-relaxed">
-                        Met Open Hiring krijgen (voor)oordelen geen kans. En mensen die vaak (onbewust) worden uitgesloten
+                        Met Open Hiring krijgen (voor)oordelen geen kans. En mensen die vaak (onbewust) worden
+                        uitgesloten
                         juist wel. Dat maakt de arbeidsmarkt eerlijker en mooier.
                     </p>
                 </div>
@@ -66,7 +68,6 @@
         </div>
 
 
-
         <!-- How Open Hiring Works -->
         <section class="px-4 sm:px-8 py-12 bg-cream">
             <div class="max-w-7xl mx-auto space-y-12">
@@ -74,7 +75,8 @@
                 <div class="text-center">
                     <h2 class="text-4xl font-bold text-mossFoot mb-4">Hoe werkt Open Hiring?</h2>
                     <p class="text-lg text-gray-700 leading-relaxed">
-                        Bij Open Hiring draait alles om eenvoud en anonimiteit. Geen sollicitatiegesprekken, geen lastige vragen—gewoon jouw bereidheid om te werken staat centraal.
+                        Bij Open Hiring draait alles om eenvoud en anonimiteit. Geen sollicitatiegesprekken, geen
+                        lastige vragen—gewoon jouw bereidheid om te werken staat centraal.
                     </p>
                 </div>
 
@@ -84,7 +86,8 @@
                     <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
                         <h3 class="text-2xl font-bold text-mossFoot">1. Kies een baan die bij je past</h3>
                         <p class="text-gray-700 text-lg leading-relaxed">
-                            Kijk welke banen beschikbaar zijn en beoordeel zelf of je de capaciteiten hebt om deze aan te kunnen. Het gaat om wat jij denkt dat je kunt, niet om je cv.
+                            Kijk welke banen beschikbaar zijn en beoordeel zelf of je de capaciteiten hebt om deze aan
+                            te kunnen. Het gaat om wat jij denkt dat je kunt, niet om je cv.
                         </p>
                     </div>
 
@@ -92,7 +95,8 @@
                     <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
                         <h3 class="text-2xl font-bold text-mossFoot">2. Meld je aan voor de lijst</h3>
                         <p class="text-gray-700 text-lg leading-relaxed">
-                            Vul een eenvoudig formulier in om je aan te melden. Je komt op een wachtlijst terecht, waarbij de volgorde van aanmelding bepaalt wie de kans krijgt.
+                            Vul een eenvoudig formulier in om je aan te melden. Je komt op een wachtlijst terecht,
+                            waarbij de volgorde van aanmelding bepaalt wie de kans krijgt.
                         </p>
                     </div>
 
@@ -100,7 +104,8 @@
                     <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
                         <h3 class="text-2xl font-bold text-mossFoot">3. Wacht op uitnodiging van de werkgever</h3>
                         <p class="text-gray-700 text-lg leading-relaxed">
-                            Zodra het jouw beurt is, word je anoniem uitgenodigd door de werkgever. Ze kennen alleen jouw bereidheid om te werken en niet je achtergrond of verleden.
+                            Zodra het jouw beurt is, word je anoniem uitgenodigd door de werkgever. Ze kennen alleen
+                            jouw bereidheid om te werken en niet je achtergrond of verleden.
                         </p>
                     </div>
 
@@ -108,7 +113,8 @@
                     <div class="bg-mosslight shadow-md rounded-lg p-6 border border-gray-400 space-y-4">
                         <h3 class="text-2xl font-bold text-mossFoot">4. Begin met werken</h3>
                         <p class="text-gray-700 text-lg leading-relaxed">
-                            Je start met werken in een omgeving waar vertrouwen en gelijkwaardigheid centraal staan. Laat zien wat je kunt en groei in je nieuwe rol.
+                            Je start met werken in een omgeving waar vertrouwen en gelijkwaardigheid centraal staan.
+                            Laat zien wat je kunt en groei in je nieuwe rol.
                         </p>
                     </div>
                 </div>
