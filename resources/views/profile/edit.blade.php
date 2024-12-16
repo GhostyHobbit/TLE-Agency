@@ -2,8 +2,17 @@
     <x-slot name="header">
         <h2>
             {{ __('Profile') }}
+
+
+
         </h2>
     </x-slot>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="text-red-600 font-bold hover:underline">
+            {{ __('Log Out') }}
+        </button>
+    </form>
 
     <div>
         <div>
@@ -25,6 +34,9 @@
 
                 </a>
             </div>
+
+
+
 
             <div>
                 <div>

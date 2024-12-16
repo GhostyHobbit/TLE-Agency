@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,5 +21,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        // Set the default authenticated route for the application
+        Route::middleware('auth')->group(function () {
+            Route::redirect('/', '/profile');
+        });
     }
 }
