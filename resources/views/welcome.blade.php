@@ -60,7 +60,7 @@
         <!-- Centered Button with Route -->
         <div class="flex justify-center mt-12">
             <a href="{{ route('video') }}"
-               class="w-72 h-20 bg-violet rounded-2xl border-b-2 border-violetDark flex items-center justify-between px-4 hover:bg-violetDark active:bg-mossMedium">
+               class="w-72 h-20 bg-violet rounded-2xl border-b-2 border-violetDark flex items-center justify-between px-4 hover:bg-violetDark active:bg-violet">
                 <!-- Button Text -->
                 <span class="text-white text-xl font-bold">Bekijk Video</span>
 
@@ -122,7 +122,7 @@
         <!-- Centered Button with Route -->
         <div class="flex justify-center mt-12">
             <a href="{{ route('vacancies.index') }}"
-               class="w-72 h-20 bg-violet rounded-2xl border-b-2 border-violetDark flex items-center justify-between px-4 hover:bg-violetDark active:bg-mossMedium">
+               class="w-72 h-20 bg-violet rounded-2xl border-b-2 border-violetDark flex items-center justify-between px-4 hover:bg-violetDark active:bg-violet">
                 <!-- Button Text -->
                 <span class="text-white text-xl font-bold">Bekijk vacatures</span>
                 <!-- Sprite Icon -->
