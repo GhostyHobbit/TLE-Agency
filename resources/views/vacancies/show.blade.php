@@ -20,9 +20,15 @@
         <div class="bg-mossLight pl-3 pr-3 py-4 rounded-lg my-2 lg:w-[35vw]">
             <p class="text-p font-bold mb-2">Interesse?</p>
             @auth
-                <div id="openEnrollTwo" class="w-[40vw] h-[6vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160] lg:w-[33vw]">
-                    <a class="text-cream text-base font-bold font-['Radikal'] leading-snug">Schrijf in</a>
-                </div>
+                @if($userCheck === null)
+                    <div id="openEnrollTwo" class="w-[40vw] h-[6vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160] lg:w-[33vw]">
+                        <a class="text-cream text-base font-bold font-['Radikal'] leading-snug">Schrijf in</a>
+                    </div>
+                @else
+                    <div id="openEnrollTwo" class="w-[40vw] h-[6vh] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex hover:bg-[#7c1a51] active:bg-[#aa0160] lg:w-[33vw]">
+                        <a class="text-cream text-base font-bold font-['Radikal'] leading-snug">Schrijf uit</a>
+                    </div>
+                @endif
             @else
                 <form action="{{ url(route('employee-vacancies.store')) }}" method="POST">
                     @csrf
@@ -130,17 +136,35 @@
             </div>
             <div class="modal-body bg-violet p-4">
                 <p class="text-p text-cream">
-                    U gaat zich inschrijven voor <span class="font-bold">{{ $vacancy->name }} bij {{ $vacancy->employer->company->name }}</span>
+                    U gaat zich
+                    @if($userCheck === null)
+                        inschrijven
+                    @else
+                        uitschrijven
+                    @endif
+                    voor <span class="font-bold">{{ $vacancy->name }} bij {{ $vacancy->employer->company->name }}</span>
                     Weet u dit zeker?
                 </p>
             </div>
-            <form action="{{ url(route('employee-vacancies.store')) }}" method="POST">
-                @csrf
-                <input type="hidden" name="vacancy_id" value="{{ $vacancy->id }}">
-                <div class="modal-footer py-2 flex justify-center bg-cream rounded-2xl border-b-4 border-mossDark mx-4 my-2 hover:bg-mossLight active:bg-cream">
-                    <button class="text-mossDark text-base font-bold font-['Radikal'] leading-snug">Bevestigen</button>
-                </div>
-            </form>
+            @if($userCheck === null)
+                <form action="{{ url(route('employee-vacancies.store')) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="vacancy_id" value="{{ $vacancy->id }}">
+                    <div class="modal-footer py-2 flex justify-center bg-cream rounded-2xl border-b-4 border-mossDark mx-4 my-2 hover:bg-mossLight active:bg-cream">
+                        <button class="text-mossDark text-base font-bold font-['Radikal'] leading-snug">Bevestig inschrijving</button>
+                    </div>
+                </form>
+            @else
+                <form action="{{ url(route('employee-vacancies.destroy', $userCheck->id)) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="vacancy_id" value="{{ $vacancy->id }}">
+                    <div class="modal-footer py-2 flex justify-center bg-cream rounded-2xl border-b-4 border-mossDark mx-4 my-2 hover:bg-mossLight active:bg-cream">
+                        <button class="text-mossDark text-base font-bold font-['Radikal'] leading-snug">Bevestig uitschrijving</button>
+                    </div>
+                </form>
+            @endif
+
             <div id="closeEnrollFooter" class="modal-footer py-2 flex justify-center bg-violet rounded-2xl border-b-4 border-violetDark border-2 mx-4 my-2 hover:bg-[#7c1a51] active:bg-[#aa0160]">
                 <button class="text-cream text-base font-bold font-['Radikal'] leading-snug">Ga Terug</button>
             </div>

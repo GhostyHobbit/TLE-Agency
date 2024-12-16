@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeVacancy;
 use App\Models\Vacancy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VacancyController extends Controller
 {
@@ -94,7 +96,12 @@ class VacancyController extends Controller
     {
         // Load the vacancy with its associated employer
         $vacancy = Vacancy::with('employer')->findOrFail($id);
-        return view('vacancies.show', compact('vacancy'));
+
+        $user = Auth::user();
+
+        $userCheck = EmployeeVacancy::where('user_id', $user->id)->first();
+
+        return view('vacancies.show', compact('vacancy'), compact('userCheck'));
     }
 
     public function edit($id)
