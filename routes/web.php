@@ -44,8 +44,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     // Profile preferences-related routes
     Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])->name('profile.preferences');
+    Route::post('/profile/picture/update', [ProfileController::class, 'updatePicture'])->name('profile.picture.update');
     Route::post('/profile/preferences/update', [ProfilePreferencesController::class, 'update'])->name('profile.preferences.update');
 });
+
 
 
 
