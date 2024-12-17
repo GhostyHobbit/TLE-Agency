@@ -85,6 +85,41 @@
                 </div>
                 @enderror
             </div>
+            <!-- Tasks Table -->
+            <div class="mb-6">
+                <label for="tasks" class="block text-sm font-medium text-gray-700">
+                    Taken <span class="text-red-500">*</span>
+                </label>
+                <textarea name="tasks" id="tasks" rows="5" aria-required="true"
+                          class="mt-1 block w-full rounded-md border border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Voer een lijst van taken in, gescheiden door nieuwe regels" required></textarea>
+                <p class="text-sm text-gray-500 mt-1">
+                    Gebruik elke regel om een taak te vermelden.
+                </p>
+                @error('tasks')
+                <div role="alert">
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                </div>
+                @enderror
+            </div>
+
+            <!-- Qualifications List -->
+            <div class="mb-6">
+                <label for="qualifications" class="block text-sm font-medium text-gray-700">
+                    Kwalificaties <span class="text-red-500">*</span>
+                </label>
+                <textarea name="qualifications" id="qualifications" rows="5" aria-required="true"
+                          class="mt-1 block w-full rounded-md border border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Voer de kwalificaties in, gescheiden door nieuwe regels" required></textarea>
+                <p class="text-sm text-gray-500 mt-1">
+                    Bijvoorbeeld: Rijbewijs, minimaal 18 jaar, enzovoort.
+                </p>
+                @error('qualifications')
+                <div role="alert">
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                </div>
+                @enderror
+            </div>
 
             <!-- Picture -->
             <div class="mb-4">
@@ -102,6 +137,31 @@
                 </div>
                 @enderror
             </div>
+
+            <!-- Status Selection -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">
+                    Status <span class="text-red-500">*</span>
+                </label>
+                <div class="flex items-center space-x-4 mt-2">
+                    <!-- Active Radio Button -->
+                    <label for="active" class="flex items-center cursor-pointer">
+                        <input type="radio" id="active" name="status" value="active" class="hidden peer" checked>
+                        <span class="peer-checked:bg-green-500 peer-checked:text-white peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-green-500 peer-checked:ring-opacity-50 peer-checked:ring-offset-2 w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center transition duration-200">
+            </span>
+                        <span class="ml-2 text-sm text-gray-700">Actief</span>
+                    </label>
+
+                    <!-- Not Active Radio Button -->
+                    <label for="not_active" class="flex items-center cursor-pointer">
+                        <input type="radio" id="not_active" name="status" value="not_active" class="hidden peer">
+                        <span class="peer-checked:bg-red-500 peer-checked:text-white peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-red-500 peer-checked:ring-opacity-50 peer-checked:ring-offset-2 w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center transition duration-200">
+            </span>
+                        <span class="ml-2 text-sm text-gray-700">Niet Actief</span>
+                    </label>
+                </div>
+            </div>
+
 
 
             <!-- Submit Button -->
