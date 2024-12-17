@@ -10,6 +10,8 @@ class VacancyController extends Controller
     public function index(Request $request)
     {
         $query = Vacancy::query();
+        $query->where('status', 'active');
+
 
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
@@ -156,4 +158,17 @@ class VacancyController extends Controller
 
         return response()->json(['message' => 'Employee detached successfully']);
     }
+
+    public function toggleStatus($vacancyId)
+    {
+        $vacancy = Vacancy::findOrFail($vacancyId);
+
+        // Toggle the status between 'active' and 'not active'
+        $vacancy->status = $vacancy->status === 'active' ? 'not active' : 'active';
+        $vacancy->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Vacaturestatus is bijgewerkt.');
+    }
+
 }

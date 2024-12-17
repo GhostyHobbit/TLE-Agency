@@ -30,6 +30,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::patch('/vacancies/{vacancy}/toggle-status', [VacancyController::class, 'toggleStatus'])
+    ->name('vacancies.toggleStatus');
+
 
 
 Route::middleware('auth')->group(function () {
