@@ -71,7 +71,7 @@
                     {{-- Kwaliteiten --}}
                     <p class="text-p my-2 font-bold">Kwaliteiten</p>
                     <ul class="list-disc list-inside pl-5">
-                        @foreach(explode("\n", $vacancy->qualities) as $quality)
+                        @foreach(explode("\n", $vacancy->qualifications) as $quality)
                             @if(!empty(trim($quality)))
                                 <li>{{ $quality }}</li>
                             @endif
