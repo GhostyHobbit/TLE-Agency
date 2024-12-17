@@ -118,7 +118,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($rejectedMessages as $message)
                             <div class="bg-red-100 shadow-md rounded-lg p-6">
-                                <a href="{{ route('employee.message.view', $message->id) }}" class="text-xl font-bold mb-2">{{ $message->vacancy->name }}</a>
+                                <a href="{{  route('vacancies.show', $vacancy->vacancy->id) }}" class="text-xl font-bold mb-2">{{ $message->vacancy->name }}</a>
                                 <p class="text-black mb-4">Geweigerd op: {{ $message->updated_at->format('d-m-Y H:i') }}</p>
                             </div>
                         @endforeach
@@ -139,7 +139,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($proposedMessages as $message)
                             <div class="bg-yellow-100 shadow-md rounded-lg p-6">
-                                <a href="{{ route('employee.message.view', $message->id) }}" class="text-xl font-bold mb-2">{{ $message->vacancy->name }}</a>
+                                <a href="{{  route('vacancies.show', $vacancy->vacancy->id)  }}" class="text-xl font-bold mb-2">{{ $message->vacancy->name }}</a>
                                 <p class="text-black mb-4">Nieuw voorstel gedaan op: {{ $message->updated_at->format('d-m-Y H:i') }}</p>
                                 <div class="bg-white p-6 shadow-lg space-y-4 rounded-xl mb-6">
                                     <p class="text-black mb-4">Nieuw voorstel:</p>
