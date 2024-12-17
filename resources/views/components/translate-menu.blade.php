@@ -6,6 +6,18 @@
     </svg>
 </div>
 
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'nl',
+            includedLanguages: 'en,fr,de,es,it,zh-CN,ar,ru,ja',
+        }, 'google_translate_element');
+    }
+</script>
+
+<script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <style>
     .goog-logo-link, .goog-te-gadget span {
         display: none !important;
@@ -15,15 +27,3 @@
         font-size: 0;
     }
 </style>
-
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'nl',
-            includedLanguages: 'nl,en,fr,de,es,it,zh-CN,ar',
-        }, 'google_translate_element');
-    }
-</script>
-
-<script type="text/javascript"
-        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
