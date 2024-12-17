@@ -141,6 +141,12 @@
                             <div class="bg-yellow-100 shadow-md rounded-lg p-6">
                                 <a href="{{ route('employee.message.view', $message->id) }}" class="text-xl font-bold mb-2">{{ $message->vacancy->name }}</a>
                                 <p class="text-black mb-4">Nieuw voorstel gedaan op: {{ $message->updated_at->format('d-m-Y H:i') }}</p>
+                                <div class="bg-white p-6 shadow-lg space-y-4 rounded-xl mb-6">
+                                    <p class="text-black mb-4">Nieuw voorstel:</p>
+                                    <p class="text-lg"><strong>Locatie:</strong> {{ $message->message->location }}</p>
+                                    <p class="text-lg"><strong>Datum:</strong> {{ $message->response->date }}</p>
+                                    <p class="text-lg"><strong>Tijd:</strong> {{ $message->response->time }}</p>
+                                </div>
                             </div>
                         @endforeach
                     </div>
