@@ -1,13 +1,11 @@
 <x-nav>
     <body class="bg-cream text-black">
-
     <div class="max-w-4xl mx-auto p-8 bg-white shadow-xl rounded-xl mt-10 mb-16">
-
         <h1 class="text-2xl font-semibold text-black mb-6 text-center">Bericht</h1>
 
         <!-- Bericht vak met border -->
         <div class="bg-white p-6 shadow-lg rounded-xl mb-6 border-2 border-gray-300">
-            <p class="text-lg"><strong></strong> {{ $message->message }}</p>
+            <p class="text-lg">{{ $message->message }}</p>
         </div>
 
         <!-- Locatie, datum en tijd vak -->
@@ -17,114 +15,94 @@
             <p class="text-lg"><strong>Tijd:</strong> {{ $message->time }}</p>
         </div>
 
-        <form action="{{ route('employee.response', $message->id) }}" method="POST" class="space-y-6">
-            @csrf <!-- Laravel's CSRF-token voor beveiliging -->
-
-            <!-- Radio buttons -->
-            <div class="flex items-center space-x-6">
-                <label class="flex items-center space-x-2">
-                    <input
-                        type="radio"
-                        name="response"
-                        value="accept"
-                        required
-                        class="form-radio h-5 w-5 text-mossDark focus:ring-mossLight"
-                    >
-                    <span class="text-black">Accepteren</span>
-                </label>
-                <label class="flex items-center space-x-2">
-                    <input
-                        type="radio"
-                        name="response"
-                        value="reject"
-                        class="form-radio h-5 w-5 text-mossDark focus:ring-mossLight"
-                    >
-                    <span class="text-black">Weigeren</span>
-                </label>
-                <label class="flex items-center space-x-2">
-                    <input
-                        type="radio"
-                        name="response"
-                        value="propose"
-                        class="form-radio h-5 w-5 text-mossDark focus:ring-mossLight"
-                    >
-                    <span class="text-black">Nieuw voorstel</span>
-                </label>
-            </div>
-
-            <!-- Nieuw voorstel veld -->
-            <div
-                id="new-proposal-field"
-                class="bg-mossLight p-6 shadow-lg rounded-xl"
-                style="display: none;"
-            >
-                <div class="flex flex-col mb-4">
-                    <label for="date" class="mb-2 font-semibold text-black">Datum:</label>
-                    <input
-                        type="date"
-                        name="date"
-                        id="date"
-                        value="{{ $message->date }}"
-                        class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-mossDark focus:border-mossDark"
-                        required
-                    >
-                    @error('date')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="flex flex-col">
-                    <label for="time" class="mb-2 font-semibold text-black">Tijd:</label>
-                    <input
-                        type="time"
-                        name="time"
-                        id="time"
-                        value="{{ $message->time }}"
-                        class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-mossDark focus:border-mossDark"
-                        required
-                    >
-                    @error('time')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
-
-            <!-- Verstuur reactie knop -->
-            <button
-                type="submit"
-                class="w-full bg-violet hover:bg-violetDark text-white font-bold py-3 px-6 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-violetDark focus:ring-opacity-50"
-            >
-                Verstuur reactie
+        <!-- Actieknoppen -->
+        <div class="flex flex-col items-center space-y-4 mb-8">
+            <button onclick="openModal('acceptModal')"
+                    class="w-full bg-mossLight hover:bg-mossMedium text-black font-semibold py-2 px-6 rounded-md shadow-md">
+                Accepteren
             </button>
-        </form>
+            <button onclick="openModal('rejectModal')"
+                    class="w-full bg-red-200 hover:bg-red-300 text-black font-semibold py-2 px-6 rounded-md shadow-md">
+                Weigeren
+            </button>
+            <button onclick="openModal('proposeModal')"
+                    class="w-full bg-yellow-200 hover:bg-yellow-300 text-black font-semibold py-2 px-6 rounded-md shadow-md">
+                Nieuw Voorstel
+            </button>
+        </div>
 
+        <!-- Dynamische Modal -->
+        <div id="modalOverlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+            <form method="POST" action="{{ route('update-status') }}" id="modalForm" class="w-11/12 max-w-lg bg-mossLight p-6 rounded-lg shadow-lg relative">
+                @csrf
+                <h2 id="modalTitle" class="text-xl font-bold mb-4"></h2>
+                <p id="modalMessage" class="text-black mb-6"></p>
+
+                <!-- Verborgen inputvelden -->
+                <input type="hidden" name="status" id="statusInput" value="">
+                <input type="hidden" name="message_id" value="{{ $message->id }}">
+
+                <!-- Datum en tijd bij nieuw voorstel -->
+                <div id="modalFormContent" class="space-y-4"></div>
+
+                <button type="submit" id="modalActionButton" class="w-full bg-violet hover:bg-violetDark text-white font-semibold py-2 rounded-md mb-6">
+                    Versturen
+                </button>
+
+                <div class="text-center">
+                    <a href="javascript:void(0);" onclick="closeModal()"
+                       class="text-violet hover:text-violetDark font-bold py-2 px-4 rounded-md focus:outline-none">
+                        Terug
+                    </a>
+                </div>
+            </form>
+        </div>
 
         <!-- Terugknop -->
         <div class="mt-8 text-center">
             <a href="{{ url()->previous() }}"
-               class="text-violet hover:text-violetDark font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-violetDark focus:ring-opacity-50"
-            >
+               class="text-violet hover:text-violetDark font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-violetDark focus:ring-opacity-50">
                 Terug
             </a>
         </div>
 
-        <!-- Script voor het tonen/verbergen van nieuw voorstel -->
+        <!-- Scripts -->
         <script>
-            const responseInputs = document.querySelectorAll('input[name="response"]');
-            const proposalField = document.getElementById('new-proposal-field');
+            function openModal(action) {
+                const modalOverlay = document.getElementById('modalOverlay');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalMessage = document.getElementById('modalMessage');
+                const modalFormContent = document.getElementById('modalFormContent');
+                const statusInput = document.getElementById('statusInput');
 
-            responseInputs.forEach(input => {
-                input.addEventListener('change', () => {
-                    if (input.value === 'propose') {
-                        proposalField.style.display = 'block';
-                    } else {
-                        proposalField.style.display = 'none';
-                    }
-                });
-            });
+                modalFormContent.innerHTML = ''; // Reset inhoud
+
+                if (action === 'acceptModal') {
+                    modalTitle.textContent = 'Accepteren';
+                    modalMessage.textContent = 'Weet je zeker dat je deze afspraak wilt accepteren?';
+                    statusInput.value = 3;
+                } else if (action === 'rejectModal') {
+                    modalTitle.textContent = 'Weigeren';
+                    modalMessage.textContent = 'Weet je zeker dat je deze afspraak wilt weigeren?';
+                    statusInput.value = 4;
+                } else if (action === 'proposeModal') {
+                    modalTitle.textContent = 'Nieuw Voorstel';
+                    modalMessage.textContent = 'Vul de nieuwe datum en tijd in:';
+                    modalFormContent.innerHTML = `
+                        <label for='newDate' class='text-black font-semibold'>Datum:</label>
+                        <input type='date' name='new_date' id='newDate' class='w-full p-2 border rounded-md' required>
+                        <label for='newTime' class='text-black font-semibold'>Tijd:</label>
+                        <input type='time' name='new_time' id='newTime' class='w-full p-2 border rounded-md' required>
+                    `;
+                    statusInput.value = 5;
+                }
+                modalOverlay.classList.remove('hidden');
+            }
+
+            function closeModal() {
+                document.getElementById('modalOverlay').classList.add('hidden');
+            }
         </script>
-
     </div>
-
     </body>
 </x-nav>

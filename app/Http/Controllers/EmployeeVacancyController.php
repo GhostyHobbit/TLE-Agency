@@ -59,6 +59,7 @@ class EmployeeVacancyController extends Controller
         return redirect(route('employee-vacancies.enrolled'));
     }
 
+
     public function enrolled() {
         return view('employee_vacancies.enrolled');
     }

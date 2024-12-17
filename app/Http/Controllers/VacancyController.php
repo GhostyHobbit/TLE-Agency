@@ -12,6 +12,8 @@ class VacancyController extends Controller
     public function index(Request $request)
     {
         $query = Vacancy::query();
+        $query->where('status', 'active');
+
 
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
@@ -71,7 +73,10 @@ class VacancyController extends Controller
             'salary' => 'required|numeric',
             'location' => 'required|string|max:255',
             'description' => 'required|string',
+            'tasks' => 'required|string',
+            'qualifications' => 'required|string',
             'picture' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'status' => 'required|string|in:active,not_active',
         ]);
 
         if ($request->hasFile('picture')) {
@@ -87,6 +92,9 @@ class VacancyController extends Controller
         $vacancy->location = $request->input("location");
         $vacancy ->description = $request->input("description");
         $vacancy->path = $path;
+        $vacancy->tasks = $request->input("tasks");
+        $vacancy->qualifications = $request->input("qualifications");
+        $vacancy->status = $request->input("status");
         $vacancy->save();
 
         return redirect()->route('vacancies.index');
@@ -99,35 +107,61 @@ class VacancyController extends Controller
 
         $user = Auth::user();
 
-        $userCheck = EmployeeVacancy::where('user_id', $user->id)->first();
+        if ($user === null) {
+            $userCheck = null;
+        } else {
+            $userCheck = EmployeeVacancy::where('user_id', $user->id)
+                ->where('vacancy_id', $vacancy->id)
+                ->first();
+        }
 
         return view('vacancies.show', compact('vacancy'), compact('userCheck'));
     }
 
     public function edit($id)
     {
-        // Return a view to show the vacancy edit form
         $vacancy = Vacancy::findOrFail($id);
         return view('vacancies.edit', compact('vacancy'));
     }
 
     public function update(Request $request, $id)
     {
-        $vacancy = Vacancy::findOrFail($id);
-
-        $validatedData = $request->validate([
-            'employer_id' => 'required|exists:employers,id',
+        $request->validate([
             'name' => 'required|string|max:255',
-            'hours' => 'required|integer',
+            'hours' => 'required|numeric',
             'salary' => 'required|numeric',
+            'location' => 'required|string|max:255',
             'description' => 'required|string',
-            'picture' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'tasks' => 'required|string',
+            'qualifications' => 'required|string',
+            'status' => 'required|in:active,not_active',
+            'picture' => 'nullable|image|mimes:jpeg,png,gif|max:2048', // Optional picture validation
         ]);
 
-        $vacancy->update($validatedData);
+        $vacancy = Vacancy::findOrFail($id);
 
-        return response()->json($vacancy);
+        // Update the vacancy fields
+        $vacancy->name = $request->input('name');
+        $vacancy->hours = $request->input('hours');
+        $vacancy->salary = $request->input('salary');
+        $vacancy->location = $request->input('location');
+        $vacancy->description = $request->input('description');
+        $vacancy->tasks = $request->input('tasks');
+        $vacancy->qualifications = $request->input('qualifications');
+        $vacancy->status = $request->input('status');
+
+        // Handle the picture upload if a new picture is provided
+        if ($request->hasFile('picture')) {
+            $imagePath = $request->file('picture')->store('vacancies', 'public');
+            $vacancy->path = $imagePath; // Save the path of the uploaded image
+        }
+
+        $vacancy->save(); // Save the updated vacancy
+
+        // Redirect or return success message
+        return redirect()->route('vacancies.index')->with('success', 'Vacature succesvol bijgewerkt.');
     }
+
 
     public function destroy($id)
     {
@@ -157,4 +191,17 @@ class VacancyController extends Controller
 
         return response()->json(['message' => 'Employee detached successfully']);
     }
+
+    public function toggleStatus($vacancyId)
+    {
+        $vacancy = Vacancy::findOrFail($vacancyId);
+
+        // Toggle the status between 'active' and 'not active'
+        $vacancy->status = $vacancy->status === 'active' ? 'not active' : 'active';
+        $vacancy->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Vacaturestatus is bijgewerkt.');
+    }
+
 }
