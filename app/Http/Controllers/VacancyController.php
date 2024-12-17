@@ -99,7 +99,11 @@ class VacancyController extends Controller
 
         $user = Auth::user();
 
-        $userCheck = EmployeeVacancy::where('user_id', $user->id)->first();
+        if ($user === null) {
+            $userCheck = null;
+        } else {
+            $userCheck = EmployeeVacancy::where('user_id', $user->id)->first();
+        }
 
         return view('vacancies.show', compact('vacancy'), compact('userCheck'));
     }
