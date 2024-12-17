@@ -1,4 +1,8 @@
-<section class="p-6 rounded-lg shadow-lg bg-[#E2ECC8] mx-auto w-full max-w-[90vw] mt-8 mb-8">
+<div class="rounded-lg mt-8">
+    <h2 class="text-lg text-center">Uw profiel</h2>
+</div>
+
+<section class="p-6 rounded-lg shadow-lg bg-[#E2ECC8] mx-auto w-full max-w-[90vw] mt-2 mb-8">
     <header>
 
         <div class="flex items-center">
@@ -81,9 +85,9 @@
 
         <!-- Save button -->
         <div class="flex justify-end items-center gap-4">
-            <x-primary-button class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 !bg-[#aa0160] !hover:bg-[#7c1a51] !active:bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug !normal-case">
+            <button class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 bg-[#aa0160] hover:bg-[#7c1a51] active:bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug !normal-case">
                 {{ __('Opslaan') }}
-            </x-primary-button>
+            </button>
 
 
         @if (session('status') === 'profile-updated')

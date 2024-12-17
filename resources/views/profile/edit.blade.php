@@ -1,18 +1,5 @@
 <x-nav>
-    <x-slot name="header">
-        <h2>
-            {{ __('Profile') }}
 
-
-
-        </h2>
-    </x-slot>
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit" class="text-red-600 font-bold hover:underline">
-            {{ __('Log Out') }}
-        </button>
-    </form>
 
     <div>
         <div>
@@ -27,13 +14,18 @@
                     @include('profile.partials.update-password-form')
                 </div>
             </div>
-            <div class="mb-4 flex justify-center items-center">
-                <a href="{{ route('profile.preferences') }}" class="w-[296px] h-[53px] px-[44.50px] py-4 bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] justify-center items-center inline-flex text-[#fbfcf6] text-base font-bold font-['Radikal'] leading-snug">
+
+            <div class="flex flex-col justify-center items-center space-y-2 mb-12">
+                <!-- Optional Header Content -->
+                <div class="rounded-lg">
+                    <h2 class="text-lg text-center">Uw persoonlijkheid</h2>
+                </div>
+
+                <a href="{{ route('profile.preferences') }}" class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 bg-[#aa0160] hover:bg-[#7c1a51] active:bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug !normal-case">
                     {{ __('Voorkeuren') }}
-
-
                 </a>
             </div>
+
 
 
 

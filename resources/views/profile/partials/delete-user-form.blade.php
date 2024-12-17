@@ -1,14 +1,36 @@
-<section class="space-y-6 flex justify-center">
-    <header>
-        <!-- You can add content here if necessary -->
-    </header>
+<header class="mt-9">
+    <!-- Optional Header Content -->
+    <div class="rounded-lg">
+        <h2 class="text-lg text-center">Instellingen</h2>
 
+    </div>
+</header>
+
+<section class="p-6 rounded-lg shadow-lg bg-[#E2ECC8] mx-auto w-full max-w-[90vw] mt-2 mb-8">
+
+
+
+
+    <!-- Logout Button -->
+    <form method="POST" action="{{ route('logout') }}" class="mt-3 flex justify-center">
+        @csrf
+        <button type="submit" class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 bg-[#aa0160] hover:bg-[#7c1a51] active:bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug !normal-case">
+            {{ __('Uitloggen') }}
+        </button>
+    </form>
+
+    <!-- Account Deletion Button -->
+    <div class="mt-8 flex justify-center">
     <x-danger-button
         x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
         class="flex justify-center items-center"
-    >{{ __('Verwijder Account') }}</x-danger-button>
+    >
+        {{ __('Verwijder Account') }}
+    </x-danger-button>
+    </div>
 
+    <!-- Modal -->
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
             @csrf
