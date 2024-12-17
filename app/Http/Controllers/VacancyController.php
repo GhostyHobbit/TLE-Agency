@@ -120,28 +120,48 @@ class VacancyController extends Controller
 
     public function edit($id)
     {
-        // Return a view to show the vacancy edit form
         $vacancy = Vacancy::findOrFail($id);
         return view('vacancies.edit', compact('vacancy'));
     }
 
     public function update(Request $request, $id)
     {
-        $vacancy = Vacancy::findOrFail($id);
-
-        $validatedData = $request->validate([
-            'employer_id' => 'required|exists:employers,id',
+        $request->validate([
             'name' => 'required|string|max:255',
-            'hours' => 'required|integer',
+            'hours' => 'required|numeric',
             'salary' => 'required|numeric',
+            'location' => 'required|string|max:255',
             'description' => 'required|string',
-            'picture' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'tasks' => 'required|string',
+            'qualifications' => 'required|string',
+            'status' => 'required|in:active,not_active',
+            'picture' => 'nullable|image|mimes:jpeg,png,gif|max:2048', // Optional picture validation
         ]);
 
-        $vacancy->update($validatedData);
+        $vacancy = Vacancy::findOrFail($id);
 
-        return response()->json($vacancy);
+        // Update the vacancy fields
+        $vacancy->name = $request->input('name');
+        $vacancy->hours = $request->input('hours');
+        $vacancy->salary = $request->input('salary');
+        $vacancy->location = $request->input('location');
+        $vacancy->description = $request->input('description');
+        $vacancy->tasks = $request->input('tasks');
+        $vacancy->qualifications = $request->input('qualifications');
+        $vacancy->status = $request->input('status');
+
+        // Handle the picture upload if a new picture is provided
+        if ($request->hasFile('picture')) {
+            $imagePath = $request->file('picture')->store('vacancies', 'public');
+            $vacancy->path = $imagePath; // Save the path of the uploaded image
+        }
+
+        $vacancy->save(); // Save the updated vacancy
+
+        // Redirect or return success message
+        return redirect()->route('vacancies.index')->with('success', 'Vacature succesvol bijgewerkt.');
     }
+
 
     public function destroy($id)
     {

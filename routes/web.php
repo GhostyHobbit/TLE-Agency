@@ -63,6 +63,7 @@ Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->na
 // Employers Routes
 
 // Vacancies Routes
+Route::resource('vacancies', VacancyController::class);
 Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
 Route::get('/vacancies/create', [VacancyController::class, 'create'])->name('vacancies.create');
 Route::post('/vacancies', [VacancyController::class, 'store'])->name('vacancies.store');
