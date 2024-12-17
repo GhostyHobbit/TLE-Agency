@@ -89,6 +89,5 @@
         @endforeach
     </div>
     <x-translate-menu/>
-
     @vite('resources/js/filter.js')
 </x-nav>
