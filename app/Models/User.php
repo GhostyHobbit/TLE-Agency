@@ -61,4 +61,10 @@ class User extends Authenticatable
             'vacancy_id' // Foreign key in de tussentabel voor de vacature
         )->withPivot('status', 'message_id', 'response_id'); // Extra kolommen in de tussentabel
     }
+
+    public function messages()
+    {
+        // Veronderstel dat een bericht een 'user_id' kolom heeft die verwijst naar de id van de gebruiker.
+        return $this->hasMany(Message::class);
+    }
 }

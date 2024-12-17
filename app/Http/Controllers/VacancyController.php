@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmployeeVacancy;
+use App\Models\Message;
 use App\Models\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,10 @@ class VacancyController extends Controller
         // Load vacancies with their associated employer
         $vacancies = Vacancy::all();
 
-        return view('employers.viewvacancies', compact('vacancies'));
+
+        $employeeVacancy = EmployeeVacancy::all();
+
+        return view('employers.viewvacancies', compact('vacancies', 'employeeVacancy'));
     }
 
     public function create()
