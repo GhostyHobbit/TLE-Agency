@@ -37,7 +37,7 @@
     <div class="flex flex-col lg:flex-row gap-4 lg:gap-8 px-4">
         @if($vacancy->path)
             <img src="{{ asset('storage/' . $vacancy->path) }}" alt="Banner-foto-baan"
-                 class="h-[20vh] w-full my-4 rounded-lg object-cover object-center lg:hidden mx-auto">
+                 class="h-[25vh] w-full my-4 rounded-lg object-cover object-center lg:hidden mx-auto">
         @else
             <img src="{{ asset('images/placeholderbanner.jpg') }}" alt="Placeholder banner"
                  class="h-[20vh] w-full my-4 rounded-lg object-cover object-center lg:hidden mx-auto">
