@@ -34,21 +34,20 @@
         </div>
     </div>
 
-    <div class="flex flex-col lg:flex-row mx-[4vw] gap-4 lg:gap-8">
-        {{-- Mobile Image Banner --}}
+    <div class="flex flex-col lg:flex-row gap-4 lg:gap-8 px-4">
         @if($vacancy->path)
             <img src="{{ asset('storage/' . $vacancy->path) }}" alt="Banner-foto-baan"
-                 class="h-[20vh] w-full my-4 rounded-lg object-cover object-top lg:hidden">
+                 class="h-[20vh] w-full my-4 rounded-lg object-cover object-center lg:hidden mx-auto">
         @else
             <img src="{{ asset('images/placeholderbanner.jpg') }}" alt="Placeholder banner"
-                 class="h-[20vh] w-full my-4 rounded-lg object-cover object-top lg:hidden">
+                 class="h-[20vh] w-full my-4 rounded-lg object-cover object-center lg:hidden mx-auto">
         @endif
 
-        {{-- Description --}}
+    {{-- Description --}}
         <div class="flex flex-col lg:w-[60%]">
             {{-- Function Section --}}
             <div>
-                <div id="funct  ionHeader" class="w-[92vw] mt-4 bg-mossLight border-2 border-mossDark rounded-lg px-3 py-1 flex justify-between items-center cursor-pointer md:w-[45vw]">
+                <div id="functionHeader" class="w-[92vw] mt-4 bg-mossLight border-2 border-mossDark rounded-lg px-3 py-1 flex justify-between items-center cursor-pointer md:w-[45vw]">
                     <h2 class="text-p font-bold text-lg">Over de functie</h2>
                     <svg class="w-5 h-5 transform rotate-180 lg:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#AA0160" fill="#AA0160">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7H5z" />
