@@ -96,14 +96,13 @@ Route::get('/employees/viewresponses', [EmployeeVacancyController::class, 'index
 
 
 Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show')->middleware('auth');
-
+Route::post('/update-status', [MessageController::class, 'updateStatus'])->name('update-status');
 
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 Route::post('/message/store/{vacancyId}', [MessageController::class, 'store'])->name('messages.store');
 Route::get('/messages/response/{id}', [MessageController::class, 'response'])->name('messages.response');
 
 Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])->name('messages.create');
-
 
 Route::get('/employers/viewvacancies', [VacancyController::class, 'get'])->name('employers.viewvacancies');
 

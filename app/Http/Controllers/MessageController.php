@@ -93,9 +93,33 @@ class MessageController extends Controller
         return view('messages.show', compact('message'));
     }
 
+    public function updateStatus(Request $request)
+    {
+        // Validate incoming request data
+        $request->validate([
+            'status' => 'required|integer',
+            'message_id' => 'required|integer|exists:messages,id',
+            'new_date' => 'required_if:status,5|date',
+            'new_time' => 'required_if:status,5|date_format:H:i',
+        ]);
+
+        // Find the EmployeeVacancy entry based on message_id
+        $employeeVacancy = EmployeeVacancy::where('message_id', $request->input('message_id'))->first();
+
+        if (!$employeeVacancy) {
+            return redirect()->back()->with('error', 'The requested message does not exist.');
+        }
+
+        // Update the status based on the action performed
+        $employeeVacancy->status = $request->input('status');
 
 
+        // Save the changes to the database
+        $employeeVacancy->save();
 
+        // Redirect with a success message
+        return redirect()->route('employees.viewresponses');
+    }
 
 
     public function update(Request $request, $id)

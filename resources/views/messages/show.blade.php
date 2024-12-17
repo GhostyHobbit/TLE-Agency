@@ -5,7 +5,7 @@
 
         <!-- Bericht vak met border -->
         <div class="bg-white p-6 shadow-lg rounded-xl mb-6 border-2 border-gray-300">
-            <p class="text-lg"><strong></strong> {{ $message->message }}</p>
+            <p class="text-lg">{{ $message->message }}</p>
         </div>
 
         <!-- Locatie, datum en tijd vak -->
@@ -15,89 +15,47 @@
             <p class="text-lg"><strong>Tijd:</strong> {{ $message->time }}</p>
         </div>
 
+        <!-- Actieknoppen -->
         <div class="flex flex-col items-center space-y-4 mb-8">
-            <button onclick="showModal('acceptModal')"
+            <button onclick="openModal('acceptModal')"
                     class="w-full bg-mossLight hover:bg-mossMedium text-black font-semibold py-2 px-6 rounded-md shadow-md">
                 Accepteren
             </button>
-            <button onclick="showModal('rejectModal')"
+            <button onclick="openModal('rejectModal')"
                     class="w-full bg-red-200 hover:bg-red-300 text-black font-semibold py-2 px-6 rounded-md shadow-md">
                 Weigeren
             </button>
-            <button onclick="showModal('proposeModal')"
+            <button onclick="openModal('proposeModal')"
                     class="w-full bg-yellow-200 hover:bg-yellow-300 text-black font-semibold py-2 px-6 rounded-md shadow-md">
                 Nieuw Voorstel
             </button>
         </div>
 
-        <!-- Pop-up Modals -->
-        <!-- Accepteren Modal -->
-        <div id="acceptModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-            <div class="w-11/12 max-w-lg bg-mossLight p-6 rounded-lg shadow-lg">
-                <h2 class="text-xl font-bold mb-4">Accepteren</h2>
-                <p class="text-black mb-6">Weet je zeker dat je deze afspraak wilt accepteren?</p>
-                <button onclick="sendResponse('accept')"
-                        class="w-full bg-violet hover:bg-violetDark text-white font-semibold py-2 rounded-md mb-6">
+        <!-- Dynamische Modal -->
+        <div id="modalOverlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+            <form method="POST" action="{{ route('update-status') }}" id="modalForm" class="w-11/12 max-w-lg bg-mossLight p-6 rounded-lg shadow-lg relative">
+                @csrf
+                <h2 id="modalTitle" class="text-xl font-bold mb-4"></h2>
+                <p id="modalMessage" class="text-black mb-6"></p>
+
+                <!-- Verborgen inputvelden -->
+                <input type="hidden" name="status" id="statusInput" value="">
+                <input type="hidden" name="message_id" value="{{ $message->id }}">
+
+                <!-- Datum en tijd bij nieuw voorstel -->
+                <div id="modalFormContent" class="space-y-4"></div>
+
+                <button type="submit" id="modalActionButton" class="w-full bg-violet hover:bg-violetDark text-white font-semibold py-2 rounded-md mb-6">
                     Versturen
                 </button>
+
                 <div class="text-center">
-                    <a href="javascript:void(0);" onclick="closeModal('acceptModal')"
-                       class="text-violet hover:text-violetDark font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-violetDark focus:ring-opacity-50">
+                    <a href="javascript:void(0);" onclick="closeModal()"
+                       class="text-violet hover:text-violetDark font-bold py-2 px-4 rounded-md focus:outline-none">
                         Terug
                     </a>
                 </div>
-            </div>
-        </div>
-
-        <!-- Weigeren Modal -->
-        <div id="rejectModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-            <div class="w-11/12 max-w-lg bg-mossLight p-6 rounded-lg shadow-lg">
-                <h2 class="text-xl font-bold mb-4">Weigeren</h2>
-                <p class="text-black mb-6">Weet je zeker dat je deze afspraak wilt weigeren?</p>
-                <button onclick="sendResponse('reject')"
-                        class="w-full bg-violet hover:bg-violetDark text-white font-semibold py-2 rounded-md mb-6">
-                    Versturen
-                </button>
-                <div class="text-center">
-                    <a href="javascript:void(0);" onclick="closeModal('rejectModal')"
-                       class="text-violet hover:text-violetDark font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-violetDark focus:ring-opacity-50">
-                        Terug
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Nieuw Voorstel Modal -->
-        <div id="proposeModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-            <div class="w-11/12 max-w-lg bg-mossLight p-6 rounded-lg shadow-lg">
-                <h2 class="text-xl font-bold mb-4">Nieuw Voorstel</h2>
-                <p class="text-black mb-4">Vul hier de nieuwe datum en tijd in voor je voorstel.</p>
-
-                <!-- Formulier voor nieuw voorstel -->
-                <form id="proposalForm" class="space-y-6 mb-6">
-                    <div>
-                        <label for="newDate" class="text-black font-semibold">Datum:</label>
-                        <input type="date" id="newDate"
-                               class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-mossDark">
-                    </div>
-                    <div>
-                        <label for="newTime" class="text-black font-semibold">Tijd:</label>
-                        <input type="time" id="newTime"
-                               class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-mossDark">
-                    </div>
-                </form>
-
-                <button onclick="sendResponse('propose')"
-                        class="w-full bg-violet hover:bg-violetDark text-white font-semibold py-2 rounded-md mb-6">
-                    Versturen
-                </button>
-                <div class="text-center">
-                    <a href="javascript:void(0);" onclick="closeModal('proposeModal')"
-                       class="text-violet hover:text-violetDark font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-violetDark focus:ring-opacity-50">
-                        Terug
-                    </a>
-                </div>
-            </div>
+            </form>
         </div>
 
         <!-- Terugknop -->
@@ -108,54 +66,41 @@
             </a>
         </div>
 
-        <!-- Scripts voor modals -->
+        <!-- Scripts -->
         <script>
-            function showModal(modalId) {
-                document.getElementById(modalId).classList.remove('hidden');
-            }
+            function openModal(action) {
+                const modalOverlay = document.getElementById('modalOverlay');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalMessage = document.getElementById('modalMessage');
+                const modalFormContent = document.getElementById('modalFormContent');
+                const statusInput = document.getElementById('statusInput');
 
-            function closeModal(modalId) {
-                document.getElementById(modalId).classList.add('hidden');
-            }
+                modalFormContent.innerHTML = ''; // Reset inhoud
 
-            function sendResponse(action) {
-                // Stuur naar de server zonder extra bevestiging
-                fetch('/update-status', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        status: getStatus(action), // Haalt de status op
-                        message_id: '{{ $message->id }}',
-                        new_date: document.getElementById('newDate')?.value,
-                        new_time: document.getElementById('newTime')?.value
-                    })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Status succesvol bijgewerkt!');
-                            location.reload();
-                        } else {
-                            alert('Er ging iets mis. Probeer het opnieuw!');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Fout bij het versturen:', error);
-                        alert('Er is een fout opgetreden!');
-                    });
-            }
-
-            // Hulpfunctie om de juiste status te bepalen
-            function getStatus(action) {
-                switch (action) {
-                    case 'accept': return 3;
-                    case 'reject': return 4;
-                    case 'propose': return 5;
-                    default: return null;
+                if (action === 'acceptModal') {
+                    modalTitle.textContent = 'Accepteren';
+                    modalMessage.textContent = 'Weet je zeker dat je deze afspraak wilt accepteren?';
+                    statusInput.value = 3;
+                } else if (action === 'rejectModal') {
+                    modalTitle.textContent = 'Weigeren';
+                    modalMessage.textContent = 'Weet je zeker dat je deze afspraak wilt weigeren?';
+                    statusInput.value = 4;
+                } else if (action === 'proposeModal') {
+                    modalTitle.textContent = 'Nieuw Voorstel';
+                    modalMessage.textContent = 'Vul de nieuwe datum en tijd in:';
+                    modalFormContent.innerHTML = `
+                        <label for='newDate' class='text-black font-semibold'>Datum:</label>
+                        <input type='date' name='new_date' id='newDate' class='w-full p-2 border rounded-md' required>
+                        <label for='newTime' class='text-black font-semibold'>Tijd:</label>
+                        <input type='time' name='new_time' id='newTime' class='w-full p-2 border rounded-md' required>
+                    `;
+                    statusInput.value = 5;
                 }
+                modalOverlay.classList.remove('hidden');
+            }
+
+            function closeModal() {
+                document.getElementById('modalOverlay').classList.add('hidden');
             }
         </script>
     </div>
