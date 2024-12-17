@@ -13,8 +13,6 @@ class VacancyController extends Controller
     {
         $query = Vacancy::query();
         $query->where('status', 'active');
-
-
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
             $query->where(function($q) use ($search) {
