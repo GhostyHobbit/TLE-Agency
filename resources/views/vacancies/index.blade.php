@@ -11,16 +11,10 @@
             class="mt-1 block w-full pl-3 pr-10 py-2 border-2 border-mossDark focus:outline-none focus:ring-mossDark focus:border-mossDark sm:text-sm rounded-md bg-mossLight text-mossFoot placeholder-mossFoot"
         />
 
-        @if(session('success'))
-            <div class="bg-green-500 text-white p-4 mb-4 rounded-md">
-                {{ session('success') }}
-            </div>
-        @endif
-
 
         <!-- Location Filter -->
         <label for="location" class="block text-sm font-medium text-mossFoot mt-4">Filter op Locatie:</label>
-        <div class="relative">
+        <div class="relativ e">
             <select
                 name="location"
                 id="location"
