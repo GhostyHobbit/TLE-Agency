@@ -10,7 +10,7 @@
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'nl',
-            includedLanguages: 'en,fr,de,es,it,zh-CN,ar,ru,ja',
+            includedLanguages: 'nl,en,fr,de,es,it,zh-CN,ar,ru,ja',
         }, 'google_translate_element');
     }
 </script>
