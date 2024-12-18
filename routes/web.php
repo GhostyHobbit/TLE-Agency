@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeResponseController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -24,11 +25,12 @@ Route::get('/video', function () {
     return view('video');
 })->name('video');
 
-
 Route::get('/dashboard', function () {
     return redirect()->route('profile.edit'); // Replace 'profile.show' with your profile route name
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::patch('/vacancies/{vacancy}/toggle-status', [VacancyController::class, 'toggleStatus'])
+    ->name('vacancies.toggleStatus');
 
 
 
@@ -42,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])->name('profile.preferences');
     Route::post('/profile/preferences', [ProfilePreferencesController::class, 'update'])->name('profile.preferences.update');
 });
+
 Route::middleware('auth')->group(function () {
     // Profile preferences-related routes
     Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])->name('profile.preferences');
@@ -66,6 +69,7 @@ Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->na
 // Employers Routes
 
 // Vacancies Routes
+Route::resource('vacancies', VacancyController::class);
 Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
 Route::get('/vacancies/create', [VacancyController::class, 'create'])->name('vacancies.create');
 Route::post('/vacancies', [VacancyController::class, 'store'])->name('vacancies.store');
@@ -77,19 +81,26 @@ Route::delete('/vacancies/{vacancy}', [VacancyController::class, 'destroy'])->na
 // Employee Vacancies Routes
 Route::get('/employee-vacancies', [EmployeeVacancyController::class, 'index'])->name('employee-vacancies.index');
 Route::get('/employee-vacancies/create', [EmployeeVacancyController::class, 'create'])->name('employee-vacancies.create');
-Route::post('/employee-vacancies', [EmployeeVacancyController::class, 'store'])->name('employee-vacancies.store');
+Route::post('/employee-vacancies', [EmployeeVacancyController::class, 'store'])->name('employee-vacancies.store')->middleware('auth');
+Route::get('/employee-vacancies/enrolled', [EmployeeVacancyController::class, 'enrolled'])->name('employee-vacancies.enrolled');
 Route::get('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyController::class, 'show'])->name('employee-vacancies.show');
 Route::get('/employee-vacancies/{employeeVacancy}/edit', [EmployeeVacancyController::class, 'edit'])->name('employee-vacancies.edit');
 Route::put('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyController::class, 'update'])->name('employee-vacancies.update');
 Route::delete('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyController::class, 'destroy'])->name('employee-vacancies.destroy');
 
+Route::post('/employee/response/{message}', [EmployeeResponseController::class, 'store'])->name('employee.response');
+
 // Employees Routes
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
 
-Route::get('/employees/viewresponses/{employeeId}', [EmployeeController::class, 'showMyQueue'])->name('employees.viewresponses');
+// routes/web.php
+Route::get('employee/message/{message}', [MessageController::class, 'show'])->name('employee.message.view');
 
-Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
+Route::get('/employees/viewresponses', [EmployeeVacancyController::class, 'index'])->name('employees.viewresponses') ->middleware('auth');
 
+Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show')->middleware('auth');
+
+Route::post('/update-status', [MessageController::class, 'updateStatus'])->name('update-status');
 
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 Route::post('/message/store/{vacancyId}', [MessageController::class, 'store'])->name('messages.store');
@@ -97,24 +108,17 @@ Route::get('/messages/response/{id}', [MessageController::class, 'response'])->n
 
 Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])->name('messages.create');
 
-
 Route::get('/employers/viewvacancies', [VacancyController::class, 'get'])->name('employers.viewvacancies');
-
 
 Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])->name('profile.preferences');
 Route::post('/profile/preferences/update', [ProfilePreferencesController::class, 'update'])->name('profile.preferences.update');
 Route::get('/preferences', [ProfilePreferencesController::class, 'index'])->name('profile.preferences');
 Route::post('/preferences', [ProfilePreferencesController::class, 'update'])->name('profile.preferences.update');
 Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index']);
-Route::get('/profile/preferences', function () {
-    return view('preferences'); // Replace with the correct logic for showing the preferences page
-})->name('profile.preferences');
 
 Route::post('/profile/preferences/update', [ProfilePreferencesController::class, 'update'])
     ->name('profile.preferences.update');
 Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])
     ->name('profile.preferences');
-
-
 
 require __DIR__.'/auth.php';

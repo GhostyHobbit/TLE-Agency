@@ -26,9 +26,6 @@
     <ul class="inline-block ml-4 mt-2 md:mt-0">
         <li class="inline">
             <button id="openModal" class="bg-transparent text-yellow font-medium text-lg">Menu</button>
-{{--            <button type="button" class="bg-transparent text-yellow font-medium text-lg hover:bg-yellow-500 hover:text-white transition-colors duration-300" data-toggle="modal" data-target="#myModal">--}}
-{{--                Menu--}}
-{{--            </button>--}}
         </li>
     </ul>
 </nav>
@@ -41,10 +38,13 @@
             <p class="text-yellow font-bold mb-2">Voor werkzoekenden</p>
             <ul>
                 <li>
-                    <a href="{{ route('vacancies.index') }}" class="text-[#D1D5DB] font-medium transition-colors">Vind een baan</a>
+                    <a href="{{ route('vacancies.index') }}" class="text-[#D1D5DB] font-medium transition-colors hover:underline">Vind een baan</a>
                 </li>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Veelgestelde vragen</a>
+                    <a href="{{ route('privacy') }}" class="text-[#D1D5DB] font-medium transition-colors hover:underline">Uw privacy</a>
+                </li>
+                <li>
+                    <a href="https://www.openhiring.nl/veelgestelde-vragen-van-werkzoekenden" class="text-[#D1D5DB] font-medium transition-colors hover:underline">Veelgestelde vragen</a>
                 </li>
             </ul>
         </div>
@@ -52,10 +52,10 @@
             <p class="text-yellow font-bold mb-2">Voor werkgevers</p>
             <ul>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Spelregels</a>
+                    <a href="https://www.openhiring.nl/over-open-hiring#de-spelregels-van-open-hiring" class="text-[#D1D5DB] font-medium transition-colors hover:underline">Spelregels</a>
                 </li>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Veelgestelde vragen</a>
+                    <a href="https://www.openhiring.nl/faq-werkgevers" class="text-[#D1D5DB] font-medium transition-colors hover:underline">Veelgestelde vragen</a>
                 </li>
             </ul>
         </div>
@@ -63,10 +63,10 @@
             <p class="text-yellow font-bold mb-2">Over Open Hiring</p>
             <ul>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Ontstaan</a>
+                    <a href="https://www.openhiring.nl/onstaan" class="text-[#D1D5DB] font-medium transition-colors hover:underline">Ontstaan</a>
                 </li>
                 <li>
-                    <a href="{{ route('privacy') }}" class="text-[#D1D5DB] font-medium transition-colors">Privacybeleid</a>
+                    <a href="https://www.openhiring.nl/privacy-policy" class="text-[#D1D5DB] font-medium transition-colors hover:underline">Privacybeleid</a>
                 </li>
             </ul>
         </div>
@@ -74,13 +74,13 @@
             <p class="text-yellow font-bold mb-2">Volg ons op</p>
             <ul>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">LinkedIn</a>
+                    <a href="https://www.linkedin.com/company/open-hiring-nl/" class="text-[#D1D5DB] font-medium transition-colors hover:underline">LinkedIn</a>
                 </li>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Instagram</a>
+                    <a href="https://www.instagram.com/openhiring_nl/" class="text-[#D1D5DB] font-medium transition-colors hover:underline">Instagram</a>
                 </li>
                 <li>
-                    <a href="#" class="text-[#D1D5DB] font-medium transition-colors">Facebook</a>
+                    <a href="https://www.facebook.com/Openhiringnl" class="text-[#D1D5DB] font-medium transition-colors hover:underline">Facebook</a>
                 </li>
             </ul>
         </div>
@@ -103,7 +103,7 @@
             <ul>
                 <li><a class="text-mossDark font-medium text-lg" href="{{ route('welcome') }}">Home</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="{{ route('vacancies.index') }}">Vacatures</a></li>
-                <li><a class="text-mossDark font-medium text-lg" href="#">Over Open Hiring</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="https://www.openhiring.nl/onstaan">Over Open Hiring</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="{{ route('privacy') }}">Uw privacy</a></li>
             </ul>
             <ul>
@@ -111,6 +111,12 @@
                 <li><a class="text-navLink" href="{{ route('vacancies.index') }}">Vacature overzicht</a></li>
                 <li><a class="text-navLink" href="{{ route('employers.viewvacancies') }}">Bedrijf vacatures</a></li>
                 <li><a class="text-navLink" href="{{ route('employees.viewresponses', $employee) }}">Werknemer ontvangen bericht</a></li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
             </ul>
         </div>
         <div class="modal-footer py-2 flex justify-center bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] mx-4">
@@ -144,5 +150,6 @@
         }
     });
 </script>
+<x-translate-menu/>
 </body>
 </html>

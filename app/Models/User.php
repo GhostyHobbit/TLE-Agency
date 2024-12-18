@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -46,5 +45,26 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Define a many-to-many relationship with the Vacancy model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function vacancies(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Vacancy::class, // Het gerelateerde model
+            'employee_vacancy', // Tussentabel
+            'user_id', // Foreign key in de tussentabel voor de gebruiker
+            'vacancy_id' // Foreign key in de tussentabel voor de vacature
+        )->withPivot('status', 'message_id', 'response_id'); // Extra kolommen in de tussentabel
+    }
+
+    public function messages()
+    {
+        // Veronderstel dat een bericht een 'user_id' kolom heeft die verwijst naar de id van de gebruiker.
+        return $this->hasMany(Message::class);
     }
 }

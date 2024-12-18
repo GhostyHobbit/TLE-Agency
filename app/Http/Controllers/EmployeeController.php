@@ -66,8 +66,6 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
-
-
     public function showMyQueue($employeeId)
     {
         // Haal de werkzoekende op
@@ -102,15 +100,6 @@ class EmployeeController extends Controller
         return view('employees.viewresponses', compact('vacancies', 'messages'));
     }
 
-
-
-
-
-
-
-
-
-
     public function destroy($id)
     {
         Employee::findOrFail($id)->delete();
@@ -132,11 +121,5 @@ class EmployeeController extends Controller
     }
 
     // Additional method to detach a vacancy from an employee
-    public function detachVacancy($employeeId, $vacancyId)
-    {
-        $employee = Employee::findOrFail($employeeId);
-        $employee->vacancies()->detach($vacancyId);
 
-        return response()->json(['message' => 'Vacancy detached successfully']);
-    }
 }
