@@ -27,21 +27,9 @@
             </svg>
         </div>
 
-        <label for="location" class="block text-sm font-medium text-[#2E342A] mt-4">Filter op Locatie:</label>
-        <div class="relative">
-        <select name="location" id="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-2 border-[#2E342A] focus:outline-none focus:ring-[#2E342A] focus:border-[#2E342A] sm:text-sm rounded-md bg-[#E2ECC8] text-[#2E342A] appearance-none">
-            <option value="">Alle locaties</option>
-            @foreach($locations as $location)
-                <option value="{{ $location->location }}" {{ request('location') == $location->location ? 'selected' : '' }}>{{ $location->location }}</option>
-            @endforeach
-        </select>
-        <svg class="w-5 h-5 transform rotate-180 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#AA0160" fill="#AA0160">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7H5z" />
-        </svg>
-
         <!-- Location Filter -->
         <label for="location" class="block text-sm font-medium text-mossFoot mt-4">Filter op Locatie:</label>
-        <div class="relativ e">
+        <div class="relative">
             <select
                 name="location"
                 id="location"
@@ -53,7 +41,7 @@
                 @endforeach
             </select>
             <!-- Custom Dropdown Arrow -->
-            <svg class="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="currentColor">
+            <svg class="w-5 h-5 transform rotate-180 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#AA0160" fill="#AA0160">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7H5z" />
             </svg>
         </div>
@@ -72,7 +60,7 @@
                 @endforeach
             </select>
             <!-- Custom Dropdown Arrow -->
-            <svg class="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="currentColor">
+            <svg class="w-5 h-5 transform rotate-180 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#AA0160" fill="#AA0160">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7H5z" />
             </svg>
         </div>
