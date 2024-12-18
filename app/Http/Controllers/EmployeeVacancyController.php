@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\EmployeeVacancy;
+use App\Models\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,6 +59,7 @@ class EmployeeVacancyController extends Controller
         return redirect(route('employee-vacancies.enrolled'));
     }
 
+
     public function enrolled() {
         return view('employee_vacancies.enrolled');
     }
@@ -91,9 +93,9 @@ class EmployeeVacancyController extends Controller
         return response()->json($application);
     }
 
-    public function destroy($id)
+    public function destroy(EmployeeVacancy $employeeVacancy)
     {
-        EmployeeVacancy::findOrFail($id)->delete();
-        return response()->json(['message' => 'Application deleted']);
+        $employeeVacancy->delete();
+        return redirect(route('vacancies.index'));
     }
 }

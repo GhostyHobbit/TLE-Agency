@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\Response;
 use Illuminate\Http\Request;
 use App\Models\Vacancy;
 use App\Models\EmployeeVacancy;
@@ -93,7 +94,42 @@ class MessageController extends Controller
         return view('messages.show', compact('message'));
     }
 
+    public function updateStatus(Request $request)
+    {
+        // Validate incoming request data
+        $request->validate([
+            'status' => 'required|integer',
+            'message_id' => 'required|integer|exists:messages,id',
+            'new_date' => 'required_if:status,5|date',
+            'new_time' => 'required_if:status,5|date_format:H:i',
+        ]);
 
+        // Zoek de EmployeeVacancy op basis van message_id
+        $employeeVacancy = EmployeeVacancy::where('message_id', $request->input('message_id'))->first();
+
+        if (!$employeeVacancy) {
+            return redirect()->back()->with('error', 'The requested message does not exist.');
+        }
+
+        // Check of het een nieuw voorstel betreft (status = 5)
+        if ($request->input('status') == 5) {
+            // Maak een nieuw record aan in de responses-tabel
+            $response = Response::create([
+                'date' => $request->input('new_date'),
+                'time' => $request->input('new_time'),
+            ]);
+
+            // Koppel het response_id aan de EmployeeVacancy
+            $employeeVacancy->response_id = $response->id;
+        }
+
+        // Update de status van EmployeeVacancy
+        $employeeVacancy->status = $request->input('status');
+        $employeeVacancy->save();
+
+        // Redirect met een succesbericht
+        return redirect()->route('employees.viewresponses')->with('success', 'Status succesvol bijgewerkt.');
+    }
 
 
     public function update(Request $request, $id)
