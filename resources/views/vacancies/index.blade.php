@@ -89,7 +89,7 @@
                 </div>
                 @if($vacancy->path)
                     <img
-                        src="{{ asset('storage/' . $vacancy->employer->company->logo_path) }}"
+                        src="{{ asset('images/' . $vacancy->employer->company->logo_path) }}"
                         alt="{{ $vacancy->employer->company->name }} logo"
                         class="w-24 h-24 mr-8 rounded-md"
                     />
