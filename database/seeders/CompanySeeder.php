@@ -18,21 +18,26 @@ class CompanySeeder extends Seeder
             'id' => 1,
             'name' => 'Hogeschool Rotterdam',
             'city' => 'Rotterdam',
-            'adress' => '123 Education Lane'
+            'adress' => '123 Education Lane',
+            'logo_path' => 'hr.png'
+
         ]);
 
         Company::create([
             'id' => 2,
             'name' => 'Open Hiring',
             'city' => 'Amsterdam',
-            'adress' => '789 Opportunity Road'
+            'adress' => '789 Opportunity Road',
+            'logo_path' => 'openhiring.png'
         ]);
 
         Company::create([
             'id' => 3,
             'name' => 'McDonald\'s',
             'city' => 'Middelburg',
-            'adress' => '101 Fast Food Blvd'
+            'adress' => '101 Fast Food Blvd',
+            'logo_path' => 'mcdonalds.png'
+
         ]);
     }
 }

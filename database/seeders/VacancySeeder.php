@@ -21,7 +21,8 @@ class VacancySeeder extends Seeder
             'description' => 'We zijn op zoek naar een nieuwe docent om ons team te versterken.',
             'location' => 'Rotterdam',
             'tasks' => 'Lesgeven aan studenten',
-            'qualifications' => 'HBO Diploma in onderwijs'
+            'qualifications' => 'HBO Diploma in onderwijs',
+            'path' => 'vacancies/hr.png'
         ]);
 
         Vacancy::create([
@@ -33,7 +34,8 @@ class VacancySeeder extends Seeder
             'description' => 'Verantwoordelijk voor het beheren van HR-processen.',
             'location' => 'Amsterdam',
             'tasks' => 'HR-beleid ontwikkelen en implementeren',
-            'qualifications' => 'Bachelor in Human Resources'
+            'qualifications' => 'Bachelor in Human Resources',
+            'path' => 'vacancies/openhiring.png'
         ]);
 
         Vacancy::create([
@@ -45,7 +47,8 @@ class VacancySeeder extends Seeder
             'description' => 'Klantvriendelijke service bieden in een fastfoodrestaurant.',
             'location' => 'Middelburg',
             'tasks' => 'Bestellingen opnemen en bereiden',
-            'qualifications' => 'Geen specifieke opleiding vereist'
+            'qualifications' => 'Geen specifieke opleiding vereist',
+            'path' => 'vacancies/mcdonalds.png'
         ]);
 
         Vacancy::create([
@@ -57,7 +60,8 @@ class VacancySeeder extends Seeder
             'description' => 'Ondersteuning bieden aan docenten en studenten.',
             'location' => 'Rotterdam',
             'tasks' => 'Assisteren bij lessen en administratieve taken',
-            'qualifications' => 'MBO Diploma in onderwijs'
+            'qualifications' => 'MBO Diploma in onderwijs',
+            'path' => 'vacancies/hr.png'
         ]);
 
         Vacancy::create([
@@ -69,7 +73,8 @@ class VacancySeeder extends Seeder
             'description' => 'Nieuwe medewerkers werven en selecteren.',
             'location' => 'Amsterdam',
             'tasks' => 'Vacatures opstellen en sollicitatiegesprekken voeren',
-            'qualifications' => 'Bachelor in Human Resources of vergelijkbaar'
+            'qualifications' => 'Bachelor in Human Resources of vergelijkbaar',
+            'path' => 'vacancies/openhiring.png'
         ]);
 
         Vacancy::create([
@@ -81,7 +86,8 @@ class VacancySeeder extends Seeder
             'description' => 'Ondersteuning bieden in de keuken van een fastfoodrestaurant.',
             'location' => 'Middelburg',
             'tasks' => 'Ingrediënten voorbereiden en schoonmaken',
-            'qualifications' => 'Geen specifieke opleiding vereist'
+            'qualifications' => 'Geen specifieke opleiding vereist',
+            'path' => 'vacancies/mcdonalds.png'
         ]);
 
         Vacancy::create([
@@ -93,7 +99,8 @@ class VacancySeeder extends Seeder
             'description' => 'Beheer en onderhoud van ICT-systemen.',
             'location' => 'Rotterdam',
             'tasks' => 'Netwerkbeheer en technische ondersteuning',
-            'qualifications' => 'HBO Diploma in ICT'
+            'qualifications' => 'HBO Diploma in ICT',
+            'path' => 'vacancies/hr.png'
         ]);
 
         Vacancy::create([
@@ -105,7 +112,8 @@ class VacancySeeder extends Seeder
             'description' => 'Ontwikkelen en uitvoeren van marketingstrategieën.',
             'location' => 'Amsterdam',
             'tasks' => 'Marketingcampagnes opzetten en analyseren',
-            'qualifications' => 'Bachelor in Marketing'
+            'qualifications' => 'Bachelor in Marketing',
+            'path' => 'vacancies/openhiring.png'
         ]);
 
         Vacancy::create([
@@ -117,7 +125,8 @@ class VacancySeeder extends Seeder
             'description' => 'Schoonmaken van het restaurant en de keuken.',
             'location' => 'Middelburg',
             'tasks' => 'Schoonmaken en desinfecteren van ruimtes',
-            'qualifications' => 'Geen specifieke opleiding vereist'
+            'qualifications' => 'Geen specifieke opleiding vereist',
+            'path' => 'vacancies/mcdonalds.png'
         ]);
     }
 }
