@@ -50,7 +50,7 @@ class ProfileController extends Controller
     {
         // Validate the incoming request
         $request->validate([
-            'profile_picture' => 'required|string|in:picture1.jpg,picture2.jpg,picture3.jpg',
+            'profile_picture' => 'required|string|in:picture1.jpg,picture2.jpg,picture3.jpg,picture4.jpg,picture5.jpg',
         ]);
 
         // Update the profile picture

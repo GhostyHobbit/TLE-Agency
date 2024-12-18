@@ -12,22 +12,24 @@
         <!-- Profile Picture and Selection Section -->
         <section>
             <header>
-                <div class="flex items-center">
+                <div class="flex justify-center items-center">
                     <label for="profile_picture" class="cursor-pointer">
                         <img src="{{ $user->profile_picture ? asset('images/profile_pics/' . $user->profile_picture) : asset('images/profile_pics/picture1.jpg') }}"
                              alt="Profile Picture"
                              class="w-32 h-32 rounded-full object-cover cursor-pointer"
                              id="profile-picture-dropdown-button">
                     </label>
-                    <h1 class="text-lg ml-4 !text-black">{{ $user->name }}</h1>
+                    <h1 class="text-lg ml-4 !text-[#2E342A]">{{ $user->name }}</h1>
                 </div>
             </header>
 
             <!-- Dropdown menu -->
             <div id="profile-picture-dropdown" class="absolute hidden mt-1 w-full bg-white shadow-lg rounded-md border border-gray-300">
-                <a href="#" onclick="changeProfilePicture('picture1.jpg')" class="block px-4 py-2 text-black hover:bg-gray-100">Tiger</a>
-                <a href="#" onclick="changeProfilePicture('picture2.jpg')" class="block px-4 py-2 text-black hover:bg-gray-100">Dog</a>
-                <a href="#" onclick="changeProfilePicture('picture3.jpg')" class="block px-4 py-2 text-black hover:bg-gray-100">Crow</a>
+                <a href="#" onclick="changeProfilePicture('picture1.jpg')" class="block px-4 py-2 text-[#2E342A] hover:bg-gray-100">Luipaard</a>
+                <a href="#" onclick="changeProfilePicture('picture2.jpg')" class="block px-4 py-2 text-[#2E342A] hover:bg-gray-100">Hond</a>
+                <a href="#" onclick="changeProfilePicture('picture3.jpg')" class="block px-4 py-2 text-[#2E342A] hover:bg-gray-100">Kraai</a>
+                <a href="#" onclick="changeProfilePicture('picture4.jpg')" class="block px-4 py-2 text-[#2E342A] hover:bg-gray-100">Vogeltjes</a>
+                <a href="#" onclick="changeProfilePicture('picture5.jpg')" class="block px-4 py-2 text-[#2E342A] hover:bg-gray-100">Kat</a>
             </div>
 
             <!-- Hidden input field to store the selected image -->
@@ -36,14 +38,14 @@
 
         <!-- Email field -->
         <div>
-            <x-input-label class="!text-black" for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full !bg-white !text-black p-1" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2 !text-black" :messages="$errors->get('email')" />
+            <x-input-label class="!text-[#2E342A]" for="email" :value="__('Email')" />
+            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full !bg-white !text-[#2E342A] p-1" :value="old('email', $user->email)" required autocomplete="username" />
+            <x-input-error class="mt-2 !text-[#2E342A]" :messages="$errors->get('email')" />
         </div>
 
         <!-- Save button -->
         <div class="flex justify-end items-center gap-4">
-            <button class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 bg-[#aa0160] hover:bg-[#7c1a51] active:bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug !normal-case">
+            <button class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 bg-[#aa0160] hover:bg-[#7c1a51] active:bg-[#aa0160] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug !normal-case">
                 {{ __('Opslaan') }}
             </button>
 
@@ -53,7 +55,7 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="!text-sm !text-black p-1"
+                    class="!text-sm !text-[#2E342A] p-1"
                 >{{ __('Saved.') }}</p>
             @endif
         </div>

@@ -21,7 +21,7 @@
                     <h2 class="text-lg text-center">Uw persoonlijkheid</h2>
                 </div>
 
-                <a href="{{ route('profile.preferences') }}" class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 bg-[#aa0160] hover:bg-[#7c1a51] active:bg-[#92AA83] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug !normal-case">
+                <a href="{{ route('profile.preferences') }}" class="!w-[296px] !h-[53px] !px-[44.50px] !py-4 bg-[#aa0160] hover:bg-[#7c1a51] active:bg-[#aa0160] !rounded-2xl !border-b-4 !border-[#2E342A] !justify-center !items-center !inline-flex !text-[#fbfcf6] !text-base !font-bold !font-['Radikal'] !leading-snug !normal-case">
                     {{ __('Voorkeuren') }}
                 </a>
             </div>

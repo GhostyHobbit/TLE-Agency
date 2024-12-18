@@ -26,8 +26,9 @@ Route::get('/video', function () {
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->route('profile.edit'); // Replace 'profile.show' with your profile route name
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 
 

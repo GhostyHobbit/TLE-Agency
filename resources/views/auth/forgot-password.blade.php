@@ -1,11 +1,11 @@
 <x-nav>
     <div class="mx-auto w-full max-w-[90vw] mt-8 mb-0 p-0 rounded-lg !important">
-        <h3 class="text-xl font-bold text-black text-center">Wachtwoord vergeten</h3>
+        <h3 class="text-xl font-bold !text-[#2E342A] text-center">Wachtwoord vergeten</h3>
     </div>
 
     <div class="mx-auto w-full max-w-[90vw] mt-4 mb-8 p-0 rounded-lg !important">
-        <div class="text-black !important">
-            <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+        <div class="!text-[#2E342A] !important">
+            <div class="mb-4 text-sm !text-[#2E342A]">
                 {{ __('Bent u uw wachtwoord vergeten? Geen probleem. Laat ons gewoon uw e-mailadres weten en wij sturen u een link om uw wachtwoord opnieuw in te stellen, zodat u een nieuw wachtwoord kunt kiezen.') }}
             </div>
 
@@ -17,9 +17,9 @@
 
                 <!-- Email Address -->
                 <div class="mb-6 bg-[#D9E6B1] p-4 rounded-lg !important">
-                    <x-input-label class="!text-black" for="email" :value="__('E-mail')" />
-                    <x-text-input id="email" class="mt-1 block w-full !bg-white !text-black p-1" type="email" name="email" :value="old('email')" required autofocus />
-                    <x-input-error class="mt-2 !text-black" :messages="$errors->get('email')" />
+                    <x-input-label class="!text-[#2E342A]" for="email" :value="__('E-mail')" />
+                    <x-text-input id="email" class="mt-1 block w-full !bg-white !text-[#2E342A] p-1" type="email" name="email" :value="old('email')" required autofocus />
+                    <x-input-error class="mt-2 !text-[#2E342A]" :messages="$errors->get('email')" />
                 </div>
 
                 <div class="flex justify-center items-center !important">
