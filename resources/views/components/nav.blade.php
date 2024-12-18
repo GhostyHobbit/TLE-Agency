@@ -150,5 +150,6 @@
         }
     });
 </script>
+<x-translate-menu/>
 </body>
 </html>
