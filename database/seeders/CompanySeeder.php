@@ -16,18 +16,23 @@ class CompanySeeder extends Seeder
     {
         Company::create([
             'id' => 1,
-            'name' => 'Tech Corp',
-            'city' => 'San Francisco',
-            'adress' => '123 Tech Street'
+            'name' => 'Hogeschool Rotterdam',
+            'city' => 'Rotterdam',
+            'adress' => '123 Education Lane'
         ]);
 
         Company::create([
             'id' => 2,
-            'name' => 'Business Inc',
-            'city' => 'New York',
-            'adress' => '456 Business Avenue'
+            'name' => 'Open Hiring',
+            'city' => 'Amsterdam',
+            'adress' => '789 Opportunity Road'
         ]);
 
-        // Add more companies as needed
+        Company::create([
+            'id' => 3,
+            'name' => 'McDonald\'s',
+            'city' => 'Middelburg',
+            'adress' => '101 Fast Food Blvd'
+        ]);
     }
 }

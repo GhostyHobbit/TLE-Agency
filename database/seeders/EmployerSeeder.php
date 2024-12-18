@@ -15,17 +15,24 @@ class EmployerSeeder extends Seeder
     public function run()
     {
         Employer::create([
+            'id' => 1,
+            'name' => 'John Doe',
             'company_id' => 1,
-            'name' => 'Tech Corp',
-            'email' => 'contact@techcorp.com'
+            'email' => 'johndoe@hr.com'
         ]);
 
         Employer::create([
+            'id' => 2,
+            'name' => 'Jane Smith',
             'company_id' => 2,
-            'name' => 'Business Inc',
-            'email' => 'info@businessinc.com'
+            'email' => 'janesmith@oh.com'
         ]);
 
-        // Add more employers as needed
+        Employer::create([
+            'id' => 3,
+            'name' => 'Alice Johnson',
+            'company_id' => 3,
+            'email' => 'alicejohnson@mcdonalds.com'
+        ]);
     }
 }
