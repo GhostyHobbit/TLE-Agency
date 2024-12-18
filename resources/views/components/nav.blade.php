@@ -95,7 +95,7 @@
     <div class="w-[96vw] m-2 bg-mossLight min-h-[50vh] position-relative rounded-lg xl:w-[30vw]">
         <div class="modal-header  p-4 flex justify-between items-center">
             <h3 class="modal-title text-h3">Menu</h3>
-            <button id="closeModal" class="text-black hover:text-gray-700" aria-label="Close">
+            <button id="closeModal" class="text-black hover:text-gray-700 text-4xl" aria-label="Close">
                 &times;
             </button>
         </div>
@@ -103,19 +103,15 @@
             <ul>
                 <li><a class="text-mossDark font-medium text-lg" href="{{ route('welcome') }}">Home</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="{{ route('vacancies.index') }}">Vacatures</a></li>
-                <li><a class="text-mossDark font-medium text-lg" href="https://www.openhiring.nl/onstaan">Over Open Hiring</a></li>
-                <li><a class="text-mossDark font-medium text-lg" href="{{ route('privacy') }}">Uw privacy</a></li>
-            </ul>
-            <ul>
-                <li>Demo Links</li>
-                <li><a class="text-navLink" href="{{ route('vacancies.index') }}">Vacature overzicht</a></li>
                 <li><a class="text-navLink" href="{{ route('employers.viewvacancies') }}">Bedrijf vacatures</a></li>
                 <li><a class="text-navLink" href="{{ route('employees.viewresponses', $employee) }}">Werknemer ontvangen bericht</a></li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <li><a class="text-mossDark font-medium text-lg" href="https://www.openhiring.nl/onstaan">Over Open Hiring</a></li>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('privacy') }}">Uw privacy</a></li>
+                <form id="logout-form" action="{{ route('profile') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Logout
+                    Profile
                 </a>
             </ul>
         </div>

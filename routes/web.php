@@ -36,6 +36,8 @@ Route::patch('/vacancies/{vacancy}/toggle-status', [VacancyController::class, 't
 
 Route::middleware('auth')->group(function () {
     // Profile-related routes
+    Route::resource('profile', ProfileController::class);
+    Route::post('/profile', [ProfileController::class, 'index'])->name('profile');  // Profile editing route
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');  // Profile editing route
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
