@@ -4,8 +4,8 @@
     <div class="max-w-4xl mx-auto p-8 bg-white shadow-xl rounded-xl mt-10 mb-16">
 
         <ul class="flex mb-6 space-x-4 border-b">
-            <li class="mr-2">
-                <a href="#vacature-overzicht" class="tab-link active">Vacature Overzicht</a>
+            <li class="mr-2 ">
+                <a href="#vacature-overzicht" class="tab-link active bg-violetDark text-white px-4 py-2 rounded-md">Vacature Overzicht</a>
             </li>
             <li class="mr-2">
                 <a href="#wachten-op-reactie" class="tab-link">Wachten op reactie</a>
@@ -28,8 +28,6 @@
                         <tr class="bg-mossLight text-black">
                             <th class="px-3 py-3 text-left w-1/12">#</th>
                             <th class="px-3 py-3 text-left w-2/12">Functie</th>
-                            <th class="px-3 py-3 text-left w-2/12">Werkuren</th>
-                            <th class="px-3 py-3 text-left w-2/12">Salaris</th>
                             <th class="px-3 py-3 text-left w-2/12">Aantal in Wachtrij</th>
                             <th class="px-3 py-3 text-left w-2/12">Werkgever</th>
                             <th class="px-3 py-3 text-left w-2/12">status</th>
@@ -41,9 +39,7 @@
                         @foreach($vacancies as $vacancy)
                             <tr class="border-t border-strokeThin hover:bg-mossLight">
                                 <td class="px-3 py-3">{{ $vacancy->id }}</td>
-                                <td class="px-3 py-3">{{ $vacancy->name }}</td>
-                                <td class="px-3 py-3">{{ $vacancy->hours }} uur</td>
-                                <td class="px-3 py-3">{{ number_format($vacancy->salary, 2) }}</td>
+                                <td class="px-3 py-3"><a href="{{  route('vacancies.show', $vacancy->id)  }}">{{ $vacancy->name }}</a></td>
                                 <td class="px-3 py-3">{{ $vacancy->employee_vacancies_in_wachtlijst_count }} werkzoekenden</td>
                                 <td class="px-3 py-3">{{ $vacancy->employer ? $vacancy->employer->name : 'Onbekend' }}</td>
                                 <td class="px-3 py-3">
@@ -208,17 +204,30 @@
             const tabLinks = document.querySelectorAll('.tab-link');
             const tabContents = document.querySelectorAll('.tab-content');
 
+            // Set the active tab based on the current hash in the URL
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelector(`.tab-link[href="${currentHash}"]`).classList.add('active');
+                document.querySelector(currentHash).classList.remove('hidden');
+            } else {
+                document.querySelector('.tab-link').classList.add('active');
+                document.querySelector('.tab-content').classList.remove('hidden');
+            }
+
             tabLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
 
-                    tabLinks.forEach(link => link.classList.remove('active'));
+                    // Remove active class from all tabs and hide all contents
+                    tabLinks.forEach(link => link.classList.remove('active', 'bg-violetDark', 'text-white', 'px-4', 'py-2', 'rounded-md'));
                     tabContents.forEach(content => content.classList.add('hidden'));
 
-                    e.currentTarget.classList.add('active');
+                    // Add active class to the clicked tab and show the corresponding content
+                    e.currentTarget.classList.add('active', 'bg-violetDark', 'text-white', 'px-4', 'py-2', 'rounded-md');
                     document.querySelector(e.currentTarget.getAttribute('href')).classList.remove('hidden');
                 });
             });
         });
     </script>
+
 </x-nav>
