@@ -107,12 +107,7 @@
                 <li><a class="text-navLink" href="{{ route('employees.viewresponses', $employee) }}">Werknemer ontvangen bericht</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="https://www.openhiring.nl/onstaan">Over Open Hiring</a></li>
                 <li><a class="text-mossDark font-medium text-lg" href="{{ route('privacy') }}">Uw privacy</a></li>
-                <form id="logout-form" action="{{ route('profile') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Profile
-                </a>
+                <li><a class="text-mossDark font-medium text-lg" href="{{ route('profile.edit') }}">Profiel</a></li>
             </ul>
         </div>
         <div class="modal-footer py-2 flex justify-center bg-[#aa0160] rounded-2xl border-b-4 border-[#7c1a51] mx-4">
