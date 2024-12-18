@@ -105,61 +105,97 @@
         </div>
 
         <div id="reactie-ontvangen" class="tab-content hidden">
-            <h1 class="text-2xl font-semibold text-black mb-6 text-center">Bericht gestuurd, reactie ontvangen</h1>
-            <div class="overflow-x-auto"> <!-- Zorgt ervoor dat de berichtenlijst scrollbaar wordt als het nodig is -->
-                <table class="min-w-full table-fixed">
-                    <thead>
-                    <tr class="bg-mossLight text-black">
-                        <th class="px-3 py-3 text-left w-1/12">#</th>
-                        <th class="px-3 py-3 text-left w-2/12">Vacature</th>
-                        <th class="px-3 py-3 text-left w-2/12">Bericht</th>
-                        <th class="px-3 py-3 text-left w-2/12">verstuurd op</th>
-                        <th class="px-3 py-3 text-left w-2/12">Status Inhoud</th>
-                        <th class="px-3 py-3 text-left w-2/12">afspraak data</th>
-                        <th class="px-3 py-3 text-left w-2/12">nieuwe afspraak data</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-black">
-                    @foreach($employeeVacancy->sortByDesc(function($message) {
-                        return $message->message->created_at; // Sort by 'verstuurd op' date
-                    }) as $message)
-                        @if($message->message && in_array($message->status, [3, 4, 5]))
-                            <tr class="border-t border-strokeThin hover:bg-white
-                                      @if($message->status == 3) bg-mossLight
-                                      @elseif($message->status == 4) bg-red-200
-                                      @elseif($message->status == 5) bg-yellow-200
-                                      @endif">
+            <!-- Bericht geaccepteerd -->
+            <div id="berichten-geaccepteerd" class="m-4">
+                <h1 class="text-2xl font-semibold text-black mb-6 text-center">Berichten Geaccepteerd</h1>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full table-fixed">
+                        <thead>
+                        <tr class="bg-mossLight text-black">
+                            <th class="px-3 py-3 text-left w-1/12">#</th>
+                            <th class="px-3 py-3 text-left w-2/12">Vacature</th>
+                            <th class="px-3 py-3 text-left w-2/12">Bericht</th>
+                            <th class="px-3 py-3 text-left w-2/12">Verstuurd Op</th>
+                            <th class="px-3 py-3 text-left w-2/12">Afspraak Data</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-black">
+                        @foreach($employeeVacancy->where('status', 3)->sortByDesc(fn($message) => optional($message->message)->created_at) as $message)
+                            <tr class="border-t border-strokeThin hover:bg-white bg-mossLight">
                                 <td class="px-3 py-3">{{ $message->vacancy->id }}</td>
                                 <td class="px-3 py-3">{{ $message->vacancy->name }}</td>
-                                <td class="px-3 py-3">
-                                    {{ Str::limit(optional($message->message)->message) ?? 'geen bericht verzonden' }}
-                                </td>
-                                <td class="px-3 py-3">
-                                    {{ optional(optional($message->message)->created_at)->format('d-m-Y H:i') ?? 'Geen bericht verzonden' }}
-                                </td>
-                                <td class="px-3 py-3">
-                                    @if($message->status == 3)
-                                        bericht geaccepteerd
-                                    @elseif($message->status == 4)
-                                        bericht geweigerd
-                                    @elseif($message->status == 5)
-                                        alternatieve datum toegezegd
-                                    @endif
-                                </td>
-                                <td class="px-3 py-3">{{ $message->message->date}}, {{ $message->message->time}}, {{ $message->message->location}}</td>
-                                <td class="px-3 py-3">
-                                    {{ Str::limit(optional($message->response)->date) ?? 'geen nieuw voorstel gedaan' }}
-                                    {{ Str::limit(optional($message->response)->time) ?? '' }}
-                                </td>
+                                <td class="px-3 py-3">{{ Str::limit(optional($message->message)->message) ?? 'geen bericht verzonden' }}</td>
+                                <td class="px-3 py-3">{{ optional(optional($message->message)->created_at)->format('d-m-Y H:i') ?? 'Geen bericht verzonden' }}</td>
+                                <td class="px-3 py-3">{{ optional($message->message)->date }}, {{ optional($message->message)->time }}, {{ optional($message->message)->location }}</td>
                             </tr>
-                        @endif
-                    @endforeach
-                    </tbody>
-                </table>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-    </div>
+            <!-- Bericht geweigerd -->
+            <div id="berichten-geweigerd" class="m-4" >
+                <h1 class="text-2xl font-semibold text-black mb-6 text-center">Berichten Geweigerd</h1>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full table-fixed">
+                        <thead>
+                        <tr class="bg-red-200 text-black">
+                            <th class="px-3 py-3 text-left w-1/12">#</th>
+                            <th class="px-3 py-3 text-left w-2/12">Vacature</th>
+                            <th class="px-3 py-3 text-left w-2/12">Bericht</th>
+                            <th class="px-3 py-3 text-left w-2/12">Verstuurd Op</th>
+                            <th class="px-3 py-3 text-left w-2/12">Afspraak Data</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-black">
+                        @foreach($employeeVacancy->where('status', 4)->sortByDesc(fn($message) => optional($message->message)->created_at) as $message)
+                            <tr class="border-t border-strokeThin hover:bg-white bg-red-200">
+                                <td class="px-3 py-3">{{ $message->vacancy->id }}</td>
+                                <td class="px-3 py-3">{{ $message->vacancy->name }}</td>
+                                <td class="px-3 py-3">{{ Str::limit(optional($message->message)->message) ?? 'geen bericht verzonden' }}</td>
+                                <td class="px-3 py-3">{{ optional(optional($message->message)->created_at)->format('d-m-Y H:i') ?? 'Geen bericht verzonden' }}</td>
+                                <td class="px-3 py-3">{{ optional($message->message)->date }}, {{ optional($message->message)->time }}, {{ optional($message->message)->location }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Alternatieve datum toegezegd -->
+            <div id="alternatieve-datum" class="m-4">
+                <h1 class="text-2xl font-semibold text-black mb-6 text-center">Alternatieve Datum Toegezegd</h1>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full table-fixed">
+                        <thead>
+                        <tr class="bg-yellow-200 text-black">
+                            <th class="px-3 py-3 text-left w-1/12">#</th>
+                            <th class="px-3 py-3 text-left w-2/12">Vacature</th>
+                            <th class="px-3 py-3 text-left w-2/12">Bericht</th>
+                            <th class="px-3 py-3 text-left w-2/12">Verstuurd Op</th>
+                            <th class="px-3 py-3 text-left w-2/12">Afspraak Data</th>
+                            <th class="px-3 py-3 text-left w-2/12">Nieuwe Afspraak Data</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-black">
+                        @foreach($employeeVacancy->where('status', 5)->sortByDesc(fn($message) => optional($message->message)->created_at) as $message)
+                            <tr class="border-t border-strokeThin hover:bg-white bg-yellow-200">
+                                <td class="px-3 py-3">{{ $message->vacancy->id }}</td>
+                                <td class="px-3 py-3">{{ $message->vacancy->name }}</td>
+                                <td class="px-3 py-3">{{ Str::limit(optional($message->message)->message) ?? 'geen bericht verzonden' }}</td>
+                                <td class="px-3 py-3">{{ optional(optional($message->message)->created_at)->format('d-m-Y H:i') ?? 'Geen bericht verzonden' }}</td>
+                                <td class="px-3 py-3">{{ optional($message->message)->date }}, {{ optional($message->message)->time }}, {{ optional($message->message)->location }}</td>
+                                <td class="px-3 py-3">{{ optional($message->response)->date ?? 'geen nieuw voorstel gedaan' }} {{ optional($message->response)->time ?? '' }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
 
     </body>
 
