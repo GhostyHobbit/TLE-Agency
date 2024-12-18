@@ -82,13 +82,13 @@ Route::get('/employee-vacancies/{employeeVacancy}/edit', [EmployeeVacancyControl
 Route::put('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyController::class, 'update'])->name('employee-vacancies.update');
 Route::delete('/employee-vacancies/{employeeVacancy}', [EmployeeVacancyController::class, 'destroy'])->name('employee-vacancies.destroy');
 
-Route::post('/employee/response/{message}', [EmployeeResponseController::class, 'store'])->name('employee.response');
+Route::post('/employee/response/{message}', [EmployeeResponseController::class, 'store'])->name('employee.response')->middleware('auth');;
 
 // Employees Routes
-Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index')->middleware('auth');;
 
 // routes/web.php
-Route::get('employee/message/{message}', [MessageController::class, 'show'])->name('employee.message.view');
+Route::get('employee/message/{message}', [MessageController::class, 'show'])->name('employee.message.view')->middleware('auth');;
 
 Route::get('/employees/viewresponses', [EmployeeVacancyController::class, 'index'])->name('employees.viewresponses') ->middleware('auth');
 
@@ -100,9 +100,9 @@ Route::post('/messages', [MessageController::class, 'store'])->name('messages.st
 Route::post('/message/store/{vacancyId}', [MessageController::class, 'store'])->name('messages.store');
 Route::get('/messages/response/{id}', [MessageController::class, 'response'])->name('messages.response');
 
-Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])->name('messages.create');
+Route::get('/messages/create/{vacancyId}', [MessageController::class, 'create'])->name('messages.create')->middleware('auth');;
 
-Route::get('/employers/viewvacancies', [VacancyController::class, 'get'])->name('employers.viewvacancies');
+Route::get('/employers/viewvacancies', [VacancyController::class, 'get'])->name('employers.viewvacancies')->middleware('auth');;
 
 Route::get('/profile/preferences', [ProfilePreferencesController::class, 'index'])->name('profile.preferences');
 Route::post('/profile/preferences/update', [ProfilePreferencesController::class, 'update'])->name('profile.preferences.update');
