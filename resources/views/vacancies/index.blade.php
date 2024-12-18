@@ -109,6 +109,5 @@
             </a>
         @endforeach
     </div>
-
     @vite('resources/js/filter.js')
 </x-nav>
