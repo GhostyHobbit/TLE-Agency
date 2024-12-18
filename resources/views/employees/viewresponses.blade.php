@@ -97,6 +97,8 @@
                                     <p class="text-lg"><strong>Locatie:</strong> {{ $message->message->location }}</p>
                                     <p class="text-lg"><strong>Datum:</strong> {{ $message->message->date }}</p>
                                     <p class="text-lg"><strong>Tijd:</strong> {{ $message->message->time }}</p>
+                                    <a class="text-lg mt-1" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text={{$message->vacancy->name }}&dates={{ $message->message->date }}/{{ $message->message->date }}&details={{ $message->message->message }}&location={{ $message->message->location }}
+"><strong>Toevoegen aan agenda</strong></a>
                                 </div>
                             </div>
                         @endforeach
