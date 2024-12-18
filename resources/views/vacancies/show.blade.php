@@ -5,7 +5,7 @@
         @if($vacancy->path)
             <img src="{{ asset('storage/' . $vacancy->employer->company->logo_path) }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
         @else
-            <img src="{{ asset('images/OpenHiring.png') }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
+            <img src="{{ asset('images/openhiring.png') }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
         @endif
         <p class="text-p mx-4">{{ $vacancy->employer->company->name }}</p>
     </div>

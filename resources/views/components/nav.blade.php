@@ -20,7 +20,7 @@
 <nav class="p-4 bg-mossFoot flex justify-between items-center rounded-b-lg">
     <!-- Logo -->
     <a href="{{ route('welcome') }}">
-    <img src="{{ asset('images/OpenHiring.png') }}" alt="Site Logo" class="h-14 w-auto">
+    <img src="{{ asset('images/openhiring.png') }}" alt="Site Logo" class="h-14 w-auto">
     </a>
     <!-- Menu -->
     <ul class="inline-block ml-4 mt-2 md:mt-0">
@@ -86,7 +86,7 @@
         </div>
     </div>
     <div class="flex justify-end mt-8">
-        <img src="{{ asset('images/OpenHiring.png') }}" alt="Site Logo" class="h-[20vh] w-auto p-4">
+        <img src="{{ asset('images/openhiring.png') }}" alt="Site Logo" class="h-[20vh] w-auto p-4">
     </div>
 </footer>
 <!-- Modal Background -->
