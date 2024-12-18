@@ -20,6 +20,18 @@ class Vacancy extends Model
             ->withTimestamps();
     }
 
+    public function employeeVacanciesInWachtlijst()
+    {
+        return $this->hasMany(EmployeeVacancy::class)->where('status', 1);
+    }
+
+
+
+    public function employeeVacancies()
+    {
+        return $this->hasMany(EmployeeVacancy::class, 'vacancy_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

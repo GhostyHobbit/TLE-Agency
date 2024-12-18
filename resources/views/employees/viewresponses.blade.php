@@ -80,7 +80,7 @@
 
             <!-- Acceptaties -->
             <div class="mb-6">
-                <h3 class="text-xl font-bold text-mossLight-500">Geaccepteerd</h3>
+                <h3 class="text-xl font-bold text-mossLight-500 mb-4">Geaccepteerd</h3>
                 @php
                     $acceptedMessages = $vacancies->filter(fn($v) => $v->status === 3);
                 @endphp
@@ -108,7 +108,7 @@
 
             <!-- Weigeringen -->
             <div class="mb-6">
-                <h3 class="text-xl font-bold text-red-500">Weigeringen</h3>
+                <h3 class="text-xl font-bold text-red-500 mb-4">Weigeringen</h3>
                 @php
                     $rejectedMessages = $vacancies->filter(fn($v) => $v->status === 4);
                 @endphp
@@ -129,7 +129,7 @@
 
             <!-- Voorstellen -->
             <div>
-                <h3 class="text-xl font-bold text-yellow-500">Nieuw Voorstel</h3>
+                <h3 class="text-xl font-bold text-yellow-500 mb-4">Nieuw Voorstel</h3>
                 @php
                     $proposedMessages = $vacancies->filter(fn($v) => $v->status === 5);
                 @endphp

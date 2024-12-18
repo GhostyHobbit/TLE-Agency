@@ -18,6 +18,11 @@ class EmployeeVacancy extends Model
         'response_id', // Deze ontbreekt in je huidige model
     ];
 
+    public function employeeVacanciesInWachtlijst()
+    {
+        return $this->hasMany(EmployeeVacancy::class)->where('status', 1);
+    }
+
     /**
      * Relatie met User
      */

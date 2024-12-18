@@ -33,6 +33,7 @@
                             <th class="px-3 py-3 text-left w-2/12">Aantal in Wachtrij</th>
                             <th class="px-3 py-3 text-left w-2/12">Werkgever</th>
                             <th class="px-3 py-3 text-left w-2/12">status</th>
+                            <th class="px-3 py-3 text-left w-2/12">edit</th>
                             <th class="px-3 py-3 text-left w-1/12">Uitnodigen</th>
                         </tr>
                         </thead>
@@ -42,8 +43,8 @@
                                 <td class="px-3 py-3">{{ $vacancy->id }}</td>
                                 <td class="px-3 py-3">{{ $vacancy->name }}</td>
                                 <td class="px-3 py-3">{{ $vacancy->hours }} uur</td>
-                                <td class="px-3 py-3">€{{ number_format($vacancy->salary, 2) }}</td>
-                                <td class="px-3 py-3">{{ $vacancy->employees_count }} werkzoekenden</td>
+                                <td class="px-3 py-3">{{ number_format($vacancy->salary, 2) }}</td>
+                                <td class="px-3 py-3">{{ $vacancy->employee_vacancies_in_wachtlijst_count }} werkzoekenden</td>
                                 <td class="px-3 py-3">{{ $vacancy->employer ? $vacancy->employer->name : 'Onbekend' }}</td>
                                 <td class="px-3 py-3">
                                     <form action="{{ route('vacancies.toggleStatus', $vacancy->id) }}" method="POST" class="inline-block ml-2">
@@ -53,6 +54,9 @@
                                             {{ $vacancy->status === 'active' ? 'Deactiveren' : 'Activeren' }}
                                         </button>
                                     </form>
+                                </td>
+                                <td class="px-3 py-3">
+                                    <a href="{{ route('vacancies.edit', ['vacancyId' => $vacancy->id]) }}" class="text-violet hover:text-violetDark font-bold">Edit</a>
                                 </td>
                                 <td class="px-3 py-3">
                                     <a href="{{ route('messages.create', ['vacancyId' => $vacancy->id]) }}" class="text-violet hover:text-violetDark font-bold">Werkzoekende uitnodigen</a>
@@ -196,7 +200,7 @@
 
 
         </div>
-
+    </div>
     </body>
 
     <script>
