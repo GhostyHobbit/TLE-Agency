@@ -17,24 +17,7 @@
 
         <h1 class="text-2xl font-semibold text-black mb-6 text-center">Stuur een Bericht</h1>
 
-        <!-- Succes- en foutberichten -->
-        @if (session('success'))
-            <p class="text-violetDark">{{ session('success') }}</p>
-        @endif
 
-        @if (session('error'))
-            <p class="text-violetDark">{{ session('error') }}</p>
-        @endif
-
-        @if ($errors->any())
-            <div class="text-violetDark">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
         <h2 class="text-lg font-semibold text-black mb-6">Bericht versturen naar werkzoekenden voor Vacature: {{ $vacancy->name }}</h2>
 
@@ -81,5 +64,53 @@
         </form>
     </div>
 
+    <div id="myEnroll" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden xl:justify-center">
+        <!-- Modal Content -->
+        <div class="w-[96vw] min-h-[45vh] m-2 bg-mossLight rounded-lg xl:w-[30vw]">
+            <div class="modal-header p-4 flex justify-between items-center">
+                <p class="text-navLink text-mossDark font-bold">Melding</p>
+                <button id="closeEnroll" class="text-black hover:text-gray-700" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body bg-mossLight p-4">
+                <!-- Success or Error Messages -->
+                @if (session('success'))
+                    <p class="text-mossDark text-center font-bold text-lg">{{ session('success') }}</p>
+                @endif
+
+                @if (session('error'))
+                    <p class="text-mossDark text-center font-bold text-lg">{{ session('error') }}</p>
+                @endif
+            </div>
+            <div id="closeEnrollFooter" class="modal-footer py-2 flex justify-center bg-violet rounded-2xl border-b-4 border-violetDark border-2 mx-4 my-2 hover:bg-[#7c1a51] active:bg-[#aa0160]">
+                <button class="text-cream text-base font-bold font-['Radikal'] leading-snug">Sluit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const enroll = document.getElementById('myEnroll');
+        const closeEnrollButtons = document.querySelectorAll('#closeEnroll, #closeEnrollFooter');
+
+        // Automatically open modal if there's a success or error message
+        if ("{{ session('success') }}" || "{{ session('error') }}") {
+            enroll.classList.remove('hidden');
+        }
+
+        // Close modal logic
+        closeEnrollButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                enroll.classList.add('hidden');
+            });
+        });
+
+        // Close modal when clicking outside of it
+        enroll.addEventListener('click', (event) => {
+            if (event.target === enroll) {
+                enroll.classList.add('hidden');
+            }
+        });
+    </script>
     </body>
 </x-nav>
