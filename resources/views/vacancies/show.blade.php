@@ -1,6 +1,6 @@
 <x-nav>
 {{--Info--}}
-    <h1 class="text-h1 mx-4 my-2 lg:mx-[4vw]">{{ $vacancy->name }}</h1>
+    <h1 class="text-h1 mx-4 my-2 lg:mx-[4vw] break-words">{{ $vacancy->name }}</h1>
     <div class="flex items-center mx-4 my-2 lg:mx-[4vw]">
         @if($vacancy->path)
             <img src="{{ asset('images/' . $vacancy->employer->company->logo_path) }}" alt="{{ $vacancy->employer->company->name }} Logo" class="h-[5vh] w-auto">
